@@ -1,304 +1,183 @@
-/* Fuentes e Importaciones */
+/* --- Asegúrate de tener las importaciones y resets básicos --- */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: #333; background-color: #f4f6f9; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+a { color: #007bff; text-decoration: none; }
+a:hover { text-decoration: none; } /* Quitamos subrayado por defecto en hover */
+h1, h2, h3 { color: #2c3e50; margin-bottom: 15px; }
+h1 { font-size: 2.8em; font-weight: 700; }
+h2 { font-size: 2em; font-weight: 600; text-align: center; margin-bottom: 30px; }
+h3 { font-size: 1.4em; font-weight: 600; margin-bottom: 10px; color: inherit; /* Hereda color de tarjeta */ }
+p { margin-bottom: 1em; color: #555; }
+img { max-width: 100%; height: auto; }
+i { margin-right: 6px; }
 
-/* Reset Básico y Estilos Globales */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* --- Header (Sin cambios respecto a la versión anterior) --- */
+.site-header { background-color: #ffffff; padding: 15px 0; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.site-header .container { display: flex; justify-content: space-between; align-items: center; }
+.logo a { font-size: 1.6em; font-weight: 700; color: #2c3e50; text-decoration: none; }
+.main-nav ul { list-style: none; display: flex; }
+.main-nav ul li { margin-left: 25px; }
+.main-nav ul li a { color: #555; font-weight: 500; text-decoration: none; transition: color 0.3s ease; }
+.main-nav ul li a:hover { color: #007bff; }
+.main-nav i { font-size: 0.9em; }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f9f9f9; /* Un gris muy claro */
-}
+/* --- Hero Section (Ajuste CTA si quieres) --- */
+.hero { background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.85)), url('https://via.placeholder.com/1500x600/cccccc/969696?text=SalePeru+Ofertas') center center/cover no-repeat; padding: 100px 0; text-align: center; color: #fff; }
+.hero h1 { color: #fff; margin-bottom: 20px; font-size: 3.2em; }
+.hero .subtitle { font-size: 1.3em; color: #f0f0f0; max-width: 750px; margin: 0 auto 40px auto; }
+.hero .cta-button { display: inline-block; background-color: #ffc107; /* Amarillo llamativo */ color: #333; padding: 15px 35px; border-radius: 30px; text-decoration: none; font-size: 1.1em; font-weight: 600; transition: background-color 0.3s ease, transform 0.2s ease; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(255, 193, 7, 0.4); }
+.hero .cta-button:hover { background-color: #e0a800; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(255, 193, 7, 0.5); color: #000; }
+.hero .cta-button i { margin-right: 8px; }
 
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+/* --- Social Hub Section (Estilos Banner/Card) --- */
+.social-hub { padding: 60px 0; }
+.social-hub .section-intro { text-align: center; max-width: 700px; margin: -15px auto 40px auto; color: #555; }
+.social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
 
-a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-h1, h2 {
-    color: #222; /* Un poco más oscuro para títulos */
-    margin-bottom: 15px;
-}
-
-h1 { font-size: 2.5em; font-weight: 700; }
-h2 { font-size: 1.8em; font-weight: 600; }
-
-p { margin-bottom: 1em; }
-
-/* Header */
-.site-header {
+.social-card.banner-card {
     background-color: #fff;
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
-    position: sticky; /* Opcional: header fijo */
-    top: 0;
-    z-index: 100;
-}
-
-.site-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo a {
-    font-size: 1.5em;
-    font-weight: 700;
-    color: #333;
-    text-decoration: none;
-}
-.logo a:hover { text-decoration: none; }
-
-.main-nav ul {
-    list-style: none;
-    display: flex;
-}
-
-.main-nav ul li {
-    margin-left: 20px;
-}
-
-.main-nav ul li a {
-    color: #555;
-    font-weight: 500;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.main-nav ul li a:hover {
-    color: #007bff;
-    text-decoration: none;
-}
-
-/* Hero Section */
-.hero {
-    background-color: #fff; /* Fondo blanco para el hero */
-    padding: 80px 0;
-    text-align: center;
-}
-
-.hero h1 {
-    margin-bottom: 20px;
-    font-size: 2.8em;
-}
-
-.hero .subtitle {
-    font-size: 1.2em;
-    color: #555;
-    max-width: 700px;
-    margin: 0 auto 30px auto;
-}
-
-.cta-button {
-    display: inline-block;
-    background-color: #007bff;
-    color: #fff;
-    padding: 12px 30px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 1.1em;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    border: none;
-    cursor: pointer;
-}
-
-.cta-button .arrow {
-    margin-left: 8px;
-    transition: transform 0.3s ease;
-}
-
-.cta-button:hover {
-    background-color: #0056b3;
-    text-decoration: none;
-    transform: translateY(-2px);
-}
-.cta-button:hover .arrow {
-    transform: translateX(5px);
-}
-
-
-.cta-button.secondary {
-    background-color: #6c757d; /* Un gris para acción secundaria */
-    margin-top: 15px;
-}
-.cta-button.secondary:hover {
-    background-color: #5a6268;
-}
-
-/* Secciones Generales */
-section {
-    padding: 60px 0;
-}
-
-section:nth-child(even) { /* Alternar color de fondo sutilmente */
-   background-color: #fff;
-}
-
-/* Featured Offers */
-.featured-offers {
-    text-align: center;
-}
-.featured-offers h2 {
-    margin-bottom: 30px;
-}
-
-/* About Us */
-.about-us {
-     text-align: center;
-}
-.about-us p {
-    max-width: 750px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Footer */
-.site-footer {
-    background-color: #333;
-    color: #ccc;
-    padding: 30px 0;
-    text-align: center;
-    font-size: 0.9em;
-}
-
-.site-footer .container {
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* Centrar contenido */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* Para efectos de fondo si se añaden */
+    position: relative; /* Para posicionar elementos internos si es necesario */
+}
+.social-card.banner-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
-.footer-nav ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
+/* Estilo del icono grande */
+.card-icon-bg {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
     display: flex;
-    gap: 15px; /* Espacio entre elementos */
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #e9ecef; /* Fondo neutro por defecto */
+    color: #fff; /* Color del icono */
+    font-size: 2.5em; /* Tamaño del icono */
+    flex-shrink: 0; /* Evita que se encoja */
 }
+.card-icon-bg i { margin: 0; } /* Resetear margen del icono interno */
 
-.footer-nav ul li a {
-    color: #ccc;
-    text-decoration: none;
+/* Colores específicos por red social */
+.facebook-card { border-top: 5px solid #1877F2; }
+.facebook-card .card-icon-bg { background-color: #1877F2; }
+.facebook-card h3 { color: #1877F2; }
+.facebook-card .social-button.primary-action { background-color: #1877F2; border-color: #1877F2; color: #fff;}
+.facebook-card .social-button.primary-action:hover { background-color: #166fe5; border-color: #166fe5;}
+
+.tiktok-card { border-top: 5px solid #000; }
+/* TikTok tiene colores duales, usamos negro como base */
+.tiktok-card .card-icon-bg {
+    background: linear-gradient(45deg, #ff0050, #00f2ea); /* Degradado TikTok */
+    color: #fff; /* Puede necesitar ajuste dependiendo del fondo */
 }
+.tiktok-card h3 { color: #000; }
+.tiktok-card .social-button.primary-action { background-color: #000; border-color: #000; color: #fff;}
+.tiktok-card .social-button.primary-action:hover { background-color: #333; border-color: #333;}
 
-.footer-nav ul li a:hover {
-    color: #fff;
-    text-decoration: underline;
+.instagram-card { border-top: 5px solid #E1306C; }
+.instagram-card .card-icon-bg {
+     background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); /* Degradado Instagram */
 }
+.instagram-card h3 { color: #C13584; } /* Uno de los tonos de Insta */
+.instagram-card .social-button.primary-action { background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); border: none; color: #fff;}
+.instagram-card .social-button.primary-action:hover { opacity: 0.9; }
 
-/* Estilos para páginas de contenido (Privacy, Cookies) */
-.page-padding {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background-color: #fff; /* Fondo blanco para mejor lectura */
-    border-radius: 5px; /* Opcional: bordes redondeados */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra sutil */
-    margin-top: 30px; /* Espacio desde el header */
-    margin-bottom: 30px; /* Espacio hasta el footer */
-}
 
-.page-padding h1 {
-    border-bottom: 2px solid #eee;
-    padding-bottom: 10px;
+.social-card .card-description {
+    font-size: 0.95em;
+    color: #666;
     margin-bottom: 25px;
+    flex-grow: 1; /* Empuja el botón hacia abajo si hay espacio */
+    min-height: 60px; /* Asegura un espacio mínimo para la descripción */
 }
 
-.page-padding h2 {
-    margin-top: 30px;
-    margin-bottom: 10px;
-     border-bottom: 1px solid #eee;
-     padding-bottom: 5px;
+/* Botón principal de la tarjeta */
+.social-button.primary-action {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 25px; /* Más redondeado */
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease, color 0.3s ease;
+    margin-top: auto; /* Se asegura de estar al final */
+    border: 2px solid transparent; /* Borde inicial transparente */
+    width: 90%; /* Ocupa casi todo el ancho de la tarjeta */
+    max-width: 250px; /* Pero con un máximo */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
+.social-button.primary-action:hover {
+    transform: scale(1.05); /* Efecto de zoom ligero */
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.social-button.primary-action i { margin-left: 8px; font-size: 0.9em; }
 
-.page-padding ul {
-    list-style: disc;
-    margin-left: 20px;
-    margin-bottom: 1em;
-}
 
-/* Cookie Consent Banner */
-.cookie-consent {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.85); /* Fondo oscuro semi-transparente */
-    color: #fff;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-    font-size: 0.9em;
-    display: none; /* Oculto por defecto, JS lo muestra */
-}
+/* --- About Us Section (Sin cambios respecto a la versión anterior) --- */
+.about-us { padding: 60px 0; background-color: #fff; text-align: center; }
+.about-us i { color: #007bff; }
+.about-us p { max-width: 800px; margin-left: auto; margin-right: auto; }
+.about-us .disclaimer { font-size: 0.9em; color: #777; margin-top: 20px; font-style: italic; }
 
-.cookie-consent p {
-    margin: 0;
-    margin-right: 15px;
-}
+/* --- Footer (Sin cambios respecto a la versión anterior) --- */
+.site-footer { background-color: #2c3e50; color: #bdc3c7; padding: 40px 0; text-align: center; font-size: 0.9em; }
+.site-footer .container { display: flex; flex-direction: column; align-items: center; }
+.social-footer-links { margin-bottom: 20px; }
+.social-footer-links a { color: #bdc3c7; font-size: 1.8em; margin: 0 12px; transition: color 0.3s ease; }
+.social-footer-links a:hover { color: #ffffff; }
+.site-footer p { margin-bottom: 10px; color: #ecf0f1; }
+.footer-nav ul { list-style: none; padding: 0; display: flex; gap: 20px; }
+.footer-nav ul li a { color: #bdc3c7; text-decoration: none; }
+.footer-nav ul li a:hover { color: #fff; }
 
-.cookie-consent a {
-    color: #00aaff; /* Un azul más brillante para el enlace */
-    text-decoration: underline;
-}
-.cookie-consent a:hover {
-     color: #fff;
-}
+/* --- Cookie Consent Banner (Sin cambios) --- */
+.cookie-consent { position: fixed; bottom: 0; left: 0; width: 100%; background-color: rgba(0, 0, 0, 0.85); color: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; font-size: 0.9em; display: none; }
+.cookie-consent p { margin: 0; margin-right: 15px; }
+.cookie-consent a { color: #00aaff; text-decoration: underline; }
+.cookie-consent a:hover { color: #fff; }
+#accept-cookies { background-color: #007bff; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease; white-space: nowrap; }
+#accept-cookies:hover { background-color: #0056b3; }
 
-#accept-cookies {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    white-space: nowrap; /* Evita que el texto del botón se rompa */
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
+    .social-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
 }
-
-#accept-cookies:hover {
-    background-color: #0056b3;
-}
-
-/* Responsive Design */
 @media (max-width: 768px) {
-    h1 { font-size: 2em; }
-    h2 { font-size: 1.5em; }
-
-    .site-header .container {
-        flex-direction: column;
-    }
-    .main-nav { margin-top: 10px; }
+    h1 { font-size: 2.2em; }
+    h2 { font-size: 1.7em; }
+    .site-header .container { flex-direction: column; }
+    .main-nav { margin-top: 15px; }
     .main-nav ul { justify-content: center; }
+    .hero { padding: 60px 0; }
+    .hero h1 { font-size: 2.5em; }
+    .hero .subtitle { font-size: 1.1em; }
+    .social-grid { grid-template-columns: 1fr; gap: 20px; } /* 1 columna en móvil */
+    .social-card.banner-card { padding: 25px; }
+    .card-icon-bg { width: 70px; height: 70px; font-size: 2em; margin-bottom: 15px; }
+    .social-card .card-description { min-height: auto; /* Ajustar altura mínima en móvil */ }
+    .social-button.primary-action { width: 100%; max-width: none; padding: 10px 20px; }
+    .cookie-consent { flex-direction: column; text-align: center; }
+    .cookie-consent p { margin-bottom: 10px; margin-right: 0; }
+}
 
-    .hero { padding: 50px 0; }
-    .hero h1 { font-size: 2.2em; }
-    .hero .subtitle { font-size: 1em; }
-
-    section { padding: 40px 0; }
-
-    .cookie-consent {
-        flex-direction: column;
-        text-align: center;
-    }
-    .cookie-consent p {
-        margin-bottom: 10px;
-        margin-right: 0;
-    }
+/* --- (Opcional) Añadir la animación de entrada suave para las tarjetas --- */
+/* (Asegúrate de tener el JS correspondiente en script.js si usas esto) */
+.social-card.banner-card {
+    /* Añade estas propiedades si usas el JS de IntersectionObserver */
+    /* opacity: 0; */
+    /* transform: translateY(20px); */
+    /* transition: opacity 0.6s ease-out, transform 0.6s ease-out; */
 }

@@ -3,92 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Encuentra las mejores ofertas y productos de afiliados seleccionados para ti en Sale Peru. ¡Síguenos en Facebook para no perderte nada!">
-    <title>Sale Peru - Ofertas y Productos de Afiliados</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Conéctate con Sale Peru en Facebook, TikTok e Instagram. Encuentra ofertas y contenido exclusivo en nuestras redes. ¡Síguenos ahora!">
+    <title>Sale Peru - Conéctate en Redes Sociales (Facebook, TikTok, Instagram)</title>
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome (para iconos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- CSS Propio -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- YA NO NECESITAMOS EL FACEBOOK SDK -->
+
 </head>
 <body>
 
     <header class="site-header">
         <div class="container">
             <div class="logo">
-                <a href="/">Sale Peru</a> <!-- Puedes reemplazar esto con <img src="images/logo.png" alt="Sale Peru Logo"> si tienes un logo -->
+                <!-- Reemplaza con tu logo si tienes uno: <a href="/"><img src="images/logo.png" alt="Sale Peru Logo"></a> -->
+                <a href="/">Sale Peru</a>
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="/">Inicio</a></li>
-                    <li><a href="#ofertas">Ofertas</a></li>
-                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="/"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="#social-hub"><i class="fas fa-share-alt"></i> Redes</a></li>
+                    <li><a href="#about"><i class="fas fa-info-circle"></i> Nosotros</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main>
+        <!-- Sección Hero Principal -->
         <section class="hero">
             <div class="container">
-                <h1>Las Mejores Ofertas de Afiliados, Seleccionadas para Ti</h1>
-                <p class="subtitle">Exploramos la web para traerte productos increíbles a precios bajos. Encuentra nuestras últimas recomendaciones en Facebook.</p>
-                <a href="https://facebook.com/saleperu" target="_blank" rel="noopener noreferrer" class="cta-button">
-                    Ver Ofertas en Facebook <span class="arrow">→</span>
+                <h1>Tu Conexión Directa a las Mejores Ofertas</h1>
+                <p class="subtitle">Sigue a Sale Peru en tus redes favoritas y sé el primero en descubrir productos increíbles y descuentos exclusivos.</p>
+                <a href="#social-hub" class="cta-button">
+                    <i class="fas fa-heart"></i> ¡Únete a Nuestra Comunidad!
                 </a>
             </div>
+            <!-- Nota: Puedes personalizar el fondo en css/style.css en la clase .hero -->
         </section>
 
-        <section id="ofertas" class="featured-offers">
+        <!-- Sección Social Hub (Rediseñada) -->
+        <section id="social-hub" class="social-hub">
             <div class="container">
-                <h2>Ofertas Destacadas</h2>
-                <p>Actualizamos constantemente nuestras recomendaciones. Las ofertas más recientes y por tiempo limitado las publicamos directamente en nuestra página de Facebook.</p>
-                <p>¡Síguenos para estar siempre al día!</p>
-                <!-- Opcional: Podrías añadir manualmente algunas ofertas estáticas aquí -->
-                <!-- Ejemplo de estructura de oferta (repetir si añades alguna):
-                <div class="offer-item">
-                    <img src="url_imagen_producto_placeholder.jpg" alt="Nombre Producto">
-                    <h3>Nombre del Producto Destacado</h3>
-                    <p>Breve descripción o beneficio principal.</p>
-                    <a href="tu_enlace_afiliado_directo" target="_blank" rel="noopener sponsored" class="offer-link">Ver Oferta</a>
-                </div>
-                -->
-                 <a href="https://facebook.com/saleperu" target="_blank" rel="noopener noreferrer" class="cta-button secondary">
-                    Ir a Facebook Ahora
-                </a>
-            </div>
-        </section>
+                <h2>Encuéntranos y Síguenos</h2>
+                <p class="section-intro">Estamos activos compartiendo lo mejor para ti. ¡Elige tu plataforma preferida!</p>
 
-        <section id="nosotros" class="about-us">
-            <div class="container">
-                <h2>¿Quiénes Somos?</h2>
-                <p>Sale Peru nació con la misión de simplificar tus compras online. Buscamos y seleccionamos cuidadosamente productos interesantes y ofertas atractivas de programas de afiliados como Aliexpress, para que tú no tengas que hacerlo.</p>
-                <p>Nuestro objetivo es ser tu fuente confiable para descubrir productos de calidad a buenos precios. ¡Gracias por confiar en nosotros!</p>
-                 <p><strong>Importante:</strong> Como afiliados, podemos recibir una comisión por las compras realizadas a través de nuestros enlaces, sin costo adicional para ti.</p>
+                <div class="social-grid">
+
+                    <!-- Banner/Tarjeta Facebook -->
+                    <div class="social-card banner-card facebook-card">
+                        <div class="card-icon-bg"><i class="fab fa-facebook-f"></i></div>
+                        <h3>Facebook</h3>
+                        <p class="card-description">Ofertas diarias, noticias importantes y nuestra comunidad principal. ¡No te lo pierdas!</p>
+                        <a href="https://www.facebook.com/saleperupe" target="_blank" rel="noopener noreferrer" class="social-button primary-action">
+                            Ver en Facebook <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div> <!-- Fin Banner Facebook -->
+
+                    <!-- Banner/Tarjeta TikTok -->
+                    <div class="social-card banner-card tiktok-card">
+                        <div class="card-icon-bg"><i class="fab fa-tiktok"></i></div>
+                         <h3>TikTok</h3>
+                        <p class="card-description">Videos cortos, descubrimientos de productos en acción y un toque divertido.</p>
+                         <a href="https://www.tiktok.com/@saleperupe" target="_blank" rel="noopener noreferrer" class="social-button primary-action">
+                            Seguir en TikTok <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div> <!-- Fin Banner TikTok -->
+
+                    <!-- Banner/Tarjeta Instagram -->
+                    <div class="social-card banner-card instagram-card">
+                        <div class="card-icon-bg"><i class="fab fa-instagram"></i></div>
+                        <h3>Instagram</h3>
+                         <p class="card-description">Inspiración visual, resúmenes de ofertas y el lado más estético de Sale Peru.</p>
+                         <a href="https://instagram.com/saleperupe" target="_blank" rel="noopener noreferrer" class="social-button primary-action">
+                            Explorar Instagram <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div> <!-- Fin Banner Instagram -->
+
+                </div> <!-- Fin .social-grid -->
             </div>
-        </section>
+        </section> <!-- Fin Sección Social Hub -->
+
+        <!-- Sección Sobre Nosotros -->
+        <section id="about" class="about-us">
+            <div class="container">
+                <h2><i class="fas fa-info-circle"></i> Sobre Sale Peru</h2>
+                <p>Somos tu guía en el mundo de las compras online. Buscamos y compartimos productos interesantes y ofertas de programas como Aliexpress Affiliates para facilitarte la vida.</p>
+                <p>Nuestra pasión es encontrar calidad y buen precio. Conéctate con nosotros en redes sociales para no perderte ninguna novedad. ¡Gracias por visitarnos!</p>
+                <p class="disclaimer"><strong>Nota:</strong> Como participantes en programas de afiliados, podemos ganar comisiones por compras calificadas realizadas a través de nuestros enlaces, sin costo extra para ti.</p>
+            </div>
+        </section> <!-- Fin Sección Sobre Nosotros -->
 
     </main>
 
     <footer class="site-footer">
         <div class="container">
+            <div class="social-footer-links">
+                 <a href="https://facebook.com/saleperupe" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                 <a href="https://www.tiktok.com/@saleperupe" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                 <a href="https://instagram.com/saleperupe" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
             <p>© <span id="year"></span> Sale Peru. Todos los derechos reservados.</p>
             <nav class="footer-nav">
                 <ul>
-                    <li><a href="privacy.html">Política de Privacidad</a></li>
+                    <!-- Enlaces a páginas legales -->
+                    <li><a href="politica-de-privacidad.html">Política de Privacidad</a></li>
                     <li><a href="cookies.html">Política de Cookies</a></li>
-                    <!-- Puedes añadir un enlace de Contacto si tienes un email -->
-                    <!-- <li><a href="mailto:tuemail@example.com">Contacto</a></li> -->
                 </ul>
             </nav>
         </div>
     </footer>
 
-    <!-- Cookie Consent Banner -->
+    <!-- Cookie Consent Banner (Sigue siendo necesario por las cookies de sesión/preferencia y posible análisis futuro) -->
     <div id="cookie-consent-banner" class="cookie-consent">
-        <p>Utilizamos cookies para mejorar tu experiencia. Al continuar navegando, aceptas nuestro uso de cookies. <a href="cookies.html">Más información</a>.</p>
+        <p>Utilizamos cookies esenciales para mejorar tu experiencia en este sitio. Al continuar navegando, aceptas nuestro uso de cookies. <a href="cookies.html">Más información</a>.</p>
         <button id="accept-cookies">Aceptar</button>
     </div>
 
+    <!-- Script Principal (Sigue siendo necesario para el año y el banner de cookies, y la animación opcional) -->
     <script src="js/script.js"></script>
+
 </body>
 </html>
