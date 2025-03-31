@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página No Encontrada - Sale Peru</title>
+    <meta name="description" content="La página que buscas no existe en Sale Peru. Vuelve al inicio o visita nuestro Facebook.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css"> <!-- Usa ruta absoluta desde la raíz -->
+    <style>
+        /* Estilos específicos para la página 404 */
+        .error-page {
+            text-align: center;
+            padding: 60px 20px;
+            min-height: 60vh; /* Asegura que ocupe espacio vertical */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .error-page h1 {
+            font-size: 3em;
+            color: #dc3545; /* Un rojo para el error */
+            margin-bottom: 15px;
+        }
+         .error-page p {
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <a href="/">Sale Peru</a>
+            </div>
+            <!-- No es necesaria la navegación completa aquí usualmente -->
+        </div>
+    </header>
+
+    <main class="error-page container">
+        <h1>¡Ups! Error 404</h1>
+        <p>Lo sentimos, la página que estás buscando no existe o ha sido movida.</p>
+        <p>Esto puede suceder si un enlace antiguo de nuestro sitio anterior ya no es válido.</p>
+        <p>Puedes:</p>
+        <a href="/" class="cta-button">Volver a la Página Principal</a>
+        <p style="margin-top: 20px;">O encontrar nuestras ofertas más recientes en Facebook:</p>
+        <a href="https://facebook.com/saleperu" target="_blank" rel="noopener noreferrer" class="cta-button secondary">
+            Visitar Sale Peru en Facebook
+        </a>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© <span id="year"></span> Sale Peru. Todos los derechos reservados.</p>
+             <nav class="footer-nav">
+                <ul>
+                    <li><a href="/privacy.html">Política de Privacidad</a></li> <!-- Usa rutas absolutas -->
+                    <li><a href="/cookies.html">Política de Cookies</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+     <script src="/js/script.js"></script> <!-- Usa ruta absoluta -->
+</body>
+</html>
