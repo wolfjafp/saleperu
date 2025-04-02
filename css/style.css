@@ -3,21 +3,21 @@
 
 :root {
     /* Paleta de colores refinada */
-    --color-primary: #20817a;      /* Teal más calmado */
-    --color-primary-dark: #005f5a;  /* Teal oscuro */
-    --color-hero-accent: #D4AF37;  /* Dorado 'Old Gold' */
-    --color-primary-bg: #f7fafa;   /* Fondo muy claro */
-    --color-secondary-bg: #ffffff; /* Blanco puro */
-    --color-text-dark: #2c3e50;   /* Azul/Gris oscuro texto */
+    --color-primary: #20817a;
+    --color-primary-dark: #005f5a;
+    --color-hero-accent: #D4AF37;
+    --color-primary-bg: #f7fafa;
+    --color-secondary-bg: #ffffff;
+    --color-text-dark: #2c3e50;
     --color-text-light: #ffffff;
-    --color-text-secondary: #5a6a7a;/* Gris medio texto */
-    --color-border: #e1eceb;      /* Borde sutil */
+    --color-text-secondary: #5a6a7a;
+    --color-border: #e1eceb;
     --color-success: #28a745;
     --color-error: #dc3545;
-    --color-bg-dark: #1e2a38; /* Color de fondo oscuro para Hero V3 */
+    --color-bg-dark: #1e2a38;
 
     /* Colores Redes Sociales */
-    --color-facebook: #1877F2; /* Mantenidos */
+    --color-facebook: #1877F2;
     --color-facebook-hover: #145cb9;
     --color-tiktok-bg: #000000;
     --color-tiktok-text: #ffffff;
@@ -35,12 +35,16 @@
 
     /* Otros */
     --base-font-size: 16px;
-    --border-radius: 8px; /* Redondez estándar */
+    --border-radius: 8px;
     --box-shadow: 0 4px 12px rgba(32, 129, 122, 0.07);
     --box-shadow-hover: 0 7px 20px rgba(32, 129, 122, 0.12);
     --transition-speed: 0.3s ease;
     --transition-speed-fast: 0.2s ease;
     --container-width: 1140px;
+    /* ACCESIBILIDAD: Variable para outline de foco */
+    --focus-outline-color: #005fcc;
+    /* Color para el hover del botón "About Us" */
+    --color-primary-hover-about: #25a69a; /* Ligeramente más claro/vivo */
 }
 
 html { scroll-behavior: smooth; font-size: var(--base-font-size); }
@@ -62,10 +66,21 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.3rem); text-align: center; }
 h3 { font-size: 1.4rem; color: var(--color-primary); font-weight: 600;}
 h4 { font-size: 1.2rem; }
 p { margin-bottom: 1.2em; color: var(--color-text-secondary); }
-a { text-decoration: none; color: var(--color-primary); transition: color var(--transition-speed), opacity var(--transition-speed), transform var(--transition-speed-fast); }
+a { text-decoration: none; color: var(--color-primary); transition: color var(--transition-speed), opacity var(--transition-speed), transform var(--transition-speed-fast), background-color var(--transition-speed); /* Añadido background-color a transition */ }
 a:hover { color: var(--color-primary-dark); opacity: 0.9; }
 ul { list-style: none; }
 img { max-width: 100%; height: auto; display: block; }
+
+/* --- ACCESIBILIDAD: Estilos de Foco Visibles --- */
+a:focus-visible,
+button:focus-visible,
+input:focus:not(:disabled),
+textarea:focus:not(:disabled),
+select:focus:not(:disabled) {
+    outline: 3px solid var(--focus-outline-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(0, 95, 204, 0.3);
+}
 
 /* --- HEADER --- */
 .site-header { background-color: var(--color-secondary-bg); padding: 0.8rem 0; border-bottom: 1px solid var(--color-border); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 6px rgba(44, 62, 80, 0.05); }
@@ -75,7 +90,7 @@ img { max-width: 100%; height: auto; display: block; }
 .main-nav ul { display: flex; gap: 1.8rem; }
 .main-nav a { color: var(--color-text-dark); font-weight: 500; padding: 0.5rem 0; position: relative; text-decoration: none; }
 .main-nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -2px; left: 0; background-color: var(--color-primary-dark); transition: width var(--transition-speed); border-radius: 1px; }
-.main-nav a:hover { color: var(--color-primary); /* Hover sutil en nav */}
+.main-nav a:hover { color: var(--color-primary); }
 .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
 .mobile-menu-toggle { display: none; background: none; border: none; font-size: 1.6rem; color: var(--color-primary); cursor: pointer; }
 
@@ -101,7 +116,6 @@ img { max-width: 100%; height: auto; display: block; }
 
 
 /* --- SECCIÓN GENÉRICA PÁGINAS INTERNAS --- */
-/* ... (sin cambios) ... */
 .page-header { background-color: var(--color-primary); color: var(--color-text-light); padding: 2.5rem 0; text-align: center; margin-bottom: 3rem; }
 .page-header h1 { color: var(--color-text-light); font-weight: 600; }
 .content-section { padding: 2rem 0 3.5rem 0; background-color: var(--color-secondary-bg); border-radius: var(--border-radius); box-shadow: var(--box-shadow); margin-bottom: 3rem; }
@@ -117,16 +131,15 @@ img { max-width: 100%; height: auto; display: block; }
 .content-section ul ul li::before { content: '\f0da'; font-size: 0.8em; }
 .content-section strong { color: var(--color-primary-dark); }
 
-/* --- SOCIAL MEDIA SECTION (Index) - Mejoras Hover y Consistencia --- */
+/* --- SOCIAL MEDIA SECTION (Index) --- */
 .social-media { padding: 4.5rem 0; background-color: var(--color-primary-bg); position: relative; z-index: 5; }
 .social-media h2 { color: var(--color-text-dark); }
 .social-media .section-description { text-align: center; color: var(--color-text-secondary); max-width: 650px; margin: 0 auto 3rem auto; font-size: 1.1rem;}
 .social-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.8rem; justify-content: center; }
 
-/* Estilo BASE para TODAS las tarjetas sociales */
 .social-card {
     background-color: var(--color-secondary-bg);
-    border-radius: var(--border-radius); /* Aplicado aquí para todas */
+    border-radius: var(--border-radius);
     padding: 2.5rem 1.8rem;
     text-align: center;
     box-shadow: var(--box-shadow);
@@ -135,9 +148,9 @@ img { max-width: 100%; height: auto; display: block; }
     flex-direction: column;
     align-items: center;
     transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-    border-top-width: 5px; /* Grosor borde superior */
-    border-top-style: solid; /* Estilo borde */
-    border-top-color: var(--color-primary); /* Color base borde superior (sobrescrito abajo) */
+    border-top-width: 5px;
+    border-top-style: solid;
+    border-top-color: var(--color-primary);
     overflow: hidden;
     position: relative;
 }
@@ -150,10 +163,17 @@ img { max-width: 100%; height: auto; display: block; }
 .social-card p { color: var(--color-text-secondary); font-size: 0.95rem; flex-grow: 1; margin-bottom: 1.8rem; line-height: 1.6; }
 
 /* Botón CTA General (fuera del hero) */
-.cta-button { display: inline-block; padding: 0.9rem 2.2rem; border-radius: 50px; font-weight: 600; color: var(--color-text-light); text-align: center; transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; cursor: pointer; border: none; font-size: 1.05rem; box-shadow: 0 4px 10px rgba(0,0,0,0.08); background-color: var(--color-primary); }
-.cta-button:hover { background-color: var(--color-primary-dark); transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.12); }
+.cta-button { display: inline-block; padding: 0.9rem 2.2rem; border-radius: 50px; font-weight: 600; color: var(--color-text-light); text-align: center; transition: background-color var(--transition-speed), transform var(--transition-speed-fast), box-shadow var(--transition-speed); cursor: pointer; border: none; font-size: 1.05rem; box-shadow: 0 4px 10px rgba(0,0,0,0.08); background-color: var(--color-primary); }
+/* ESTILO HOVER GENERAL CTA - OJO: No aplicar el background oscuro aquí */
+.cta-button:hover {
+    /* background-color: var(--color-primary-dark); <--- QUITAMOS ESTE */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+    /* Podríamos añadir un ligero brillo o cambio sutil si quitamos el color */
+    filter: brightness(1.1);
+}
 .cta-button.accent-button { background-color: var(--color-hero-accent); color: var(--color-text-dark); }
-.cta-button.accent-button:hover { background-color: #b89b2e; }
+.cta-button.accent-button:hover { background-color: #b89b2e; filter: brightness(1); /* Reset filter */ }
 .cta-button i { margin-left: 0.7rem; font-size: 0.9em; transition: transform 0.2s ease-out; }
 .cta-button:hover i { transform: translateX(2px); }
 
@@ -161,45 +181,52 @@ img { max-width: 100%; height: auto; display: block; }
 .social-card.facebook { border-top-color: var(--color-facebook); }
 .social-card.facebook .icon { color: var(--color-facebook); }
 .social-card.facebook .cta-button { background-color: var(--color-facebook); color: var(--color-text-light);}
-.social-card.facebook .cta-button:hover { background-color: var(--color-facebook-hover); }
+.social-card.facebook .cta-button:hover { background-color: var(--color-facebook-hover); filter: brightness(1); /* Reset filter */ }
 
 .social-card.tiktok { border-top-color: var(--color-tiktok-accent1); }
 .social-card.tiktok .icon { color: var(--color-tiktok-accent1); }
 .social-card.tiktok .cta-button { background-color: var(--color-tiktok-bg); color: var(--color-tiktok-text); border: 2px solid transparent; background-image: linear-gradient(var(--color-tiktok-bg), var(--color-tiktok-bg)), linear-gradient(45deg, var(--color-tiktok-accent1), var(--color-tiktok-accent2)); background-origin: border-box; background-clip: padding-box, border-box; }
-.social-card.tiktok .cta-button:hover { filter: brightness(1.4); }
+.social-card.tiktok .cta-button:hover { filter: brightness(1.4); } /* Mantener el brillo específico */
 
 .social-card.instagram {
-    /* border-top-color: transparent; Ya no es necesario */
     border-top-width: 5px;
     border-image-slice: 1;
     border-image-source: linear-gradient(to right, var(--color-instagram-bg-start), var(--color-instagram-bg-mid), var(--color-instagram-bg-end));
-    border-radius: var(--border-radius); /* Asegurar explícitamente aquí */
-    /* Asegurar que el borde sólido base no interfiera */
-    border-top-style: solid; /* Necesario para border-image */
-    border-right-style: solid; /* Mantener bordes laterales y abajo */
+    border-radius: var(--border-radius);
+    border-top-style: solid;
+    border-right-style: solid;
     border-bottom-style: solid;
     border-left-style: solid;
-    border-width: 1px; /* Bordes laterales y abajo */
-    border-top-width: 5px; /* Grosor solo arriba */
-    border-color: var(--color-border); /* Color bordes laterales/abajo */
-
+    border-width: 1px;
+    border-top-width: 5px;
+    border-color: var(--color-border);
 }
 .social-card.instagram .icon { background: linear-gradient(45deg, var(--color-instagram-bg-start), var(--color-instagram-bg-mid), var(--color-instagram-bg-end)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
 .social-card.instagram .cta-button { background: linear-gradient(45deg, var(--color-instagram-bg-start), var(--color-instagram-bg-mid), var(--color-instagram-bg-end)); color: var(--color-instagram-text); }
-.social-card.instagram .cta-button:hover { filter: brightness(1.15); transform: translateY(-3px) scale(1.03);}
+.social-card.instagram .cta-button:hover { filter: brightness(1.15); transform: translateY(-3px) scale(1.03);} /* Mantener brillo y transform específicos */
 
 
 /* --- ABOUT US SECTION --- */
-/* ... (sin cambios) ... */
 .about-us { background-color: var(--color-secondary-bg); padding: 4rem 0; text-align: center; border-top: 1px solid var(--color-border); }
 .about-us h2 { display: inline-block; margin-bottom: 1.5rem; color: var(--color-text-dark); }
 .about-us .about-icon { color: var(--color-primary); margin-right: 0.7rem; vertical-align: middle; position: relative; top: -3px; }
 .about-us p { max-width: 800px; margin: 0 auto 1.5rem auto; color: var(--color-text-secondary); font-size: 1.05rem; line-height: 1.8; }
-.about-us .cta-button { margin-top: 1.5rem; background-color: var(--color-primary); }
-.about-us .cta-button:hover { background-color: var(--color-primary-dark); }
+.about-us .cta-button {
+    margin-top: 1.5rem;
+    background-color: var(--color-primary);
+    color: var(--color-text-light); /* Asegurar texto blanco */
+}
+/* AJUSTE HOVER ESPECÍFICO para el botón 'Conócenos Mejor' */
+.about-us .cta-button:hover {
+    background-color: var(--color-primary-hover-about); /* Usar la nueva variable */
+    color: var(--color-text-light); /* Asegurar texto blanco */
+    /* Hereda transform y shadow del .cta-button:hover general, ya no necesita filtro */
+    filter: none; /* Asegurarse que no herede el filtro general si lo hubiera */
+     transform: translateY(-3px); /* Mantener explícito si se quitó del general */
+    box-shadow: 0 6px 15px rgba(32, 129, 122, 0.2); /* Sombra específica si se desea */
+}
 
 /* --- CONTACT SECTION --- */
-/* ... (sin cambios) ... */
 .contact-section { padding: 1rem 0 4rem 0; }
 .contact-section .container { max-width: 750px; }
 .contact-section h1 { text-align: center; margin-bottom: 0.5em; color: var(--color-text-dark); }
@@ -209,11 +236,27 @@ img { max-width: 100%; height: auto; display: block; }
 .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--color-primary); font-size: 1rem;}
 .form-group label span[aria-hidden="true"] { color: var(--color-error); margin-left: 2px; }
 .form-group input[type="text"], .form-group input[type="email"], .form-group textarea { width: 100%; padding: 0.9rem 1.1rem; border: 1px solid var(--color-border); border-radius: var(--border-radius); font-family: var(--font-primary); font-size: 1rem; color: var(--color-text-dark); transition: border-color var(--transition-speed), box-shadow var(--transition-speed); background-color: #f9fbfb; }
-.form-group input[type="text"]:focus, .form-group input[type="email"]:focus, .form-group textarea:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(32, 129, 122, 0.15); }
+.form-group input[type="text"]:focus, .form-group input[type="email"]:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(32, 129, 122, 0.15);
+}
+/* Asegurar que :focus-visible también quite el outline predeterminado aquí */
+.form-group input:focus-visible, .form-group textarea:focus-visible {
+     outline: none;
+}
+
 .form-group textarea { resize: vertical; min-height: 120px; }
 .form-submit { text-align: center; margin-top: 1.8rem; }
-.form-submit .whatsapp-button { background-color: var(--color-whatsapp); padding: 1rem 2.5rem; font-size: 1.1rem; }
-.form-submit .whatsapp-button:hover { background-color: var(--color-whatsapp-hover); }
+/* Botón WhatsApp hereda de .cta-button pero con colores propios */
+.form-submit .whatsapp-button {
+     background-color: var(--color-whatsapp);
+     color: var(--color-text-light); /* Asegurar texto claro */
+}
+.form-submit .whatsapp-button:hover {
+     background-color: var(--color-whatsapp-hover);
+     filter: none; /* Quitar filtro general */
+}
 .form-submit .whatsapp-button i { margin-right: 0.8rem; font-size: 1.2em; }
 .form-feedback { margin-top: 1.2rem; font-weight: 500; min-height: 1.5em; font-size: 1rem; text-align: center;}
 .form-feedback.success { color: var(--color-success); }
@@ -226,14 +269,12 @@ img { max-width: 100%; height: auto; display: block; }
 .social-links-inline i { vertical-align: middle; }
 
 /* --- FOOTER --- */
-/* ... (sin cambios) ... */
 .site-footer { background-color: var(--color-text-dark); color: rgba(255, 255, 255, 0.8); padding: 2rem 0; text-align: center; font-size: 0.9rem; margin-top: auto; border-top: 4px solid var(--color-primary); }
 .site-footer .container { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
 .site-footer a { color: rgba(255, 255, 255, 0.9); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 .site-footer a:hover { color: var(--color-hero-accent); opacity: 1; }
 
 /* --- ESTILOS GUÍA --- */
-/* ... (sin cambios) ... */
 .page-header.guide-header { background: linear-gradient(to right, var(--color-primary), var(--color-primary-dark)); padding: 3rem 0; }
 .page-header.guide-header h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
 .guide-content .page-intro { font-size: 1.1rem; color: var(--color-text-dark); margin-bottom: 2.5rem; line-height: 1.8; text-align: center; background-color: var(--color-primary-bg); padding: 1.5rem; border-radius: var(--border-radius); border-left: 5px solid var(--color-primary); }
@@ -266,7 +307,6 @@ img { max-width: 100%; height: auto; display: block; }
 
 
 /* --- RESPONSIVE DESIGN --- */
-/* ... (sin cambios) ... */
 @media (max-width: 992px) {
     .main-nav { display: none; }
     .mobile-menu-toggle { display: block; }

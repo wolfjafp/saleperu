@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- SEO Meta Tags -->
     <title>Sale Peru | ¡Tu Conexión Directa a Ofertas Increíbles!</title>
     <meta name="description" content="¡Únete a Sale Peru! Te mostramos ofertas, productos geniales y descuentos exclusivos en Facebook, Instagram y TikTok. ¡No te quedes fuera de nuestra comunidad!">
     <meta name="keywords" content="ofertas peru, descuentos peru, compras online peru, sale peru, facebook, instagram, tiktok, aliexpress afiliados, chollos peru, comunidad compras, guia compras peru">
     <meta name="author" content="Sale Peru">
     <link rel="canonical" href="https://saleperu.pe/" />
-    <!-- Open Graph y Twitter Cards (CAMBIA URLS DE IMAGEN) -->
     <meta property="og:title" content="Sale Peru | ¡Ofertas, Comunidad y Diversión!" />
     <meta property="og:description" content="¡Descubre ofertones y únete a la gente chévere de Sale Peru en redes sociales!" />
     <meta property="og:image" content="https://saleperu.pe/images/og-image-saleperu.jpg" />
@@ -20,38 +18,44 @@
     <meta name="twitter:title" content="Sale Peru | ¡Ofertas, Comunidad y Diversión!">
     <meta name="twitter:description" content="¡Descubre ofertones y únete a la gente chévere de Sale Peru en redes sociales!">
     <meta name="twitter:image" content="https://saleperu.pe/images/twitter-image-saleperu.jpg">
-    <!-- <meta name="twitter:site" content="@tuUsuarioTwitter"> -->
 
-    <!-- Favicon (Descomenta y ajusta rutas) -->
-    <!-- <link rel="icon" href="/favicon.ico" sizes="any"> -->
-    <!-- <link rel="icon" href="/images/favicon.svg" type="image/svg+xml"> -->
-    <!-- <link rel="apple-touch-icon" href="/images/apple-touch-icon.png"> -->
-    <!-- <link rel="manifest" href="/site.webmanifest"> -->
 
-    <!-- Estilos CSS -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Schema.org (Organización) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Sale Peru",
       "url": "https://saleperu.pe",
-      "logo": "https://saleperu.pe/images/logo-saleperu.png", // CAMBIAR URL LOGO
+      "logo": "https://saleperu.pe/images/logo-saleperu.png",
       "sameAs": [
         "https://www.facebook.com/saleperupe",
         "https://www.instagram.com/saleperupe",
         "https://www.tiktok.com/@saleperupe"
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Sale Peru",
+      "url": "https://saleperu.pe",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://saleperu.pe/buscar?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
     }
     </script>
 
@@ -76,7 +80,6 @@
     </header>
 
     <main>
-        <!-- HERO SECTION V3 -->
         <section class="hero hero-v3">
             <div class="hero-background-gradient"></div>
             <div class="container hero-content">
@@ -94,15 +97,12 @@
                 </div>
             </div>
         </section>
-        <!-- FIN HERO SECTION V3 -->
-
 
         <section id="social-section" class="social-media">
             <div class="container">
                 <h2>¡Búscanos y Síguenos! 😉</h2>
                 <p class="section-description">Siempre estamos compartiendo lo último y lo mejor para ti. ¿Cuál es tu red social favorita? ¡Ahí estamos!</p>
                 <div class="social-cards">
-                    <!-- Tarjeta Facebook -->
                      <article class="social-card facebook">
                          <i class="fab fa-facebook-f icon"></i>
                         <h3>Facebook</h3>
@@ -111,7 +111,6 @@
                             Chismear en Facebook <i class="fas fa-arrow-right"></i>
                         </a>
                     </article>
-                    <!-- Tarjeta TikTok -->
                     <article class="social-card tiktok">
                         <i class="fab fa-tiktok icon"></i>
                         <h3>TikTok</h3>
@@ -120,7 +119,6 @@
                             Ver Tiktoks <i class="fas fa-arrow-right"></i>
                         </a>
                     </article>
-                     <!-- Tarjeta Instagram -->
                     <article class="social-card instagram">
                         <i class="fab fa-instagram icon"></i>
                         <h3>Instagram</h3>
@@ -153,7 +151,6 @@
         </div>
     </footer>
 
-    <!-- Scripts JavaScript -->
     <script src="js/script.js" defer></script>
 
 </body>

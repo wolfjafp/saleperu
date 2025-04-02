@@ -1,12 +1,27 @@
 # robots.txt para Sale Peru (saleperu.pe)
+# Versión: 1.1
 
+# Permitir a todos los crawlers rastrear el sitio completo
 User-agent: *
 Allow: /
-# Disallow: /productos.html # Descomenta si quieres mantenerla sin indexar temporalmente
 
-# Permitir acceso a todos los crawlers (Googlebot, Bingbot, etc.)
-# a todo el contenido del sitio (CSS, JS, Imágenes incluidas).
+# Si deseas bloquear temporalmente la página de productos (porque está en construcción):
+# Disallow: /productos.html
+# (Recuerda quitar el Disallow cuando la página esté lista y quitar el noindex del HTML)
+
+# Si tienes secciones administrativas o privadas que NO deben ser indexadas:
+# User-agent: *
+# Disallow: /admin/
+# Disallow: /private/
 
 # --- Sitemap ---
-# Indica la ubicación de tu sitemap.
+# Indica la ubicación de tu sitemap XML. Asegúrate que la URL sea correcta.
 Sitemap: https://saleperu.pe/sitemap.xml
+
+# Consideraciones adicionales (opcional):
+# Puedes definir reglas específicas para bots si es necesario, ej:
+# User-agent: Googlebot
+# Crawl-delay: 1 # segundos entre peticiones (usar con cuidado)
+
+# User-agent: Bingbot
+# Crawl-delay: 2
