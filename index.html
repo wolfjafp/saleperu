@@ -25,6 +25,12 @@
     <meta name="twitter:image" content="https://saleperu.pe/images/twitter-image-saleperu.jpg" />
     <meta name="twitter:image:alt" content="Logo de Sale Peru sobre un fondo abstracto" />
 
+    <!-- ** INICIO Favicons (Recomendación anterior) - Asegúrate de crear estos archivos ** -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/images/favicons/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/images/favicons/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
+    <!-- ** FIN Favicons ** -->
 
     <link rel="stylesheet" href="css/style.css">
 
@@ -34,13 +40,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+    <!-- ** INICIO Schemas (Revisados y potencialmente combinables, pero ok por ahora) ** -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Sale Peru",
       "url": "https://saleperu.pe",
-      "logo": "https://saleperu.pe/images/logo-saleperu.png",
+      "logo": "https://saleperu.pe/images/logo.webp", // Actualizado a logo.webp
       "description": "Comunidad online enfocada en encontrar y compartir ofertas, descuentos y productos interesantes, principalmente de AliExpress y tiendas locales peruanas.",
       "sameAs": [
         "https://www.facebook.com/saleperupe",
@@ -50,7 +57,7 @@
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer support",
-        "url": "https://saleperu.pe/contacto.html"
+        "url": "https://saleperu.pe/contacto.html" // Asegúrate que esta página exista o elimina el contactPoint
       }
     }
     </script>
@@ -67,10 +74,10 @@
          "url": "https://saleperu.pe",
          "logo": {
            "@type": "ImageObject",
-           "url": "https://saleperu.pe/images/logo-saleperu.png"
+           "url": "https://saleperu.pe/images/logo.webp" // Actualizado a logo.webp
          }
        },
-      "potentialAction": {
+      "potentialAction": { // Manten esto solo si REALMENTE planeas implementar búsqueda interna en el sitio
         "@type": "SearchAction",
         "target": {
           "@type": "EntryPoint",
@@ -80,18 +87,24 @@
       }
     }
     </script>
+    <!-- ** FIN Schemas ** -->
 
 </head>
 <body>
 
     <header class="site-header">
         <div class="container">
-            <a href="/" class="site-title-link" aria-label="Sale Peru - Ir a la página de inicio"><span class="site-title">Sale Peru</span></a>
+            <!-- ***** MODIFICACIÓN AQUÍ ***** -->
+            <a href="/" class="site-title-link" aria-label="Sale Peru - Ir a la página de inicio">
+                <!-- Se reemplaza el SPAN por el IMG del logo -->
+                <img src="images/logo.webp" alt="Logo de Sale Peru" class="site-logo">
+            </a>
+            <!-- ***** FIN DE MODIFICACIÓN ***** -->
             <nav class="main-nav">
                  <ul>
                     <li><a href="/" class="active" aria-current="page">Inicio</a></li>
                     <li><a href="/nosotros.html">Nosotros</a></li>
-                    <li><a href="/productos.html">Productos</a></li>
+                    <li><a href="/tienda.html">Tienda</a></li> <!-- Considera si esta página aún tiene sentido en el modelo actual -->
                     <li><a href="/contacto.html">Contacto</a></li>
                 </ul>
             </nav>
@@ -130,7 +143,7 @@
                         <h3>Facebook</h3>
                         <p>Ofertitas diarias, noticias al toque y nuestra comunidad principal. ¡No te quedes fuera!</p>
                         <a href="https://www.facebook.com/saleperupe" target="_blank" rel="noopener noreferrer" class="cta-button" aria-label="Visitar Sale Peru en Facebook">
-                            Chismear en Facebook <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            Ofertas en Facebook <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </article>
                     <article class="social-card tiktok">

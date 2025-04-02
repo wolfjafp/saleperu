@@ -100,6 +100,9 @@ input:focus-visible, textarea:focus-visible, select:focus-visible {
 .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
 .mobile-menu-toggle { display: none; background: none; border: none; font-size: 1.6rem; color: var(--color-primary); cursor: pointer; padding: 5px; }
 
+/* ***** MODIFICACIÓN AQUÍ ***** */
+.site-logo { width: 100%; max-width: 250px; height: auto; object-fit: contain; }
+/* ***** FIN DE MODIFICACIÓN ***** */
 
 /* --- HERO SECTION V3 --- */
 .hero-v3 { position: relative; background-color: var(--color-bg-dark); color: var(--color-text-light); padding: 8rem 0 6rem 0; text-align: center; overflow: hidden; min-height: 65vh; display: flex; align-items: center; justify-content: center; }
