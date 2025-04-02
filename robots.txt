@@ -1,0 +1,12 @@
+# robots.txt para Sale Peru (saleperu.pe)
+
+User-agent: *
+Allow: /
+# Disallow: /productos.html # Descomenta si quieres mantenerla sin indexar temporalmente
+
+# Permitir acceso a todos los crawlers (Googlebot, Bingbot, etc.)
+# a todo el contenido del sitio (CSS, JS, Imágenes incluidas).
+
+# --- Sitemap ---
+# Indica la ubicación de tu sitemap.
+Sitemap: https://saleperu.pe/sitemap.xml

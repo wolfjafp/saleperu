@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Contacto | Sale Peru - ¡Hablemos por WhatsApp!</title>
+    <meta name="description" content="¿Tienes alguna duda o consulta? ¡Mándanos un WhatsApp! Llena el formulario y te ayudamos a preparar el mensaje. Fácil y rápido.">
+    <meta name="keywords" content="contacto sale peru, formulario contacto peru, whatsapp sale peru, atención al cliente peru, compras online peru, ofertas peru, ayuda compras">
+    <meta name="author" content="Sale Peru">
+    <link rel="canonical" href="https://saleperu.pe/contacto.html" />
+    <!-- Open Graph y Twitter Cards (CAMBIA URLS DE IMAGEN) -->
+    <meta property="og:title" content="¡Habla con Sale Peru por WhatsApp!" />
+    <meta property="og:description" content="¿Consultas? Llena el form y te llevamos directo a WhatsApp." />
+    <meta property="og:url" content="https://saleperu.pe/contacto.html" />
+    <meta property="og:image" content="https://saleperu.pe/images/og-image-contacto.jpg" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="¡Habla con Sale Peru por WhatsApp!">
+    <meta name="twitter:description" content="¿Consultas? Llena el form y te llevamos directo a WhatsApp.">
+    <meta name="twitter:image" content="https://saleperu.pe/images/twitter-image-contacto.jpg">
+
+    <!-- Favicon (Mismos que en index.html) -->
+    <!-- <link rel="icon" href="/favicon.ico" sizes="any"> -->
+    <!-- <link rel="icon" href="/images/favicon.svg" type="image/svg+xml"> -->
+    <!-- <link rel="apple-touch-icon" href="/images/apple-touch-icon.png"> -->
+    <!-- <link rel="manifest" href="/site.webmanifest"> -->
+
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <!-- <img src="images/logo.png" alt="Sale Peru Logo" class="logo"> -->
+             <a href="/" class="site-title-link"><span class="site-title">Sale Peru</span></a>
+            <nav class="main-nav">
+                 <ul>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/nosotros.html">Nosotros</a></li>
+                    <li><a href="/productos.html">Productos</a></li>
+                    <li><a href="/contacto.html" class="active">Contacto</a></li>
+                </ul>
+            </nav>
+             <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+         <section class="page-header">
+            <div class="container">
+                 <h1>¡Conversemos!</h1> <!-- Título más cercano -->
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="container">
+                 <!-- Mensaje más claro sobre el proceso -->
+                <p class="subtitle">¿Alguna pregunta? ¡No te quedes con la duda! Llena estos datos rapidito y te ayudamos a armar un mensaje para que nos escribas directo a WhatsApp. ¡Más fácil, imposible!</p>
+
+                <form id="contact-form" class="contact-form" aria-live="polite">
+                    <div class="form-group">
+                        <label for="name">Tu Nombre <span aria-hidden="true">*</span></label>
+                        <input type="text" id="name" name="name" required placeholder="Ej: Juan Pérez" aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Tu Email <span aria-hidden="true">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="Para saber quién eres :) " aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Tu País <span aria-hidden="true">*</span></label>
+                        <input type="text" id="country" name="country" required placeholder="¿Desde dónde nos escribes?" aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Tu Mensaje <span aria-hidden="true">*</span></label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Cuéntanos qué necesitas o qué oferta buscas..." aria-required="true"></textarea>
+                    </div>
+                    <div class="form-submit">
+                        <!-- Texto del botón más explicativo -->
+                        <button type="submit" class="cta-button whatsapp-button">
+                            <i class="fab fa-whatsapp"></i> Abrir Chat en WhatsApp
+                        </button>
+                        <div id="form-feedback" class="form-feedback" aria-live="assertive"></div>
+                    </div>
+                </form>
+
+                <div class="contact-alternatives">
+                     <!-- Texto alternativo más informal -->
+                    <p>Si prefieres, también nos encuentras en nuestras redes. ¡Síguenos y escríbenos!</p>
+                    <div class="social-links-inline">
+                        <a href="https://www.facebook.com/saleperupe" target="_blank" rel="noopener noreferrer" title="Facebook Sale Peru" aria-label="Visita nuestra página de Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.tiktok.com/@saleperupe" target="_blank" rel="noopener noreferrer" title="TikTok Sale Peru" aria-label="Visita nuestro perfil de TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.instagram.com/saleperupe" target="_blank" rel="noopener noreferrer" title="Instagram Sale Peru" aria-label="Visita nuestro perfil de Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+           <p>© <span id="current-year"></span> Sale Peru. ¡Con cariño desde Perú! 😉</p>
+             <div>
+                <a href="/politica-privacidad.html">Política de Privacidad</a> |
+                <a href="/terminos-condiciones.html">Términos y Condiciones</a>
+             </div>
+        </div>
+    </footer>
+
+    <!-- Scripts JavaScript -->
+    <script src="js/script.js" defer></script>
+
+</body>
+</html>
