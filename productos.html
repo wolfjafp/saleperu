@@ -1,14 +1,30 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-PE">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Productos Destacados | Sale Peru - ¡Próximamente!</title>
     <meta name="robots" content="noindex, follow">
-    <meta name="description" content="¡Estamos preparando algo genial! Pronto aquí verás nuestros productos propios y las ofertas más top que encontramos. ¡Atento a las novedades!">
+    <meta name="description" content="Página de productos en construcción en Sale Peru. Pronto encontrarás nuestros productos propios y una selección curada de ofertas. ¡Síguenos en redes para novedades!">
     <meta name="author" content="Sale Peru">
     <link rel="canonical" href="https://saleperu.pe/productos.html" />
+
+    <meta property="og:title" content="Productos en Sale Peru | ¡Próximamente!" />
+    <meta property="og:description" content="Estamos preparando nuestra sección de productos. ¡Vuelve pronto o síguenos en redes!" />
+    <meta property="og:url" content="https://saleperu.pe/productos.html" />
+    <meta property="og:image" content="https://saleperu.pe/images/og-image-productos-placeholder.jpg" />
+    <meta property="og:image:alt" content="Caja abierta con signo de interrogación" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_PE" />
+    <meta property="og:site_name" content="Sale Peru" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Productos en Sale Peru | ¡Próximamente!" />
+    <meta name="twitter:description" content="Estamos preparando nuestra sección de productos. ¡Vuelve pronto o síguenos en redes!" />
+    <meta name="twitter:image" content="https://saleperu.pe/images/twitter-image-productos-placeholder.jpg" />
+    <meta name="twitter:image:alt" content="Caja abierta con signo de interrogación" />
+
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -21,17 +37,17 @@
 
     <header class="site-header">
         <div class="container">
-             <a href="/" class="site-title-link"><span class="site-title">Sale Peru</span></a>
+             <a href="/" class="site-title-link" aria-label="Sale Peru - Ir a la página de inicio"><span class="site-title">Sale Peru</span></a>
             <nav class="main-nav">
                  <ul>
                     <li><a href="/">Inicio</a></li>
                     <li><a href="/nosotros.html">Nosotros</a></li>
-                    <li><a href="/productos.html" class="active">Productos</a></li>
+                    <li><a href="/productos.html" class="active" aria-current="page">Productos</a></li>
                     <li><a href="/contacto.html">Contacto</a></li>
                 </ul>
             </nav>
-             <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
-                <i class="fas fa-bars"></i>
+             <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Alternar Menú" aria-expanded="false" aria-controls="main-nav-list">
+                <i class="fas fa-bars" aria-hidden="true"></i>
             </button>
         </div>
     </header>
@@ -44,16 +60,16 @@
         </section>
 
         <section class="content-section">
-            <div class="container" style="text-align: center;" role="alert">
+            <div class="container" style="text-align: center;" role="alert" aria-live="polite">
                  <i class="fas fa-box-open fa-4x" style="color: var(--color-hero-accent); margin-bottom: 1.5rem;" aria-hidden="true"></i>
                 <h2>¡Estamos Cocinando Algo Bueno! 🍳</h2>
                 <p>¡Uy! Todavía estamos preparando esta sección. Muy pronto vas a encontrar aquí algunos de nuestros <strong>productos propios</strong> (¡secretos por ahora!) y una selección de las <strong>ofertas más bravas</strong> que cazamos por ahí.</p>
                 <p>¡Prometemos que valdrá la pena la espera! Mientras tanto, no te desconectes de nuestras redes sociales, ¡ahí siempre hay novedades frescas!</p>
 
                  <div class="social-links-inline" style="margin-top: 2.5rem; justify-content: center;">
-                     <a href="https://www.facebook.com/saleperupe" target="_blank" rel="noopener noreferrer" title="Facebook Sale Peru" aria-label="Visita nuestra página de Facebook"><i class="fab fa-facebook-f fa-2x"></i></a>
-                     <a href="https://www.tiktok.com/@saleperupe" target="_blank" rel="noopener noreferrer" title="TikTok Sale Peru" aria-label="Visita nuestro perfil de TikTok"><i class="fab fa-tiktok fa-2x"></i></a>
-                     <a href="https://www.instagram.com/saleperupe" target="_blank" rel="noopener noreferrer" title="Instagram Sale Peru" aria-label="Visita nuestro perfil de Instagram"><i class="fab fa-instagram fa-2x"></i></a>
+                     <a href="https://www.facebook.com/saleperupe" target="_blank" rel="noopener noreferrer" title="Facebook Sale Peru" aria-label="Visita nuestra página de Facebook"><i class="fab fa-facebook-f fa-2x" aria-hidden="true"></i></a>
+                     <a href="https://www.tiktok.com/@saleperupe" target="_blank" rel="noopener noreferrer" title="TikTok Sale Peru" aria-label="Visita nuestro perfil de TikTok"><i class="fab fa-tiktok fa-2x" aria-hidden="true"></i></a>
+                     <a href="https://www.instagram.com/saleperupe" target="_blank" rel="noopener noreferrer" title="Instagram Sale Peru" aria-label="Visita nuestro perfil de Instagram"><i class="fab fa-instagram fa-2x" aria-hidden="true"></i></a>
                 </div>
             </div>
         </section>

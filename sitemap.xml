@@ -4,44 +4,49 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- Sitemap generado para Sale Peru -->
-<!-- ¡IMPORTANTE! Actualiza las fechas <lastmod> cada vez que hagas cambios significativos en una página -->
+<!-- Sitemap generado para Sale Peru - Actualizado: 2024-07-26 -->
 
 <url>
   <loc>https://saleperu.pe/</loc>
-  <lastmod>2024-07-26</lastmod> <!-- Formato YYYY-MM-DD es suficiente y común -->
-  <changefreq>weekly</changefreq> <!-- Frecuencia estimada de cambio -->
-  <priority>1.0</priority> <!-- Prioridad máxima para la Home -->
+  <lastmod>2024-07-26</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>1.0</priority>
 </url>
 <url>
   <loc>https://saleperu.pe/nosotros.html</loc>
   <lastmod>2024-07-26</lastmod>
   <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
+  <priority>0.7</priority>
 </url>
 <url>
   <loc>https://saleperu.pe/productos.html</loc>
   <lastmod>2024-07-26</lastmod>
-  <changefreq>monthly</changefreq> <!-- Cambiar a weekly/daily cuando tenga contenido dinámico -->
-  <priority>0.6</priority> <!-- Prioridad baja mientras sea placeholder -->
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority> <!-- Prioridad baja mientras sea placeholder y tenga noindex -->
 </url>
 <url>
   <loc>https://saleperu.pe/contacto.html</loc>
   <lastmod>2024-07-26</lastmod>
-  <changefreq>yearly</changefreq> <!-- El contenido del contacto cambia poco -->
-  <priority>0.7</priority> <!-- Prioridad media-baja -->
+  <changefreq>yearly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+    <loc>https://saleperu.pe/guia-compras-ofertas-peru.html</loc>
+    <lastmod>2024-07-26</lastmod>
+    <changefreq>monthly</changefreq> <!-- Puede cambiar si actualizas la guía -->
+    <priority>0.9</priority> <!-- Contenido importante -->
 </url>
 <url>
   <loc>https://saleperu.pe/politica-privacidad.html</loc>
-  <lastmod>2024-07-26</lastmod> <!-- Actualizar cuando cambie la política -->
+  <lastmod>2024-07-26</lastmod>
   <changefreq>yearly</changefreq>
-  <priority>0.3</priority> <!-- Prioridad baja para páginas legales -->
+  <priority>0.3</priority>
 </url>
 <url>
   <loc>https://saleperu.pe/terminos-condiciones.html</loc>
-  <lastmod>2024-07-26</lastmod> <!-- Actualizar cuando cambien los términos -->
+  <lastmod>2024-07-26</lastmod>
   <changefreq>yearly</changefreq>
-  <priority>0.3</priority> <!-- Prioridad baja para páginas legales -->
+  <priority>0.3</priority>
 </url>
-<!-- Añadir aquí futuras URLs importantes, como posts de blog o categorías de productos -->
+
 </urlset>
