@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Página No Encontrada (404) | Sale Peru</title>
-    <meta name="description" content="Oops! Parece que la página que buscas en Sale Peru no existe o ha sido movida. Vuelve al inicio o síguenos en redes.">
-    <meta name="robots" content="noindex, follow">
+    <meta name="description" content="Oops! Parece que la página que buscas en Sale Peru no existe, ha sido movida o era una oferta temporal. ¡Pero no te vayas! Encuéntranos en redes o vuelve al inicio.">
+    <meta name="robots" content="noindex, follow"> <!-- Correcto: No indexar, sí seguir links -->
 
+    <!-- Asegúrate que la ruta al CSS sea absoluta desde la raíz -->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -15,15 +16,27 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+    <!-- Favicons (Asegúrate que las rutas sean correctas y los archivos existan) -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/images/favicons/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/images/favicons/apple-touch-icon.png">
+    <!-- <link rel="manifest" href="/manifest.json"> Si tienes un manifest -->
+
     <style>
-        .not-found-section { padding: 4rem 0; text-align: center; }
+        /* Estilos específicos para la sección 404 (se mantienen inline por simplicidad) */
+        .not-found-section { padding: 4rem 1rem; text-align: center; } /* Añadido padding lateral */
         .not-found-section .container { max-width: 700px; }
-        .not-found-section i { font-size: 4rem; color: var(--color-primary); margin-bottom: 1.5rem; }
-        .not-found-section h1 { margin-bottom: 1rem; color: var(--color-text-dark); }
-        .not-found-section p { color: var(--color-text-secondary); margin-bottom: 2rem; font-size: 1.1rem; }
-        .not-found-actions .cta-button { margin: 0.5rem; }
-        .not-found-social { margin-top: 3rem; border-top: 1px solid var(--color-border); padding-top: 2rem; }
-        .not-found-social p { margin-bottom: 1rem; font-weight: 500; }
+        .not-found-section .not-found-icon { font-size: 4.5rem; color: var(--color-primary); margin-bottom: 1.5rem; display: inline-block; } /* Clase específica para el icono */
+        .not-found-section h1 { margin-bottom: 1rem; color: var(--color-text-dark); font-size: clamp(1.8rem, 5vw, 2.5rem); } /* Ajuste tamaño h1 */
+        .not-found-section p { color: var(--color-text-secondary); margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.7; }
+        .not-found-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; } /* Añadido flex-wrap y gap */
+        .not-found-actions .cta-button { margin: 0; } /* Quitamos margen extra */
+        .not-found-social { margin-top: 3.5rem; border-top: 1px solid var(--color-border); padding-top: 2.5rem; }
+        .not-found-social p { margin-bottom: 1.5rem; font-weight: 600; font-size: 1.1rem; color: var(--color-text-dark); } /* Ajuste estilo párrafo social */
+        .social-links-inline { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; } /* Estilos consistentes para links sociales */
+        .social-links-inline a { color: var(--color-text-secondary); transition: color var(--transition-speed), transform var(--transition-speed); display: inline-block; font-size: 1.6rem; }
+        .social-links-inline a:hover { color: var(--color-primary); transform: scale(1.15); }
+        .social-links-inline i { vertical-align: middle; }
     </style>
 </head>
 <body>
@@ -31,42 +44,49 @@
     <header class="site-header">
         <div class="container">
             <a href="/" class="site-title-link" aria-label="Sale Peru - Ir a la página de inicio">
+                <!-- CORRECCIÓN RUTA LOGO -->
                 <img src="/images/logo.webp" alt="Logo de Sale Peru" class="site-logo">
             </a>
-                        <nav class="main-nav">
+            <!-- Asegúrate que la navegación sea idéntica a la de index.html -->
+            <nav class="main-nav" id="main-nav-list">
                  <ul>
+                    <!-- Los enlaces aquí deben coincidir con los de tu index.html -->
                     <li><a href="/">Inicio</a></li>
                     <li><a href="/nosotros.html">Nosotros</a></li>
                     <li><a href="/tienda.html">Tienda</a></li>
                     <li><a href="/contacto.html">Contacto</a></li>
                 </ul>
             </nav>
-             <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
-                <i class="fas fa-bars"></i>
+             <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Alternar Menú" aria-expanded="false" aria-controls="main-nav-list">
+                <i class="fas fa-bars" aria-hidden="true"></i>
             </button>
         </div>
     </header>
 
     <main>
-         <section class="not-found-section">
+         <section class="not-found-section" aria-labelledby="not-found-heading">
             <div class="container">
-                 <i class="fas fa-compass fa-spin" style="--fa-animation-duration: 3s;" aria-hidden="true"></i>
-                 <h1>Oops! Página No Encontrada (404)</h1>
-                 <p>Lo sentimos, la dirección que intentas visitar no existe en Sale Peru o quizás se ha movido. ¡No te preocupes!</p>
+                 <!-- Icono cambiado y con clase específica -->
+                 <span class="not-found-icon" aria-hidden="true"><i class="fas fa-unlink"></i></span>
+                 <h1 id="not-found-heading">Oops! Página No Encontrada (404)</h1>
+                 <p>Lo sentimos, la dirección que intentas visitar no existe en Sale Peru. Quizás se movió, nunca existió ¡o fue una oferta que ya voló! 😉</p>
                  <div class="not-found-actions">
                      <a href="/" class="cta-button button-primary-v3">
-                         <i class="fas fa-home"></i> Volver al Inicio
+                         <i class="fas fa-home" aria-hidden="true"></i> Volver al Inicio
                      </a>
+                     <!-- Si la página de contacto existe y es útil, mantenla -->
                      <a href="/contacto.html" class="cta-button button-secondary-v3">
-                        <i class="fas fa-envelope"></i> Contactar
+                        <i class="fas fa-envelope" aria-hidden="true"></i> Contactar Soporte
                      </a>
                  </div>
                  <div class="not-found-social">
-                     <p>Mientras tanto, encuéntranos en nuestras redes:</p>
+                     <p>¡No te pierdas! Encuentra nuestras últimas ofertas y novedades aquí:</p>
+                     <!-- Reutilizando estilos consistentes de links sociales -->
                      <div class="social-links-inline">
                          <a href="https://www.facebook.com/saleperupe" target="_blank" rel="noopener noreferrer" title="Facebook Sale Peru" aria-label="Visita nuestra página de Facebook"><i class="fab fa-facebook-f"></i></a>
                          <a href="https://www.tiktok.com/@saleperupe" target="_blank" rel="noopener noreferrer" title="TikTok Sale Peru" aria-label="Visita nuestro perfil de TikTok"><i class="fab fa-tiktok"></i></a>
                          <a href="https://www.instagram.com/saleperupe" target="_blank" rel="noopener noreferrer" title="Instagram Sale Peru" aria-label="Visita nuestro perfil de Instagram"><i class="fab fa-instagram"></i></a>
+                         <!-- Añadir más redes si son relevantes -->
                      </div>
                  </div>
             </div>
@@ -74,15 +94,18 @@
     </main>
 
     <footer class="site-footer">
+        <!-- Asegúrate que el footer sea idéntico al de index.html -->
         <div class="container">
            <p>© <span id="current-year"></span> Sale Peru. ¡Con cariño desde Perú! 😉</p>
              <div>
+                <!-- Asegúrate que estas páginas existan o elimina los enlaces -->
                 <a href="/politica-privacidad.html">Política de Privacidad</a> |
                 <a href="/terminos-condiciones.html">Términos y Condiciones</a>
              </div>
         </div>
     </footer>
 
+    <!-- Asegúrate que la ruta al JS sea absoluta desde la raíz -->
     <script src="/js/script.js" defer></script>
 
 </body>
