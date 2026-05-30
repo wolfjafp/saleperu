@@ -19,11 +19,9 @@ function initThemeSystem() {
   const themeToggleBtn = document.getElementById("theme-toggle");
   if (!themeToggleBtn) return;
 
-  // Intentar leer preferencia del usuario en localStorage, o fallback al esquema del sistema
+  // Intentar leer preferencia del usuario en localStorage, o forzar la versión clara por defecto (ignorar pre-configuración oscura del SO)
   const savedTheme = localStorage.getItem("saleperu_theme");
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  
-  const currentTheme = savedTheme || (prefersDark ? "dark" : "light");
+  const currentTheme = savedTheme || "light";
   
   setTheme(currentTheme);
 
@@ -380,6 +378,42 @@ function setupSearchUX() {
       }
     });
   });
+
+  // Lógica de apertura y cierre del Buscador Móvil Overlay
+  const mobileSearchTrigger = document.getElementById("mobile-search-trigger");
+  const mobileSearchOverlay = document.getElementById("mobile-search-overlay");
+  const mobileSearchClose = document.getElementById("mobile-search-close");
+
+  if (mobileSearchTrigger && mobileSearchOverlay) {
+    mobileSearchTrigger.addEventListener("click", () => {
+      mobileSearchOverlay.classList.add("active");
+      document.body.classList.add("modal-open");
+      
+      // Enfoque automático del input en móvil con un leve delay para esperar la animación CSS
+      setTimeout(() => {
+        if (mobileSearch) mobileSearch.focus();
+      }, 200);
+    });
+  }
+
+  if (mobileSearchClose && mobileSearchOverlay) {
+    mobileSearchClose.addEventListener("click", () => {
+      mobileSearchOverlay.classList.remove("active");
+      document.body.classList.remove("modal-open");
+    });
+  }
+
+  // Cerrar el modal al hacer clic en marcas o atajos sugeridos
+  if (mobileSuggest && mobileSearchOverlay) {
+    mobileSuggest.addEventListener("mousedown", (e) => {
+      const item = e.target.closest(".search-suggest-pill, .search-suggest-store");
+      if (!item) return;
+      setTimeout(() => {
+        mobileSearchOverlay.classList.remove("active");
+        document.body.classList.remove("modal-open");
+      }, 350); // Leve retardo para permitir el clic de filtrado
+    });
+  }
 }
 
 /**

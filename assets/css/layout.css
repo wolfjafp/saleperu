@@ -51,9 +51,9 @@
 .logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-family: var(--font-heading);
-  font-size: 1.45rem;
+  font-size: 1.65rem; /* Logotipo más imponente */
   font-weight: 800;
   letter-spacing: -0.03em; /* Estilo tipográfico ultra moderno y premium */
   background: var(--grad-royal);
@@ -65,7 +65,7 @@
 }
 
 .logo:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 .logo::after {
@@ -98,26 +98,17 @@
   }
 }
 
-.logo-fire {
+.logo-svg {
   display: inline-block;
-  font-size: 1.6rem;
+  width: 32px;
+  height: 32px;
   -webkit-text-fill-color: initial;
-  transition: transform var(--transition-fast), filter var(--transition-fast);
+  transition: transform var(--transition-smooth), filter var(--transition-smooth);
 }
 
-.logo:hover .logo-fire {
-  animation: fire-wiggle 0.5s ease-in-out infinite alternate;
-}
-
-@keyframes fire-wiggle {
-  0% {
-    transform: rotate(-6deg) scale(1.1);
-    filter: drop-shadow(0 2px 4px rgba(255, 69, 0, 0.3));
-  }
-  100% {
-    transform: rotate(8deg) scale(1.22);
-    filter: drop-shadow(0 4px 12px rgba(255, 69, 0, 0.7));
-  }
+.logo:hover .logo-svg {
+  transform: rotate(-10deg) scale(1.15);
+  filter: drop-shadow(0 4px 10px rgba(107, 17, 255, 0.35)) drop-shadow(0 2px 4px rgba(255, 77, 109, 0.3));
 }
 
 /* Acciones en Cabecera */
@@ -387,6 +378,30 @@
   z-index: 300; /* Prioridad de apilamiento por encima de imágenes y botones del feed */
 }
 
+/* Botón Disparador de Búsqueda Móvil en Cabecera */
+.mobile-search-trigger-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-body);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.mobile-search-trigger-btn:hover {
+  background-color: var(--bg-card);
+}
+
+.mobile-search-trigger-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
 /* ==========================================================================
    CONSULTAS DE RESPONSIVIDAD (MOBILE FIRST)
    ========================================================================== */
@@ -406,15 +421,75 @@
     display: none; /* Se oculta de la cabecera e irá al cuerpo principal o un botón */
   }
   
-  /* Habilitar buscador móvil espectacular */
+  .mobile-search-trigger-btn {
+    display: flex !important;
+  }
+  
+  /* Buscador móvil inmersivo overlay */
   .mobile-search-wrapper {
-    display: block !important;
+    display: flex !important;
+    flex-direction: column;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    background: rgba(247, 248, 252, 0.95) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    z-index: 1001 !important; /* Por encima de todo, incluso del reproductor e historias */
+    padding: 20px 16px 16px 16px !important;
+    margin-bottom: 0 !important;
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease-out;
+  }
+
+  [data-theme="dark"] .mobile-search-wrapper {
+    background: rgba(11, 10, 22, 0.95) !important;
+  }
+
+  .mobile-search-wrapper.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .mobile-search-overlay-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    width: 100%;
+  }
+
+  .mobile-search-overlay-title {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .mobile-search-close-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 2.2rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .mobile-search-wrapper .search-container {
     display: flex !important;
     width: 100% !important;
     box-shadow: var(--shadow-sm);
+    margin-bottom: 12px;
   }
   
   .mobile-search-wrapper .search-container:focus-within {
@@ -423,8 +498,9 @@
   }
   
   .feed-grid {
-    grid-template-columns: 1fr; /* Columna única en móviles para diseño TikTok */
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr); /* Rejilla doble de alta densidad */
+    gap: 12px;
+    margin-top: 16px;
   }
   
   .site-header .logo {

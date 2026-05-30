@@ -203,6 +203,7 @@
   flex-direction: column;
   transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
   position: relative;
+  cursor: pointer;
 }
 
 .deal-card:hover {
@@ -434,32 +435,34 @@
   transform: scale(0.95);
 }
 
-/* Botón Comprar / Ir a oferta */
+/* Botón Comprar / Ir a oferta (Estilo Obsidian Premium de Alta Conversión) */
 .card-btn {
   width: 100%;
-  padding: 12px;
-  border-radius: var(--radius-md);
-  background: var(--grad-royal);
-  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm); /* Bordes más rectos (8px) para un acabado elegante y técnico */
+  background: var(--text-primary);
+  color: var(--bg-card); /* Color opuesto al texto de fondo, dinámico light/dark */
   font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 0.95rem;
+  font-weight: 600;
+  font-size: 0.9rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  transition: opacity var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
-  box-shadow: 0 4px 15px rgba(107, 17, 255, 0.2);
+  gap: 6px;
+  border: none;
+  transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
 }
 
 .card-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(107, 17, 255, 0.35);
-  opacity: 0.95;
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  opacity: 0.92;
 }
 
 .card-btn:active {
-  transform: translateY(1px);
+  transform: translateY(0.5px);
 }
 
 /* Ajuste específico para ofertas expiradas */
@@ -1021,4 +1024,108 @@
 [data-theme="dark"] .load-more-btn {
   background-color: var(--bg-card);
   border-color: var(--border-color);
+}
+
+/* ==========================================================================
+   10. OPTIMIZACIONES DE TARJETA PARA REJILLA MÓVIL DE 2 COLUMNAS (ALTA DENSIDAD)
+   ========================================================================== */
+@media (max-width: 576px) {
+  .deal-card {
+    border-radius: 12px !important;
+    overflow: hidden;
+  }
+
+  .card-media-wrapper {
+    aspect-ratio: 1 / 1 !important; /* Imagen cuadrada perfecta en móvil */
+  }
+
+  .card-badges {
+    top: 8px !important;
+    left: 8px !important;
+    gap: 4px !important;
+  }
+
+  .badge {
+    padding: 3px 6px !important;
+    font-size: 0.65rem !important;
+    border-radius: 6px !important;
+  }
+
+  .card-share-btn {
+    top: 8px !important;
+    right: 8px !important;
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .card-share-btn svg {
+    width: 13px !important;
+    height: 13px !important;
+  }
+
+  .card-store {
+    bottom: 8px !important;
+    right: 8px !important;
+    padding: 2px 6px !important;
+    font-size: 0.65rem !important;
+    border-radius: 4px !important;
+  }
+
+  .card-body {
+    padding: 10px !important; /* Más compacto */
+  }
+
+  .card-category {
+    font-size: 0.65rem !important;
+    margin-bottom: 4px !important;
+  }
+
+  .card-title {
+    font-size: 0.85rem !important;
+    height: 2.3rem !important; /* Altura compacta uniforme de 2 líneas */
+    margin-bottom: 6px !important;
+    line-height: 1.35 !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  .card-description {
+    display: none !important; /* Ocultar para máxima densidad vertical */
+  }
+
+  .card-price-row {
+    gap: 4px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .price-offer {
+    font-size: 1.15rem !important; /* Proporcional a la tarjeta pequeña */
+  }
+
+  .price-original {
+    font-size: 0.8rem !important;
+  }
+
+  .price-discount {
+    font-size: 0.7rem !important;
+    padding: 1px 4px !important;
+    border-radius: 4px !important;
+  }
+
+  .card-coupon-container {
+    padding: 6px 8px !important;
+    font-size: 0.74rem !important;
+    margin-bottom: 10px !important;
+    border-radius: 6px !important;
+  }
+
+  .coupon-code-badge {
+    padding: 1px 4px !important;
+  }
+
+  .card-btn {
+    padding: 9px 12px !important;
+    font-size: 0.82rem !important;
+    border-radius: 6px !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
 }

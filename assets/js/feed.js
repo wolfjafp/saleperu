@@ -10,7 +10,7 @@ let searchQuery = "";
 
 // Variables de Paginación de Alto Rendimiento para DOM Ligero
 let currentPage = 1;
-const ITEMS_PER_PAGE = 12;
+const ITEMS_PER_PAGE = 24;
 
 /**
  * Función auxiliar para extraer el número secuencial de los IDs
@@ -283,6 +283,14 @@ function renderFeedCards() {
         </a>
       </div>
     `;
+
+    // Hacer que toda la tarjeta sea clickable de forma intuitiva, respetando botones interactivos
+    card.addEventListener("click", (e) => {
+      if (e.target.closest(".card-share-btn, .coupon-code-badge, .card-btn")) {
+        return; // Dejar que actúen sus propios manejadores
+      }
+      window.open(offer.link, "_blank", "noopener,noreferrer");
+    });
 
     grid.appendChild(card);
   });
