@@ -503,45 +503,87 @@ body.modal-open {
   margin-top: 24px;
 }
 
-/* Pie de Página */
+/* Pie de Página Minimalista y Premium */
 .site-footer {
   background-color: var(--bg-card);
   border-top: 1px solid var(--border-color);
-  padding: 64px 0 32px 0;
+  padding: 64px 0 0 0;
   transition: background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1.2fr 1fr;
   gap: 40px;
-  margin-bottom: 40px;
+  padding-bottom: 48px;
 }
 
 .footer-col {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .brand-col {
-  padding-right: 20px;
+  max-width: 320px;
 }
 
 .footer-brand-desc {
-  color: var(--text-secondary);
   font-size: 0.88rem;
   line-height: 1.6;
-  margin-top: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 12px;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  background-color: var(--bg-body);
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  font-weight: 500;
+}
+
+.social-icon:hover {
+  background: var(--grad-royal);
+  color: #fff !important;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(107, 17, 255, 0.2);
 }
 
 .footer-col-title {
   font-family: var(--font-display);
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--text-primary);
   margin-bottom: 20px;
+  color: var(--text-primary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  position: relative;
+}
+
+.footer-col-title::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background: var(--grad-royal);
+  border-radius: 2px;
 }
 
 .footer-col-links {
@@ -553,16 +595,12 @@ body.modal-open {
   gap: 12px;
 }
 
-.footer-col-links li {
-  margin: 0;
-}
-
 .footer-link {
-  display: inline-block;
   color: var(--text-secondary);
   font-size: 0.88rem;
   text-decoration: none;
-  transition: color var(--transition-fast), transform var(--transition-fast);
+  transition: all var(--transition-fast);
+  display: inline-block;
 }
 
 .footer-link:hover {
@@ -570,48 +608,70 @@ body.modal-open {
   transform: translateX(4px);
 }
 
+.footer-link.active {
+  color: var(--color-primary) !important;
+  font-weight: 700;
+}
+
 .footer-bottom {
   border-top: 1px solid var(--border-color);
-  padding-top: 24px;
-  text-align: center;
-  width: 100%;
+  padding: 24px 0;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="dark"] .footer-bottom {
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+.footer-bottom-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .footer-copy {
   color: var(--text-tertiary);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   line-height: 1.6;
   margin: 0;
+  text-align: left;
 }
 
-/* Responsividad para Footer Grid */
+/* Responsividad del Footer */
 @media (max-width: 992px) {
   .footer-grid {
-    grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 30px;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .brand-col {
+    grid-column: span 2;
+    max-width: 100%;
   }
 }
 
-@media (max-width: 768px) {
-  .site-footer {
-    padding: 48px 0 32px 0;
-  }
+@media (max-width: 576px) {
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
-    text-align: center;
+    gap: 28px;
   }
   .brand-col {
-    padding-right: 0;
+    grid-column: span 1;
   }
-  .footer-grid .logo {
-    justify-content: center;
+  .footer-col {
+    align-items: center;
+    text-align: center;
+  }
+  .footer-col-title::after {
+    left: 50%;
+    transform: translateX(-50%);
   }
   .footer-link:hover {
     transform: none;
   }
+  .footer-copy {
+    text-align: center;
+  }
 }
-
 
 /* Contenedor del Buscador MÃ³vil (Oculto en Escritorio por defecto) */
 .mobile-search-wrapper {
