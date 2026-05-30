@@ -1,0 +1,11 @@
+# Archivos personales y plantillas del administrador
+INSTRUCCIONES_SALEPERU.md
+plantilla_offers.csv
+plantilla_stories.csv
+
+# Sistema operativo e IDEs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.gemini/

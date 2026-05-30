@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <!-- Metadatos Técnicos Esenciales -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <!-- Configuración PWA / Móvil -->
+  <meta name="theme-color" content="#6b11ff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+  <link rel="shortcut icon" href="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=32&q=80" type="image/png">
+  
+  <!-- SEO Técnico y Metatags de Indexación -->
+  <title>🔥 SALEPERU.PE | Ofertas, Descuentos y Errores de Precio en Perú</title>
+  <meta name="description" content="La plataforma premium líder en Perú para encontrar ofertas, cupones, promociones y errores de precio de Falabella, Ripley, Plaza Vea y más. ¡Ahorra en tiempo real!">
+  <meta name="keywords" content="ofertas peru, descuentos peru, cupones falabella, cyber wow ripley, errores de precio peru, plaza vea promociones, sale peru, tecnologia barata">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://saleperu.pe/">
+
+  <!-- OpenGraph / Facebook (Viralidad) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="🔥 SALEPERU.PE | Ofertas, Descuentos y Errores de Precio en Perú">
+  <meta property="og:description" content="Encuentra los mejores descuentos, promociones y errores de precio de las tiendas más grandes de Perú en tiempo real. Inspirado en Apple y TikTok.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1200&q=80">
+  <meta property="og:url" content="https://saleperu.pe/">
+  <meta property="og:site_name" content="SALEPERU.PE">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="🔥 SALEPERU.PE | Ofertas, Descuentos y Errores de Precio en Perú">
+  <meta name="twitter:description" content="Encuentra las ofertas más calientes del internet peruano en un solo lugar. ¡Rápido, premium y viral!">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1200&q=80">
+  
+  <!-- Preconectar a Google Fonts para Optimizar Rendimiento -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Archivos de Estilos (Agregado modular principal) -->
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       CABECERA GENERAL (HEADER)
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container header-container">
+      
+      <!-- Logotipo de la marca -->
+      <a href="./" class="logo" id="header-logo" aria-label="Ir a Inicio - SALEPERU.PE">
+        <span class="logo-fire">🔥</span>SALEPERU.PE
+      </a>
+
+      <!-- Barra de búsqueda rápida (Escritorio / Tablet) -->
+      <div class="search-container">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="search-input" id="desktop-search" placeholder="Buscar ofertas o tiendas..." aria-label="Buscar ofertas">
+        <button class="search-clear-btn" id="desktop-search-clear" aria-label="Limpiar búsqueda" type="button" tabindex="-1">&times;</button>
+        <!-- Panel flotante de sugerencias -->
+        <div class="search-suggestions-dropdown" id="desktop-search-suggestions" role="listbox" aria-label="Sugerencias de búsqueda"></div>
+      </div>
+
+      <!-- Acciones de Cabecera -->
+      <div class="header-actions">
+        <!-- Botón de instalación PWA (Oculto inicialmente por CSS/JS) -->
+        <button id="pwa-install-btn" class="filter-pill active" style="display: none; padding: 6px 12px; font-size: 0.8rem; gap: 6px; box-shadow: none;" aria-label="Instalar Aplicación">
+          <span>📱</span> Instalar
+        </button>
+
+        <!-- Reproductor de Música Premium (PC) -->
+        <div class="music-header-container" id="music-header-container">
+          <div class="music-header-control" id="music-header-control" title="Reproductor de Música">
+            <span class="music-header-live-tag">📻 RADIO EN VIVO</span>
+            <div class="music-vinyl-wrapper" id="music-header-vinyl">
+              <div class="music-vinyl-disc" style="background-image: url('https://images.unsplash.com/photo-1506157786151-b8491531f063?w=300&q=80')"></div>
+            </div>
+            <button class="music-header-play-btn" id="music-header-play-btn" aria-label="Reproducir / Pausar Música">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div class="music-waves">
+              <span class="music-wave-bar"></span>
+              <span class="music-wave-bar"></span>
+              <span class="music-wave-bar"></span>
+            </div>
+          </div>
+
+          <!-- Dropdown Card Glassmorphic -->
+          <div class="music-dropdown-card" id="music-dropdown-card">
+            <div class="music-track-info">
+              <span class="music-track-title js-music-title">Hole In My Soul</span>
+              <span class="music-track-subtitle js-music-subtitle"><span style="color:var(--color-primary); font-weight:700;">Aerosmith</span></span>
+            </div>
+
+            <!-- Selector de fuente -->
+            <div class="music-source-selector" style="margin-bottom: 8px;">
+              <button class="music-source-btn js-source-song active" aria-label="Escuchar Aerosmith">
+                <span>🎵</span> Canción
+              </button>
+              <button class="music-source-btn js-source-radio" aria-label="Escuchar Radio">
+                <span>📻</span> Radio
+              </button>
+            </div>
+
+            <!-- Lista de radios seleccionables -->
+            <ul class="js-music-radio-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; max-height: 120px; overflow-y: auto;">
+              <!-- Se renderiza desde JS -->
+            </ul>
+
+            <!-- Fila de Controles de reproducción y volumen -->
+            <div class="music-control-row">
+              <button class="music-dropdown-play-btn js-music-play" aria-label="Reproducir / Pausar">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <div class="music-volume-container">
+                <button class="music-volume-btn js-music-mute" aria-label="Silenciar">
+                  <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+                </button>
+                <input type="range" class="music-volume-slider js-music-volume-slider" min="0" max="1" step="0.05" value="0.8" aria-label="Volumen">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interruptor de Tema (Claro/Oscuro) -->
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar Tema Visual">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       BARRA DE HISTORIAS TIPO INSTAGRAM/TIKTOK
+       ========================================================================== -->
+  <aside class="stories-section">
+    <div class="container">
+      <div class="stories-container" id="stories-container" role="list">
+        <!-- Renderizado dinámico desde JS -->
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       CONTENIDO PRINCIPAL (FEED DE OFERTAS)
+       ========================================================================== -->
+  <main class="main-content">
+    <div class="container">
+
+      <!-- Búsqueda en móvil (Solo visible en pantallas chicas < 576px) -->
+      <div class="mobile-search-wrapper">
+        <div class="search-container" style="position: relative; display: block; width: 100%;">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="left: 14px;">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" class="search-input" id="mobile-search" placeholder="Buscar ofertas o tiendas..." aria-label="Buscar ofertas móvil" style="width: 100%;">
+          <button class="search-clear-btn" id="mobile-search-clear" aria-label="Limpiar búsqueda" type="button" tabindex="-1">&times;</button>
+          <!-- Panel flotante de sugerencias -->
+          <div class="search-suggestions-dropdown" id="mobile-search-suggestions" role="listbox" aria-label="Sugerencias de búsqueda móvil"></div>
+        </div>
+      </div>
+
+      <!-- Barra de Filtros de Categorías e Indicador de Filtros -->
+      <div class="filters-header-row" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <div class="filters-wrapper" style="flex-grow: 1;">
+          <nav class="filters-container" id="category-filters-container" aria-label="Filtro de categorías">
+            <!-- Píldoras cargadas dinámicamente desde JS -->
+          </nav>
+        </div>
+
+        <!-- Selector de ordenamiento moderno -->
+        <div class="sort-container" style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+          <label for="sort-select" style="font-size: 0.82rem; color: var(--text-secondary); font-weight: 500; white-space: nowrap;">Ordenar:</label>
+          <select id="sort-select" onchange="applyFiltersAndSort()" style="background-color: var(--bg-card); border: 1px solid var(--border-color); padding: 8px 24px 8px 12px; border-radius: var(--radius-sm); font-size: 0.82rem; font-weight: 600; color: var(--text-primary); cursor: pointer; outline: none; box-shadow: var(--shadow-sm); appearance: none; -webkit-appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%236e6e73\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"6 9 12 15 18 9\"></polyline></svg>'); background-repeat: no-repeat; background-position: right 8px center; background-size: 14px;">
+            <option value="recientes">⚡ Recientes</option>
+            <option value="hot">🔥 Calientes</option>
+            <option value="descuento">% Descuento</option>
+            <option value="precio-bajo">🪙 Menor precio</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Cuadrícula Principal del Feed -->
+      <section class="feed-grid" id="feed-grid" aria-label="Feed de ofertas y descuentos">
+        <!-- Renderizado dinámico de tarjetas y skeletons en JS -->
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       PIE DE PÁGINA (FOOTER)
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      
+      <!-- Logotipo del Footer -->
+      <div class="logo" style="margin-bottom: 4px;">
+        <span class="logo-fire">🔥</span>SALEPERU.PE
+      </div>
+      
+      <!-- Enlaces del menú del pie -->
+      <div class="footer-links">
+        <a href="#todos" class="footer-link" onclick="document.querySelector('.filter-pill[data-id=\'todos\']').click()">⚡ Ofertas del Cyber</a>
+        <a href="#hot" class="footer-link" onclick="document.querySelector('.filter-pill[data-id=\'hot\']').click()">🔥 Ofertas Calientes</a>
+        <a href="#error" class="footer-link" onclick="document.querySelector('.filter-pill[data-id=\'error\']').click()">💥 Errores de Precio</a>
+        <a href="https://instagram.com/saleperu.pe" target="_blank" rel="noopener" class="footer-link">📸 Instagram</a>
+        <a href="https://tiktok.com/@saleperu.pe" target="_blank" rel="noopener" class="footer-link">🎵 TikTok</a>
+      </div>
+
+      <p class="footer-copy">
+        &copy; 2026 SALEPERU.PE. Todos los derechos reservados. <br>
+        Hecho con amor y optimización premium 🇵🇪 para encontrar las mejores promociones.
+      </p>
+
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       1. VISOR DE HISTORIAS COMPLETO (OVERLAY MODAL)
+       ========================================================================== -->
+  <div class="story-viewer-overlay" id="story-viewer-overlay" role="dialog" aria-modal="true" aria-label="Reproductor de Historias">
+    <div class="story-viewer-container" id="story-viewer-container">
+      
+      <!-- Cabecera de Historia (Barra de progreso + Usuario) -->
+      <div class="story-header">
+        <div class="story-progress-bar-container" id="story-progress-bar-container">
+          <!-- Segmentos de barra cargados dinámicamente -->
+        </div>
+        <div class="story-user-info">
+          <!-- Datos dinámicos -->
+        </div>
+      </div>
+
+      <!-- Contenido Multimedia Principal -->
+      <div class="story-body" id="story-body">
+        <!-- Imagen / Video + áreas de clic de navegación cargadas dinámicamente -->
+      </div>
+
+      <!-- Indicador visual sutil de arrastre hacia abajo para cerrar (Solo en móvil) -->
+      <div class="swipe-hint-container" style="position: absolute; top: 72px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; flex-direction: column; align-items: center; color: rgba(255,255,255,0.4); font-size: 0.7rem; pointer-events: none;">
+        <span class="swipe-hint-animation" style="font-size: 1rem;">↓</span>
+        <span>Arrastra para cerrar</span>
+      </div>
+
+      <!-- Pie de Historia (Botón CTA + Texto) -->
+      <div class="story-footer" id="story-footer">
+        <!-- Título/Descripción + Enlace "Ver Oferta" -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       2. MODAL DE COMPARTIR VIRAL (GLASSMORPHIC)
+       ========================================================================== -->
+  <div class="modal-overlay" id="share-modal-overlay" onclick="closeShareModal()" role="dialog" aria-modal="true" aria-label="Compartir Oferta">
+    <div class="modal-window slide-up" onclick="event.stopPropagation()">
+      
+      <!-- Título de cabecera de modal -->
+      <div class="modal-title-row">
+        <h3 class="modal-title">Compartir Oferta 🚀</h3>
+        <button class="modal-close" onclick="closeShareModal()" aria-label="Cerrar modal">&times;</button>
+      </div>
+
+      <!-- Redes sociales viralizadoras -->
+      <div class="share-options-grid">
+        <!-- WhatsApp -->
+        <button class="share-btn" onclick="shareOnWhatsApp()">
+          <span class="share-icon-circle share-wa">
+            <svg viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.33 4.982L2 22l5.164-1.354a9.938 9.938 0 0 0 4.846 1.258h.004c5.507 0 9.99-4.474 9.991-9.984a9.94 9.94 0 0 0-2.924-7.062A9.92 9.92 0 0 0 12.012 2zm5.727 14.126c-.312.879-1.516 1.6-2.072 1.7-.5.09-1.15.17-3.34-.74-2.8-1.17-4.606-4.01-4.746-4.2-.14-.19-1.144-1.52-1.144-2.9 0-1.38.72-2.052.98-2.33.26-.279.572-.35.76-.35.19 0 .38 0 .54.008.173.008.406-.065.632.483.23.56.786 1.92.854 2.062.068.14.113.31.02.49-.09.18-.13.29-.27.45-.14.16-.3.36-.43.48-.15.13-.3.28-.13.57.17.29.756 1.25 1.63 2.03.1.09.28.21.36.21.36 0 .57-.27.75-.51.18-.24.75-.82.95-1.1.2-.28.4-.23.68-.13.28.1.1.56 1.76.88 1.66.83.21.1.35.16.43.29.08.13.08.77-.23 1.65z"/></svg>
+          </span>
+          <span>WhatsApp</span>
+        </button>
+        <!-- Telegram -->
+        <button class="share-btn" onclick="shareOnTelegram()">
+          <span class="share-icon-circle share-tg">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.53-1.39.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.24.37-.49 1.03-.75 4.04-1.76 6.74-2.92 8.1-3.48 3.84-1.6 4.64-1.88 5.16-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07 0 .14-.02.21z"/></svg>
+          </span>
+          <span>Telegram</span>
+        </button>
+        <!-- Copiar enlace -->
+        <button class="share-btn" onclick="copyShareLink()">
+          <span class="share-icon-circle share-copy">
+            <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+          </span>
+          <span>Copiar Link</span>
+        </button>
+      </div>
+
+      <!-- Input alternativo para copiar a mano -->
+      <div class="copy-link-container">
+        <input type="text" id="share-link-input" class="copy-link-input" readonly aria-label="Enlace a copiar">
+        <button class="copy-link-btn" onclick="copyShareLink()">Copiar</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       REPRODUCTOR DE MÚSICA PREMIUM (MÓVIL FAB & DRAWER)
+       ========================================================================== -->
+  <!-- Botón Flotante para Móviles (FAB) -->
+  <div class="music-mobile-fab" id="music-mobile-fab" aria-label="Abrir Reproductor de Música">
+    <div class="music-vinyl-wrapper" id="music-mobile-vinyl">
+      <div class="music-vinyl-disc" style="background-image: url('https://images.unsplash.com/photo-1506157786151-b8491531f063?w=300&q=80')"></div>
+    </div>
+    <div class="music-waves">
+      <span class="music-wave-bar"></span>
+      <span class="music-wave-bar"></span>
+      <span class="music-wave-bar"></span>
+    </div>
+  </div>
+
+  <!-- Overlay para el Drawer -->
+  <div class="music-drawer-overlay" id="music-drawer-overlay"></div>
+
+  <!-- Drawer Deslizable Móvil -->
+  <div class="music-drawer" id="music-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-music-title">
+    <div class="music-drawer-handle-bar"></div>
+    <div class="music-drawer-header">
+      <h3 class="music-drawer-title" id="drawer-music-title">Reproducción Premium 🎵</h3>
+      <button class="music-drawer-close" id="music-drawer-close" aria-label="Cerrar">&times;</button>
+    </div>
+
+    <!-- Vinilo grande giratorio -->
+    <div class="music-drawer-vinyl-container" id="music-drawer-vinyl-container">
+      <div class="music-large-vinyl">
+        <div class="music-vinyl-disc" style="background-image: url('https://images.unsplash.com/photo-1506157786151-b8491531f063?w=300&q=80')"></div>
+      </div>
+    </div>
+
+    <!-- Información de Pista -->
+    <div class="music-large-info">
+      <div class="music-large-text">
+        <span class="music-track-title js-music-title">Hole In My Soul</span>
+        <span class="music-track-subtitle js-music-subtitle"><span style="color:var(--color-primary); font-weight:700;">Aerosmith</span></span>
+      </div>
+      <div class="music-waves">
+        <span class="music-wave-bar"></span>
+        <span class="music-wave-bar"></span>
+        <span class="music-wave-bar"></span>
+      </div>
+    </div>
+
+    <!-- Controles del Drawer -->
+    <div class="music-drawer-controls">
+      <!-- Selector de fuente -->
+      <div class="music-source-selector">
+        <button class="music-source-btn js-source-song active" aria-label="Escuchar Aerosmith">
+          <span>🎵</span> Canción
+        </button>
+        <button class="music-source-btn js-source-radio" aria-label="Escuchar Radio">
+          <span>📻</span> Radio
+        </button>
+      </div>
+
+      <!-- Selector de radios en el móvil -->
+      <ul class="js-music-radio-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; max-height: 120px; overflow-y: auto;">
+        <!-- Se renderiza desde JS -->
+      </ul>
+
+      <!-- Botón Play y Volumen -->
+      <div class="music-drawer-play-row">
+        <button class="music-large-play-btn js-music-play" aria-label="Reproducir / Pausar">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+      </div>
+
+      <div class="music-volume-container">
+        <button class="music-volume-btn js-music-mute" aria-label="Silenciar">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+        </button>
+        <input type="range" class="music-volume-slider js-music-volume-slider" min="0" max="1" step="0.05" value="0.8" aria-label="Volumen">
+      </div>
+    </div>
+  </div>
+
+  <!-- Elemento de Audio Nativo Único (Soporta reproducción en segundo plano) -->
+  <audio id="musica" style="display:none;" preload="auto"></audio>
+
+  <!-- ==========================================================================
+       SCRIPTS DE CONTROL Y FUNCIONALIDAD (CARGA ASÍNCRONA)
+       ========================================================================== -->
+  <script src="assets/js/sheets.js"></script>
+  <script src="assets/js/stories.js"></script>
+  <script src="assets/js/feed.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/seo.js"></script>
+  
+  <!-- Lógica de control del reproductor de música -->
+  <script src="assets/js/music-player.js"></script>
+  
+  <!-- Orquestador principal (debe cargarse al final) -->
+  <script src="assets/js/app.js"></script>
+
+</body>
+</html>
