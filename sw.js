@@ -17,12 +17,14 @@ const ASSETS_TO_CACHE = [
   "./assets/css/layout.css",
   "./assets/css/components.css",
   "./assets/css/animations.css",
+  "./assets/css/music-player.css",
   "./assets/js/app.js",
   "./assets/js/sheets.js",
   "./assets/js/stories.js",
   "./assets/js/feed.js",
   "./assets/js/ui.js",
-  "./assets/js/seo.js"
+  "./assets/js/seo.js",
+  "./assets/js/music-player.js"
 ];
 
 // Evento de Instalación: Guarda archivos estáticos clave en caché
@@ -54,9 +56,8 @@ self.addEventListener("activate", (e) => {
   self.clients.claim();
 });
 
-// Evento de Intercepción (Fetch): Estrategia "Network First" con fallback a Caché
+// Evento de Intercepción (Fetch): Estrategia "Stale-While-Revalidate" para activos locales y estáticos
 self.addEventListener("fetch", (e) => {
-  // Solo interceptar peticiones del mismo origen (locales) o GETs
   if (e.request.method !== "GET") return;
 
   const url = new URL(e.request.url);
@@ -65,25 +66,24 @@ self.addEventListener("fetch", (e) => {
   if (url.hostname.includes("docs.google.com")) return;
 
   e.respondWith(
-    fetch(e.request)
-      .then((networkResponse) => {
-        // Guardar copia fresca en caché
-        return caches.open(CACHE_NAME).then((cache) => {
-          cache.put(e.request, networkResponse.clone());
+    caches.match(e.request).then((cachedResponse) => {
+      // Lanzar petición en red en segundo plano para refrescar caché
+      const fetchPromise = fetch(e.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(e.request, networkResponse.clone());
+            });
+          }
           return networkResponse;
+        })
+        .catch((err) => {
+          console.warn("[Service Worker] Falló recuperación de red para:", e.request.url, err);
         });
-      })
-      .catch(() => {
-        // En caso de fallo de red, intentar cargar desde la caché
-        return caches.match(e.request).then((cachedResponse) => {
-          if (cachedResponse) {
-            return cachedResponse;
-          }
-          // Si no está en caché y es un documento HTML, retornar la raíz por defecto
-          if (e.request.mode === "navigate") {
-            return caches.match("./index.html");
-          }
-        });
-      })
+
+      // Retornar instantáneamente el recurso en caché si existe (0ms latencia!),
+      // de lo contrario esperar por la respuesta de red.
+      return cachedResponse || fetchPromise;
+    })
   );
 });
