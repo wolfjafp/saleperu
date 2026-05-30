@@ -96,6 +96,9 @@ function initMusicPlayer() {
 
   // 6. Actualizar la interfaz con los valores por defecto
   updateVisuals();
+
+  // 7. Enriquecer con Atributos de Accesibilidad WCAG (ARIA)
+  setupAriaAccessibility();
 }
 
 /**
@@ -185,24 +188,9 @@ function setupAudioElement() {
  * Configurar disparador de interacción para el Autoplay
  */
 function setupAutoplayTrigger() {
-  const triggerAutoplay = () => {
-    if (!musicState.hasInteracted) {
-      musicState.hasInteracted = true;
-      console.log("👆 Primera interacción física detectada. Iniciando música de fondo...");
-      
-      // Reproducir música por defecto (Aerosmith)
-      playMusic();
-      
-      // Limpiar listeners
-      document.removeEventListener('click', triggerAutoplay);
-      document.removeEventListener('keydown', triggerAutoplay);
-      document.removeEventListener('touchstart', triggerAutoplay);
-    }
-  };
-
-  document.addEventListener('click', triggerAutoplay);
-  document.addEventListener('keydown', triggerAutoplay);
-  document.addEventListener('touchstart', triggerAutoplay);
+  // Autoplay desactivado por Auditoría UX/Accesibilidad: Se desactiva el inicio automático por clic fortuito.
+  // Ahora la música sólo se inicia si el usuario hace clic de forma explícita en los controles de reproducción.
+  console.log("🎵 Reproducción automática desactivada por política de accesibilidad y UX.");
 }
 
 /**
@@ -500,7 +488,10 @@ function setVolume(value) {
   }
   
   uiElements.volumeSliders.forEach(slider => {
-    if (slider) slider.value = value;
+    if (slider) {
+      slider.value = value;
+      slider.setAttribute('aria-valuenow', value.toString());
+    }
   });
   
   updateMuteVisuals();
@@ -516,6 +507,10 @@ function toggleMute() {
   if (audioPlayer) {
     audioPlayer.muted = musicState.isMuted;
   }
+  
+  uiElements.muteBtns.forEach(btn => {
+    if (btn) btn.setAttribute('aria-pressed', musicState.isMuted ? 'true' : 'false');
+  });
   
   updateMuteVisuals();
 }
@@ -646,6 +641,66 @@ function updateVisuals() {
   
   if (uiElements.headerPlayBtn) {
     uiElements.headerPlayBtn.innerHTML = currentSvg;
+  }
+
+  // 4. Sincronizar estados de accesibilidad ARIA en botones
+  uiElements.playBtns.forEach(btn => {
+    if (btn) btn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
+  });
+  if (uiElements.headerPlayBtn) {
+    uiElements.headerPlayBtn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
+  }
+}
+
+/**
+ * Enriquece dinámicamente los elementos con atributos ARIA para cumplir con WCAG 2.1
+ */
+function setupAriaAccessibility() {
+  // Configurar botones de reproducción
+  uiElements.playBtns.forEach(btn => {
+    if (btn) {
+      btn.setAttribute('role', 'button');
+      btn.setAttribute('aria-label', 'Reproducir o pausar audio');
+      btn.setAttribute('aria-pressed', 'false');
+    }
+  });
+
+  if (uiElements.headerPlayBtn) {
+    uiElements.headerPlayBtn.setAttribute('role', 'button');
+    uiElements.headerPlayBtn.setAttribute('aria-label', 'Control de música principal');
+    uiElements.headerPlayBtn.setAttribute('aria-pressed', 'false');
+  }
+
+  // Configurar botones de silencio
+  uiElements.muteBtns.forEach(btn => {
+    if (btn) {
+      btn.setAttribute('role', 'button');
+      btn.setAttribute('aria-label', 'Silenciar música');
+      btn.setAttribute('aria-pressed', musicState.isMuted ? 'true' : 'false');
+    }
+  });
+
+  // Configurar volumen sliders
+  uiElements.volumeSliders.forEach(slider => {
+    if (slider) {
+      slider.setAttribute('role', 'slider');
+      slider.setAttribute('aria-label', 'Volumen de música');
+      slider.setAttribute('aria-valuemin', '0');
+      slider.setAttribute('aria-valuemax', '1');
+      slider.setAttribute('aria-valuenow', musicState.volume.toString());
+    }
+  });
+
+  // Configurar contenedor de información para actualizaciones en vivo (Screen readers)
+  uiElements.trackTitle.forEach(el => {
+    if (el) el.setAttribute('aria-live', 'polite');
+  });
+
+  // Configurar controles móviles
+  if (uiElements.mobileFab) {
+    uiElements.mobileFab.setAttribute('role', 'button');
+    uiElements.mobileFab.setAttribute('aria-label', 'Abrir panel de música flotante');
+    uiElements.mobileFab.setAttribute('aria-haspopup', 'dialog');
   }
 }
 

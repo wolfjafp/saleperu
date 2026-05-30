@@ -9,8 +9,8 @@ function initRouterAndSeo() {
   // 1. Escuchar cambios de hash (ej: #SP-001)
   window.addEventListener("hashchange", handleHashRouting);
   
-  // Ejecuatar una vez al cargar la página
-  setTimeout(handleHashRouting, 800); // Dar un margen para que rendericen los datos de Sheets
+  // Ejecutar de forma inmediata y determinista, ya que el DOM y los datos están listos.
+  handleHashRouting();
 }
 
 /**

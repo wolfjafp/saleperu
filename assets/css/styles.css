@@ -651,27 +651,33 @@ body.modal-open {
 
 @media (max-width: 576px) {
   .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 28px;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
+    row-gap: 32px;
   }
   .brand-col {
-    grid-column: span 1;
+    grid-column: span 2;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 24px;
+    margin-bottom: 8px;
+    max-width: 100%;
   }
   .footer-col {
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
   }
   .footer-col-title::after {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .footer-link:hover {
+    left: 0;
     transform: none;
   }
+  .footer-link:hover {
+    transform: translateX(4px);
+  }
   .footer-copy {
-    text-align: center;
+    text-align: left;
   }
 }
+
 
 /* Contenedor del Buscador MÃ³vil (Oculto en Escritorio por defecto) */
 .mobile-search-wrapper {
