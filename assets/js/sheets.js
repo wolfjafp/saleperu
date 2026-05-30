@@ -2,9 +2,8 @@
    SALEPERU.PE - INTEGRACIÓN DE DATOS CON GOOGLE SHEETS Y MOCK DATA
    ========================================================================== */
 
-// ID por defecto de la Hoja de Cálculo (Spreadsheet)
-// El usuario puede crear una copia de nuestra plantilla y reemplazar este ID
-const SPREADSHEET_ID = "13VB65yp4a5-LtuVYQkGNrT0fPqr1dXwcENJD5DXs5fw"; // ID de ejemplo público
+// ID de la Hoja de Cálculo (Ofuscado en Base64 para protegerlo de raspadores automáticos en GitHub)
+const SPREADSHEET_ID = atob("MTNWQjY1eXA0YTUtTHR1VllRa0dOclQwZlBxcjFkeHdjRU5KRDVEWXM1Znc=");
 
 // Claves de Almacenamiento en Caché
 const CACHE_KEY = "saleperu_deals_cache";
