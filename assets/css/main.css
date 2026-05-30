@@ -2,13 +2,7 @@
    SALEPERU.PE - HOJA DE ESTILOS PRINCIPAL (AGREGADA)
    ========================================================================== */
 
-/* Carga modular del sistema de diseño */
-@import url('variables.css');
-@import url('reset.css');
-@import url('layout.css');
-@import url('components.css');
-@import url('animations.css');
-@import url('music-player.css');
+
 
 /* ==========================================================================
    ESTILOS GENERALES ADICIONALES (SI APLICAN)

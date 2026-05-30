@@ -38,7 +38,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
-  <!-- Archivos de Estilos (Agregado modular principal) -->
+  <!-- Carga Directa de Fuentes de Google (Máxima velocidad de renderizado de texto) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Archivos de Estilos en Paralelo (Carga simultánea sin cascada bloqueante) -->
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/music-player.css">
   <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
@@ -389,19 +398,19 @@
   <audio id="musica" style="display:none;" preload="auto"></audio>
 
   <!-- ==========================================================================
-       SCRIPTS DE CONTROL Y FUNCIONALIDAD (CARGA ASÍNCRONA)
+       SCRIPTS DE CONTROL Y FUNCIONALIDAD (CARGA DIFERIDA Y NO BLOQUEANTE)
        ========================================================================== -->
-  <script src="assets/js/sheets.js"></script>
-  <script src="assets/js/stories.js"></script>
-  <script src="assets/js/feed.js"></script>
-  <script src="assets/js/ui.js"></script>
-  <script src="assets/js/seo.js"></script>
+  <script src="assets/js/sheets.js" defer></script>
+  <script src="assets/js/stories.js" defer></script>
+  <script src="assets/js/feed.js" defer></script>
+  <script src="assets/js/ui.js" defer></script>
+  <script src="assets/js/seo.js" defer></script>
   
   <!-- Lógica de control del reproductor de música -->
-  <script src="assets/js/music-player.js"></script>
+  <script src="assets/js/music-player.js" defer></script>
   
   <!-- Orquestador principal (debe cargarse al final) -->
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js" defer></script>
 
 </body>
 </html>
