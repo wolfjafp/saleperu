@@ -316,7 +316,7 @@ async function loadAppData(forceRefresh = false) {
     if (parsedOffers && parsedOffers.length > 0) {
       // Mapear al modelo que el frontend espera
       const formattedOffers = parsedOffers.map(o => ({
-        id: o.id || `SP-${Math.random().toString(36).substr(2, 9)}`,
+        id: o.id || `SP-${Math.random().toString(36).slice(2, 11)}`,
         title: o.title || "Oferta sin título",
         description: o.description || "",
         image: o.image || "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80",
@@ -333,7 +333,7 @@ async function loadAppData(forceRefresh = false) {
       }));
 
       const formattedStories = (parsedStories || []).map(s => ({
-        id: s.id || `ST-${Math.random().toString(36).substr(2, 9)}`,
+        id: s.id || `ST-${Math.random().toString(36).slice(2, 11)}`,
         title: s.title || "Historia",
         coverImage: s.coverimage || "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=150&q=80",
         mediaUrl: s.mediaurl || "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80",

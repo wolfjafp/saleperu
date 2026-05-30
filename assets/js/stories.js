@@ -113,7 +113,7 @@ function renderActiveStorySlide() {
       <img class="story-profile-img" src="${story.coverImage}" alt="${escapeHTML(story.title)}">
       <span class="story-profile-name">${escapeHTML(story.title)}</span>
     </div>
-    <button class="story-close-btn" onclick="closeStoryViewer()">&times;</button>
+    <button class="story-close-btn" onclick="closeStoryViewer()" aria-label="Cerrar reproductor de historias">&times;</button>
   `;
 
   // Crear barra de progreso segmentada
