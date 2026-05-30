@@ -10,6 +10,28 @@ const CACHE_KEY = "saleperu_deals_cache";
 const CACHE_EXPIRY_MS = 5 * 60 * 1000; // 5 minutos de caché inteligente
 
 /**
+ * Optimiza dinámicamente URLs de Unsplash con formatos modernos,
+ * compresión inteligente y dimensiones exactas.
+ */
+function getOptimizedImageUrl(url, width = 400, quality = 70) {
+  if (!url) return `https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=${width}&q=${quality}&auto=format&fit=crop`;
+  
+  if (url.includes("images.unsplash.com")) {
+    try {
+      const u = new URL(url);
+      u.searchParams.set("w", width);
+      u.searchParams.set("q", quality);
+      u.searchParams.set("auto", "format");
+      u.searchParams.set("fit", "crop");
+      return u.toString();
+    } catch (e) {
+      return url;
+    }
+  }
+  return url;
+}
+
+/**
  * DATOS DE RESPALDO PREMIUM (MOCK DATA)
  * Se cargan automáticamente si no se ha configurado el Google Sheet,
  * si la red falla o para demostración rápida e instantánea.
@@ -319,7 +341,7 @@ async function loadAppData(forceRefresh = false) {
         id: o.id || `SP-${Math.random().toString(36).slice(2, 11)}`,
         title: o.title || "Oferta sin título",
         description: o.description || "",
-        image: o.image || "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80",
+        image: getOptimizedImageUrl(o.image || "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80", 400, 70),
         category: o.category || "Tecnología",
         originalPrice: Number(o.originalprice) || 0,
         offerPrice: Number(o.offerprice) || 0,
@@ -335,8 +357,8 @@ async function loadAppData(forceRefresh = false) {
       const formattedStories = (parsedStories || []).map(s => ({
         id: s.id || `ST-${Math.random().toString(36).slice(2, 11)}`,
         title: s.title || "Historia",
-        coverImage: s.coverimage || "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=150&q=80",
-        mediaUrl: s.mediaurl || "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80",
+        coverImage: getOptimizedImageUrl(s.coverimage || "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=150&q=80", 150, 70),
+        mediaUrl: getOptimizedImageUrl(s.mediaurl || "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80", 400, 70),
         mediaType: s.mediatype || "image",
         caption: s.caption || "",
         offerLink: s.offerlink || "#",
@@ -366,7 +388,21 @@ async function loadAppData(forceRefresh = false) {
   } catch (err) {
     console.warn("⚠️ Error obteniendo datos de Google Sheets. Usando MOCK_DATA como fallback. Detalle:", err.message);
 
-    // Retornamos mock data si algo falla, pero no lo metemos en caché para intentar refrescar la próxima vez
-    return MOCK_DATA;
+    // Formatear dinámicamente Mock Data para optimizar sus imágenes en tiempo real
+    const formattedMockOffers = MOCK_DATA.offers.map(o => ({
+      ...o,
+      image: getOptimizedImageUrl(o.image, 400, 70)
+    }));
+
+    const formattedMockStories = MOCK_DATA.stories.map(s => ({
+      ...s,
+      coverImage: getOptimizedImageUrl(s.coverImage, 150, 70),
+      mediaUrl: getOptimizedImageUrl(s.mediaUrl, 400, 70)
+    }));
+
+    return {
+      offers: formattedMockOffers,
+      stories: formattedMockStories
+    };
   }
 }

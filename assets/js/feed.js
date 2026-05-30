@@ -175,6 +175,9 @@ function renderSkeletonLoading(count = 6) {
   const grid = document.getElementById("feed-grid");
   if (!grid) return;
 
+  // Si ya hay skeletons cargados (ej: en el HTML estático inicial), no los volvemos a renderizar para evitar parpadeos
+  if (grid.querySelector(".deal-card")) return;
+
   grid.innerHTML = "";
   for (let i = 0; i < count; i++) {
     const skeleton = document.createElement("div");
@@ -249,9 +252,9 @@ function renderFeedCards() {
           ${offer.couponCode ? '<span class="badge badge-coupon">🎟️ Cupón</span>' : ''}
         </div>
         <img class="card-image" src="${offer.image}" alt="${escapeHTML(offer.title)}" 
-             loading="${index < 2 ? 'eager' : 'lazy'}" 
-             ${index < 2 ? 'fetchpriority="high"' : ''}
-             onerror="this.src='https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80'">
+             loading="${index < 4 ? 'eager' : 'lazy'}" 
+             ${index < 4 ? 'fetchpriority="high"' : ''}
+             onerror="this.src='https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&q=70&auto=format&fit=crop'">
         <span class="card-store">${escapeHTML(offer.store)}</span>
         
         <!-- Botón flotante para compartir -->

@@ -1,0 +1,2863 @@
+/* ==========================================================================
+   SALEPERU.PE - SISTEMA DE DISEÃ‘O Y VARIABLES CSS
+   ========================================================================== */
+
+
+
+:root {
+  /* Fuentes */
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Colores Base (Modo Claro Premium - Minimalist Soft-White) */
+  --bg-body: #f7f8fc;
+  --bg-card: #ffffff;
+  --bg-navbar: rgba(247, 248, 252, 0.8);
+  --bg-skeleton: #e8eaf0;
+  
+  --text-primary: #121214;
+  --text-secondary: #5c5f6b;
+  --text-tertiary: #848694;
+  --text-on-accent: #ffffff;
+
+  /* Bordes y Separadores */
+  --border-color: rgba(0, 0, 0, 0.05);
+  --border-glass: rgba(255, 255, 255, 0.8);
+  
+  /* Sombras Modernas (Soft Premium Shadows) */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 24px 50px rgba(0, 0, 0, 0.06);
+  --shadow-hot: 0 8px 24px rgba(255, 69, 0, 0.12);
+
+  /* Identidad y Acentos */
+  --color-primary: #6b11ff;
+  --color-accent: #ff4d4d;
+  
+  /* Gradientes Premium */
+  --grad-premium: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%); /* Fuego / Hot */
+  --grad-royal: linear-gradient(135deg, #7b2cbf 0%, #ff4d6d 50%, #ff8531 100%); /* Tech / Sunset Premium Fire */
+  --grad-error: linear-gradient(135deg, #e60000 0%, #ff3300 100%);    /* Error de Precio */
+  --grad-flash: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);    /* Flash Deals */
+  --grad-stories: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); /* Instagram Ring */
+
+  /* Estados de Etiquetas */
+  --color-hot: #ff4500;
+  --color-flash: #ffa500;
+  --color-error: #ff3b30;
+  --color-coupon: #34c759;
+  --color-tech: #007aff;
+  --color-gaming: #af52de;
+  --color-moda: #ff2d55;
+  --color-hogar: #5856d6;
+  --color-viajes: #5ac8fa;
+  --color-supermercado: #ff9500;
+
+  /* TamaÃ±os & Bordes */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Transiciones */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  
+  /* Blur de Glassmorphism */
+  --blur-amount: 20px;
+}
+
+/* Variables para Modo Oscuro Premium ("Obsidian Indigo") */
+[data-theme="dark"] {
+  --bg-body: #0b0a16;
+  --bg-card: #141324;
+  --bg-navbar: rgba(11, 10, 22, 0.8);
+  --bg-skeleton: #1d1b33;
+  
+  --text-primary: #f0eff5;
+  --text-secondary: #9b9aa8;
+  --text-tertiary: #6c6a7a;
+  --text-on-accent: #ffffff;
+
+  --border-color: rgba(255, 255, 255, 0.05);
+  --border-glass: rgba(255, 255, 255, 0.02);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 24px 50px rgba(0, 0, 0, 0.6);
+  --shadow-hot: 0 8px 24px rgba(255, 77, 109, 0.18);
+  
+  /* Ajustes de color primario en modo oscuro para mayor contraste vibrante */
+  --color-primary: #9d4edd;
+}
+/* ==========================================================================
+   SALEPERU.PE - RESET CSS MODERNO
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--bg-body);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+/* Encabezados */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* Elementos de Texto */
+p, span, a {
+  font-family: var(--font-body);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+img, picture, svg, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  font-style: italic;
+  shape-margin: 0.75rem;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Remover listas con viÃ±etas por defecto */
+ol, ul {
+  list-style: none;
+}
+
+/* Deshabilitar scroll corporal cuando hay modales abiertos */
+body.modal-open {
+  overflow: hidden;
+}
+/* ==========================================================================
+   SALEPERU.PE - MAQUETACIÃ“N Y DISEÃ‘O DE LAYOUT
+   ========================================================================== */
+
+/* Contenedor Principal Limitado para Estilo Premium (Max 1200px) */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Cabecera Flotante Premium con Glassmorphism */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--bg-navbar);
+  backdrop-filter: blur(var(--blur-amount));
+  -webkit-backdrop-filter: blur(var(--blur-amount));
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+/* Estado al Hacer Scroll */
+.site-header.scrolled {
+  background-color: rgba(255, 255, 255, 0.88) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border-bottom-color: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .site-header.scrolled {
+  background-color: rgba(18, 18, 18, 0.88) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  border-bottom-color: rgba(255, 255, 255, 0.04);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  transition: height var(--transition-smooth);
+}
+
+.site-header.scrolled .header-container {
+  height: 60px;
+}
+
+/* Logo con AnimaciÃ³n MetÃ¡lica de Brillo sweep */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 1.65rem; /* Logotipo mÃ¡s imponente */
+  font-weight: 800;
+  letter-spacing: -0.03em; /* Estilo tipogrÃ¡fico ultra moderno y premium */
+  background: var(--grad-royal);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+.logo::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  pointer-events: none;
+}
+
+.logo:hover::after {
+  animation: shine-sweep 0.85s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes shine-sweep {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+.logo-svg {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  -webkit-text-fill-color: initial;
+  transition: transform var(--transition-smooth), filter var(--transition-smooth);
+}
+
+.logo:hover .logo-svg {
+  transform: rotate(-10deg) scale(1.15);
+  filter: drop-shadow(0 4px 10px rgba(107, 17, 255, 0.35)) drop-shadow(0 2px 4px rgba(255, 77, 109, 0.3));
+}
+
+/* Acciones en Cabecera */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Barra de BÃºsqueda Premium */
+.search-container {
+  position: relative;
+  width: 280px;
+  transition: width var(--transition-smooth), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  border: 1.5px solid var(--border-color);
+  background: var(--bg-body);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.search-container:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 15px rgba(98, 0, 238, 0.08);
+  transform: translateY(-0.5px);
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 40px 10px 40px;
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  outline: none;
+  box-shadow: none;
+  transition: color var(--transition-fast);
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  pointer-events: none;
+  width: 16px;
+  height: 16px;
+  transition: all var(--transition-fast);
+}
+
+/* Borde degradado dinÃ¡mico de focus */
+.search-container:focus-within {
+  background: var(--bg-card);
+  border-color: transparent;
+  background-image: linear-gradient(var(--bg-card), var(--bg-card)), linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: 1.5px solid transparent;
+  box-shadow: 0 10px 25px rgba(98, 0, 238, 0.14);
+}
+
+.search-container:focus-within .search-icon {
+  color: var(--color-primary);
+  transform: translateY(-50%) scale(1.08);
+}
+
+/* BotÃ³n de limpiar bÃºsqueda ("X") */
+.search-clear-btn {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  background-color: var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: all var(--transition-fast);
+  padding: 0;
+  z-index: 5;
+}
+
+.search-clear-btn.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.search-clear-btn:hover {
+  background-color: var(--text-secondary);
+  color: var(--bg-card);
+}
+
+/* Panel flotante de Sugerencias RÃ¡pidas y Tiendas */
+.search-suggestions-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-lg);
+  z-index: 250;
+  opacity: 0;
+  transform: translateY(2px); /* Desplazamiento mÃ­nimo y moderno para evitar sensaciÃ³n de rompecabezas */
+  pointer-events: none;
+  transition: opacity 0.1s ease-out, transform 0.1s ease-out !important; /* Respuesta tÃ¡ctil ultrarrÃ¡pida y minimalista */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+[data-theme="dark"] .search-suggestions-dropdown {
+  background: rgba(18, 18, 18, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.search-suggestions-dropdown.active {
+  opacity: 1;
+  transform: translateY(0) !important;
+  pointer-events: all;
+}
+
+.search-suggest-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary);
+  margin-bottom: 2px;
+}
+
+.search-suggest-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.search-suggest-pill {
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-body);
+  border: 1px solid var(--border-color);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-body);
+}
+
+.search-suggest-pill:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.search-suggest-stores {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+.search-suggest-store {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-body);
+  border: 1px solid var(--border-color);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-body);
+}
+
+.search-suggest-store:hover {
+  background-color: var(--bg-card);
+  border-color: var(--color-primary);
+  transform: translateY(-0.5px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* SecciÃ³n de Historias */
+.stories-section {
+  padding: 24px 0 12px 0;
+  overflow: hidden;
+}
+
+/* SecciÃ³n de Contenido Principal (Filtros + Grid Feed) */
+.main-content {
+  padding: 16px 0 60px 0;
+}
+
+/* Estructura del Grid de Ofertas */
+.feed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+/* Pie de PÃ¡gina */
+.site-footer {
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+  padding: 48px 0 32px 0;
+  text-align: center;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-link {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  transition: color var(--transition-fast);
+}
+
+.footer-link:hover {
+  color: var(--color-primary);
+}
+
+.footer-copy {
+  color: var(--text-tertiary);
+  font-size: 0.85rem;
+  margin-top: 12px;
+}
+
+/* Contenedor del Buscador MÃ³vil (Oculto en Escritorio por defecto) */
+.mobile-search-wrapper {
+  display: none;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 300; /* Prioridad de apilamiento por encima de imÃ¡genes y botones del feed */
+}
+
+/* BotÃ³n Disparador de BÃºsqueda MÃ³vil en Cabecera */
+.mobile-search-trigger-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-body);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.mobile-search-trigger-btn:hover {
+  background-color: var(--bg-card);
+}
+
+.mobile-search-trigger-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ==========================================================================
+   CONSULTAS DE RESPONSIVIDAD (MOBILE FIRST)
+   ========================================================================== */
+
+/* MÃ³viles PequeÃ±os y Medianos (Max 576px) */
+@media (max-width: 576px) {
+  .header-container {
+    height: 60px;
+  }
+  
+  /* Mantener cabecera estable en mÃ³vil sin encogerse */
+  .site-header.scrolled .header-container {
+    height: 60px;
+  }
+  
+  .search-container {
+    display: none; /* Se oculta de la cabecera e irÃ¡ al cuerpo principal o un botÃ³n */
+  }
+  
+  .mobile-search-trigger-btn {
+    display: flex !important;
+  }
+  
+  /* Buscador mÃ³vil inmersivo overlay */
+  .mobile-search-wrapper {
+    display: flex !important;
+    flex-direction: column;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    background: rgba(247, 248, 252, 0.95) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    z-index: 1001 !important; /* Por encima de todo, incluso del reproductor e historias */
+    padding: 20px 16px 16px 16px !important;
+    margin-bottom: 0 !important;
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease-out;
+  }
+
+  [data-theme="dark"] .mobile-search-wrapper {
+    background: rgba(11, 10, 22, 0.95) !important;
+  }
+
+  .mobile-search-wrapper.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .mobile-search-overlay-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    width: 100%;
+  }
+
+  .mobile-search-overlay-title {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .mobile-search-close-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 2.2rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .mobile-search-wrapper .search-container {
+    display: flex !important;
+    width: 100% !important;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 12px;
+  }
+  
+  .mobile-search-wrapper .search-container:focus-within {
+    width: 100% !important;
+    box-shadow: 0 10px 25px rgba(98, 0, 238, 0.14);
+  }
+  
+  .feed-grid {
+    grid-template-columns: repeat(2, 1fr); /* Rejilla doble de alta densidad */
+    gap: 12px;
+    margin-top: 16px;
+  }
+  
+  .site-header .logo {
+    font-size: 1.25rem;
+  }
+  
+  /* Panel de Sugerencias MÃ³vil Ultra-Compacto, Dividido y Limpio */
+  .mobile-search-wrapper .search-suggestions-dropdown {
+    width: 100%;
+    left: 0;
+    padding: 12px !important;
+    gap: 10px !important;
+    border-radius: var(--radius-md) !important;
+    box-shadow: var(--shadow-lg) !important;
+    background: var(--bg-card) !important; /* Fondo sÃ³lido ultra rÃ¡pido de procesar */
+    border: 1.5px solid var(--border-color) !important;
+    backdrop-filter: none !important; /* Desactivar desenfoques costosos para la GPU mÃ³vil */
+    -webkit-backdrop-filter: none !important;
+  }
+  
+  /* LÃ­nea divisoria elegante para separar campos de bÃºsqueda y marcas */
+  .mobile-search-wrapper .search-suggestions-dropdown > div:not(:last-child) {
+    border-bottom: 1px solid var(--border-color) !important;
+    padding-bottom: 10px !important;
+    margin-bottom: 2px !important;
+  }
+  
+  /* PÃ­ldoras compactas y espaciadas para dedos en pantallas tÃ¡ctiles */
+  .mobile-search-wrapper .search-suggest-pill {
+    padding: 5px 10px !important;
+    font-size: 0.72rem !important;
+  }
+  
+  /* Grid de 3 columnas de alta densidad para ahorrar 40% de espacio vertical */
+  .mobile-search-wrapper .search-suggest-stores {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+  }
+  
+  /* Formato vertical de atajo de tienda: Emoji en el centro y nombre abajo */
+  .mobile-search-wrapper .search-suggest-store {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 6px 2px !important;
+    text-align: center !important;
+    font-size: 0.7rem !important;
+    border-radius: var(--radius-sm) !important;
+    background-color: var(--bg-body) !important;
+    border: 1px solid var(--border-color) !important;
+  }
+  
+  .mobile-search-wrapper .search-suggest-store strong {
+    font-weight: 600 !important;
+  }
+}
+
+/* Tablets (Entre 577px y 992px) */
+@media (min-width: 577px) and (max-width: 992px) {
+  .search-container {
+    width: 210px;
+  }
+  .search-container:focus-within {
+    width: 250px;
+  }
+  .search-suggestions-dropdown {
+    width: 250px !important;
+    left: 0 !important;
+  }
+  .feed-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+/* Laptops / Desktops Grandes (Min 993px) */
+@media (min-width: 993px) {
+  .search-container:focus-within {
+    width: 340px;
+  }
+  .search-suggestions-dropdown {
+    width: 340px !important;
+    left: 0 !important;
+  }
+  .feed-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+}
+
+/* Pantallas Extra Grandes (Min 1400px) */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
+  .feed-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+/* ==========================================================================
+   SALEPERU.PE - ESTILOS DE COMPONENTES PREMIUM UI
+   ========================================================================== */
+
+/* ==========================================================================
+   1. COMPONENTE INTERRUPTOR DE TEMA (CLARO/OSCURO)
+   ========================================================================== */
+.theme-toggle-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-body);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-smooth);
+}
+
+.theme-toggle-btn:hover {
+  transform: rotate(15deg) scale(1.05);
+  background-color: var(--bg-card);
+}
+
+.theme-toggle-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* ==========================================================================
+   2. COMPONENTE FILTROS DE CATEGORÃAS (PILLS)
+   ========================================================================== */
+.filters-wrapper {
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE/Edge */
+  padding: 4px 0 16px 0;
+  margin-top: 12px;
+  -webkit-overflow-scrolling: touch; /* Desplazamiento por inercia tÃ¡ctil en iOS */
+  scroll-behavior: smooth;
+  
+  /* MÃ¡scara gradiente de desvanecimiento sutil a la derecha para indicar interactividad scroll */
+  -webkit-mask-image: linear-gradient(to right, #000 82%, transparent 98%);
+  mask-image: linear-gradient(to right, #000 82%, transparent 98%);
+  transition: padding var(--transition-smooth), margin var(--transition-smooth);
+}
+
+.filters-wrapper::-webkit-scrollbar {
+  display: none; /* Safari & Chrome */
+}
+
+.filters-container {
+  display: flex;
+  gap: 10px;
+  padding: 2px;
+  width: max-content;
+}
+
+.filter-pill {
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: all var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+}
+
+.filter-pill:hover {
+  color: var(--text-primary);
+  border-color: var(--text-tertiary);
+  transform: translateY(-1px);
+}
+
+.filter-pill.active {
+  background-color: var(--text-primary);
+  color: var(--bg-card);
+  border-color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Modo oscuro ajuste de filtro activo */
+[data-theme="dark"] .filter-pill.active {
+  background-color: var(--text-primary);
+  color: var(--bg-card);
+}
+
+/* OptimizaciÃ³n y compactaciÃ³n del carrusel de categorÃ­as en mÃ³viles */
+@media (max-width: 576px) {
+  .filters-wrapper {
+    /* Hack de margen negativo para desplazamiento de borde a borde de pantalla */
+    margin-left: -16px;
+    margin-right: -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 8px; /* Oculta scrollbar y reduce altura */
+    margin-top: 8px;
+    
+    /* Incrementar suavidad del gradiente */
+    -webkit-mask-image: linear-gradient(to right, #000 80%, transparent 96%);
+    mask-image: linear-gradient(to right, #000 80%, transparent 96%);
+  }
+  
+  .filters-container {
+    gap: 8px;
+  }
+  
+  .filter-pill {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+  }
+}
+
+/* ==========================================================================
+   3. COMPONENTE SISTEMA DE HISTORIAS (BARRA)
+   ========================================================================== */
+.stories-container {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 4px 4px 16px 4px;
+}
+
+.stories-container::-webkit-scrollbar {
+  display: none;
+}
+
+.story-circle-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  width: 76px;
+  flex-shrink: 0;
+  transition: transform var(--transition-smooth);
+}
+
+.story-circle-item:hover {
+  transform: scale(1.04);
+}
+
+.story-ring {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+  background: var(--grad-stories);
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast);
+}
+
+.story-circle-item.viewed .story-ring {
+  background: var(--border-color); /* Apagado si ya fue vista */
+}
+
+.story-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-full);
+  border: 3px solid var(--bg-body);
+  object-fit: cover;
+  background-color: var(--bg-skeleton);
+  transition: border-color var(--transition-fast);
+}
+
+[data-theme="dark"] .story-avatar {
+  border-color: var(--bg-body);
+}
+
+.story-label {
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   4. COMPONENTE TARJETAS DEL FEED (TIKTOK / APPLE STYLE)
+   ========================================================================== */
+.deal-card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+  position: relative;
+  cursor: pointer;
+}
+
+.deal-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--text-tertiary);
+}
+
+/* Ãrea de Imagen de Tarjeta */
+.card-media-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: var(--bg-skeleton);
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-smooth);
+}
+
+.deal-card:hover .card-image {
+  transform: scale(1.05);
+}
+
+/* Etiquetas e insignias en la imagen */
+.card-badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 2;
+}
+
+.badge {
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-on-accent);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-hot {
+  background: var(--grad-premium);
+  box-shadow: var(--shadow-hot);
+  animation: pulse-hot 1.8s infinite;
+}
+
+.badge-flash {
+  background: var(--grad-flash);
+  color: #000;
+}
+
+.badge-error {
+  background: var(--grad-error);
+}
+
+.badge-coupon {
+  background-color: var(--color-coupon);
+}
+
+/* Tienda flotante a la derecha de la imagen */
+.card-store {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--radius-sm);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 2;
+}
+
+/* BotÃ³n flotante para compartir */
+.card-share-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full);
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1d1d1f;
+  z-index: 2;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+.card-share-btn:hover {
+  transform: scale(1.1);
+  background-color: #ffffff;
+}
+
+.card-share-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Cuerpo de la Tarjeta */
+.card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-category {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 2.7rem;
+}
+
+.card-description {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 2.5rem;
+  line-height: 1.4;
+}
+
+/* Ãrea de Precios */
+.card-price-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  margin-bottom: 14px;
+}
+
+.price-offer {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-hot);
+}
+
+.price-original {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+  text-decoration: line-through;
+}
+
+.price-discount {
+  background-color: rgba(255, 69, 0, 0.1);
+  color: var(--color-hot);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+/* Bloque de CupÃ³n */
+.card-coupon-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(52, 199, 89, 0.08);
+  border: 1px dashed var(--color-coupon);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  margin-bottom: 14px;
+  font-size: 0.82rem;
+}
+
+[data-theme="dark"] .card-coupon-container {
+  background-color: rgba(52, 199, 89, 0.04);
+}
+
+.coupon-text {
+  font-weight: 600;
+  color: var(--color-coupon);
+}
+
+.coupon-code-badge {
+  background-color: var(--color-coupon);
+  color: #ffffff;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-family: monospace;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.coupon-code-badge:active {
+  transform: scale(0.95);
+}
+
+/* BotÃ³n Comprar / Ir a oferta (Estilo Obsidian Premium de Alta ConversiÃ³n) */
+.card-btn {
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm); /* Bordes mÃ¡s rectos (8px) para un acabado elegante y tÃ©cnico */
+  background: var(--text-primary);
+  color: var(--bg-card); /* Color opuesto al texto de fondo, dinÃ¡mico light/dark */
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+}
+
+.card-btn:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  opacity: 0.92;
+}
+
+.card-btn:active {
+  transform: translateY(0.5px);
+}
+
+/* Ajuste especÃ­fico para ofertas expiradas */
+.deal-card.expired {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   5. COMPONENTE VISOR DE HISTORIAS A PANTALLA COMPLETA
+   ========================================================================== */
+.story-viewer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh; /* dynamic viewport height */
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  display: none; /* Se activa por JS */
+  align-items: center;
+  justify-content: center;
+  touch-action: none; /* Previene scroll nativo en mÃ³vil */
+  backdrop-filter: blur(10px);
+}
+
+.story-viewer-container {
+  width: 100%;
+  max-width: 440px; /* TamaÃ±o telÃ©fono en desktop */
+  height: 100%;
+  max-height: 820px;
+  position: relative;
+  background-color: #000;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 576px) {
+  .story-viewer-container {
+    max-width: 100%;
+    height: 100vh;
+    height: -webkit-fill-available; /* iOS toolbar bug fix */
+    height: 100dvh; /* dynamic height */
+    max-height: 100dvh !important;
+    border-radius: 0;
+    overflow: hidden;
+  }
+  
+  /* Compactar el pie de las historias en mÃ³vil para que el botÃ³n nunca se pierda */
+  .story-footer {
+    padding: 16px 16px calc(24px + env(safe-area-inset-bottom)) 16px !important;
+    gap: 8px !important;
+  }
+  
+  .story-action-btn {
+    padding: 10px 14px !important;
+    font-size: 0.88rem !important;
+    width: 95% !important;
+  }
+  
+  .story-caption {
+    font-size: 0.85rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 2px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+}
+
+/* Cabecera del Visor (Barras de progreso + info) */
+.story-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px 16px 24px 16px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+  z-index: 10;
+}
+
+/* Barra superior segmentada */
+.story-progress-bar-container {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.story-progress-segment {
+  flex-grow: 1;
+  height: 3px;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.35);
+  overflow: hidden;
+  position: relative;
+}
+
+.story-progress-fill {
+  height: 100%;
+  width: 0%;
+  background-color: #ffffff;
+  border-radius: 2px;
+}
+
+.story-user-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.story-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+}
+
+.story-profile-img {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255,255,255,0.5);
+  object-fit: cover;
+}
+
+.story-profile-name {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.story-close-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  transition: background-color var(--transition-fast);
+}
+
+.story-close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Cuerpo de la Historia (Multimedia) */
+.story-body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.story-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #111;
+}
+
+/* Ãreas invisibles para tap izquierdo y derecho */
+.story-nav-tap {
+  position: absolute;
+  top: 70px;
+  bottom: 120px;
+  width: 25%;
+  z-index: 5;
+}
+
+.story-nav-left {
+  left: 0;
+}
+
+.story-nav-right {
+  right: 0;
+  width: 75%; /* Mayor espacio para avanzar */
+}
+
+/* Pie del Visor (BotÃ³n de AcciÃ³n + Caption) */
+.story-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 24px 16px 36px 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.story-caption {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: center;
+  max-width: 90%;
+  line-height: 1.4;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.story-action-btn {
+  width: 90%;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  background: var(--grad-premium);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(255, 69, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  animation: pulse-glow-btn 2.2s infinite;
+  transition: transform var(--transition-fast);
+}
+
+.story-action-btn:active {
+  transform: scale(0.97);
+}
+
+/* ==========================================================================
+   6. SKELETON LOADERS (PANTALLA DE ESPERA FLUIDA)
+   ========================================================================== */
+.skeleton {
+  background-color: var(--bg-skeleton);
+  background-image: linear-gradient(90deg, var(--bg-skeleton) 25%, rgba(255,255,255, 0.15) 37%, var(--bg-skeleton) 63%);
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+}
+
+.skeleton-story-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+}
+
+.skeleton-story-text {
+  width: 50px;
+  height: 10px;
+  border-radius: 4px;
+  margin: 0 auto;
+}
+
+.skeleton-card-media {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+.skeleton-card-line {
+  height: 14px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.skeleton-card-title1 {
+  width: 85%;
+  margin-top: 12px;
+}
+
+.skeleton-card-title2 {
+  width: 60%;
+}
+
+.skeleton-card-desc1 {
+  width: 100%;
+  height: 10px;
+  margin-top: 14px;
+}
+
+.skeleton-card-desc2 {
+  width: 90%;
+  height: 10px;
+}
+
+.skeleton-card-price {
+  width: 40%;
+  height: 24px;
+  margin-top: 12px;
+}
+
+.skeleton-card-btn {
+  width: 100%;
+  height: 44px;
+  border-radius: var(--radius-md);
+  margin-top: 8px;
+}
+
+/* ==========================================================================
+   7. MODALES GENÃ‰RICOS (COMPARTIR)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-smooth);
+  padding: 16px;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-window {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  width: 100%;
+  max-width: 400px;
+  padding: 24px;
+  box-shadow: var(--shadow-lg);
+  transform: scale(0.9);
+  transition: transform var(--transition-smooth);
+}
+
+.modal-overlay.active .modal-window {
+  transform: scale(1);
+}
+
+.modal-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.modal-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.modal-close {
+  background: none;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-fast);
+}
+
+.modal-close:hover {
+  color: var(--text-primary);
+}
+
+.share-options-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.share-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.share-btn:hover {
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.share-icon-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast);
+}
+
+.share-btn:active .share-icon-circle {
+  transform: scale(0.92);
+}
+
+.share-wa { background-color: #25d366; }
+.share-tg { background-color: #0088cc; }
+.share-copy { background-color: #007aff; }
+
+.share-icon-circle svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.copy-link-container {
+  display: flex;
+  background-color: var(--bg-body);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.copy-link-input {
+  flex-grow: 1;
+  padding: 10px 14px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.copy-link-btn {
+  padding: 0 16px;
+  background-color: var(--text-primary);
+  color: var(--bg-card);
+  font-weight: 600;
+  font-size: 0.8rem;
+  transition: opacity var(--transition-fast);
+}
+
+.copy-link-btn:hover {
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   8. NOTIFICACIÃ“N TOAST (NOTAS DE COPIADO EXITOSO)
+   ========================================================================== */
+.toast-notification {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background-color: #1d1d1f;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--transition-smooth), opacity var(--transition-smooth);
+  opacity: 0;
+  z-index: 2000;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toast-notification.active {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   9. ELEMENTOS AUXILIARES Y ACCESIBILIDAD
+   ========================================================================== */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.empty-state-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+/* ==========================================================================
+   ANIMACIONES CLAVE
+   ========================================================================== */
+@keyframes pulse-hot {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pulse-glow-btn {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* BotÃ³n de Cargar MÃ¡s Glassmorphic Premium */
+.load-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-smooth);
+  margin: 16px auto;
+  cursor: pointer;
+}
+
+.load-more-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+  color: var(--color-primary);
+}
+
+.load-more-btn:active {
+  transform: translateY(0);
+}
+
+[data-theme="dark"] .load-more-btn {
+  background-color: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+/* ==========================================================================
+   10. OPTIMIZACIONES DE TARJETA PARA REJILLA MÃ“VIL DE 2 COLUMNAS (ALTA DENSIDAD)
+   ========================================================================== */
+@media (max-width: 576px) {
+  .deal-card {
+    border-radius: 12px !important;
+    overflow: hidden;
+  }
+
+  .card-media-wrapper {
+    aspect-ratio: 1 / 1 !important; /* Imagen cuadrada perfecta en mÃ³vil */
+  }
+
+  .card-badges {
+    top: 8px !important;
+    left: 8px !important;
+    gap: 4px !important;
+  }
+
+  .badge {
+    padding: 3px 6px !important;
+    font-size: 0.65rem !important;
+    border-radius: 6px !important;
+  }
+
+  .card-share-btn {
+    top: 8px !important;
+    right: 8px !important;
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .card-share-btn svg {
+    width: 13px !important;
+    height: 13px !important;
+  }
+
+  .card-store {
+    bottom: 8px !important;
+    right: 8px !important;
+    padding: 2px 6px !important;
+    font-size: 0.65rem !important;
+    border-radius: 4px !important;
+  }
+
+  .card-body {
+    padding: 10px !important; /* MÃ¡s compacto */
+  }
+
+  .card-category {
+    font-size: 0.65rem !important;
+    margin-bottom: 4px !important;
+  }
+
+  .card-title {
+    font-size: 0.85rem !important;
+    height: 2.3rem !important; /* Altura compacta uniforme de 2 lÃ­neas */
+    margin-bottom: 6px !important;
+    line-height: 1.35 !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  .card-description {
+    display: none !important; /* Ocultar para mÃ¡xima densidad vertical */
+  }
+
+  .card-price-row {
+    gap: 4px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .price-offer {
+    font-size: 1.15rem !important; /* Proporcional a la tarjeta pequeÃ±a */
+  }
+
+  .price-original {
+    font-size: 0.8rem !important;
+  }
+
+  .price-discount {
+    font-size: 0.7rem !important;
+    padding: 1px 4px !important;
+    border-radius: 4px !important;
+  }
+
+  .card-coupon-container {
+    padding: 6px 8px !important;
+    font-size: 0.74rem !important;
+    margin-bottom: 10px !important;
+    border-radius: 6px !important;
+  }
+
+  .coupon-code-badge {
+    padding: 1px 4px !important;
+  }
+
+  .card-btn {
+    padding: 9px 12px !important;
+    font-size: 0.82rem !important;
+    border-radius: 6px !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+}
+/* ==========================================================================
+   SALEPERU.PE - ANIMACIONES Y TRANSICIONES PREMIUM
+   ========================================================================== */
+
+/* Clases de Entrada de Carga de Contenido */
+.fade-in {
+  animation: fadeIn 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.slide-up {
+  animation: slideUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.slide-down {
+  animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Efectos de Hover Suave */
+.hover-scale {
+  transition: transform var(--transition-fast) ease-out;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* ==========================================================================
+   DECLARACIÃ“N DE KEYFRAMES
+   ========================================================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Micro-animaciÃ³n para el swipe-down instructivo en el visor de historias */
+@keyframes swipeDownHint {
+  0% { transform: translateY(0); opacity: 0.3; }
+  50% { transform: translateY(8px); opacity: 0.9; }
+  100% { transform: translateY(0); opacity: 0.3; }
+}
+
+.swipe-hint-animation {
+  animation: swipeDownHint 2s infinite ease-in-out;
+}
+/* ==========================================================================
+   SALEPERU.PE - REPRODUCTOR DE MÃšSICA PREMIUM HÃBRIDO (CSS)
+   ========================================================================== */
+
+/* Variables locales del reproductor */
+:root {
+  --music-glow-color: rgba(98, 0, 238, 0.25); /* --color-primary */
+  --music-active-glow: 0 0 15px var(--color-primary);
+  --music-vinyl-size-desktop: 32px;
+  --music-vinyl-size-drawer: 120px;
+}
+
+[data-theme="dark"] {
+  --music-glow-color: rgba(138, 63, 252, 0.3);
+}
+
+/* ==========================================================================
+   1. CONTROLES DEL HEADER (PC / DESKTOP)
+   ========================================================================== */
+.music-header-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+  .music-header-container {
+    display: none !important; /* Ocultar en mÃ³vil para dar espacio al buscador y logo */
+  }
+}
+
+.music-header-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: var(--bg-body);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.music-header-control:hover {
+  background: var(--bg-card);
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px var(--music-glow-color);
+  transform: translateY(-1px);
+}
+
+.music-header-control:active {
+  transform: translateY(0);
+}
+
+/* Vinilo Giratorio */
+.music-vinyl-wrapper {
+  position: relative;
+  width: var(--music-vinyl-size-desktop);
+  height: var(--music-vinyl-size-desktop);
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.music-vinyl-disc {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-full);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  transition: transform var(--transition-smooth);
+}
+
+/* Efecto de vinilo real (surcos y centro) */
+.music-vinyl-disc::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: var(--radius-full);
+  background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.1) 21%, transparent 35%, rgba(0,0,0,0.08) 50%, rgba(255,255,255,0.05) 55%, transparent 70%);
+  pointer-events: none;
+}
+
+.music-vinyl-disc::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 25%; height: 25%;
+  background: var(--bg-body);
+  border: 2px solid rgba(0,0,0,0.8);
+  border-radius: var(--radius-full);
+  box-shadow: inset 0 0 2px rgba(255,255,255,0.5);
+}
+
+/* AnimaciÃ³n de giro */
+@keyframes spin-vinyl {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.music-vinyl-wrapper.playing .music-vinyl-disc {
+  animation: spin-vinyl 5s linear infinite;
+}
+
+/* BotÃ³n Play/Pause Header */
+.music-header-play-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: var(--color-primary);
+  color: var(--text-on-accent);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.music-header-play-btn:hover {
+  transform: scale(1.1);
+  background: var(--color-primary);
+}
+
+.music-header-play-btn svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+
+/* ==========================================================================
+   2. AUDIO WAVE VISUALIZER (MICRO & GRANDE)
+   ========================================================================== */
+.music-waves {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+  width: 14px;
+}
+
+.music-wave-bar {
+  width: 2px;
+  height: 3px;
+  background-color: var(--text-secondary);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.music-vinyl-wrapper.playing ~ .music-waves .music-wave-bar,
+.music-drawer-vinyl-container.playing ~ .music-large-info .music-waves .music-wave-bar,
+.music-dropdown-card.playing .music-waves .music-wave-bar {
+  background-color: var(--color-primary);
+}
+
+/* Animaciones individuales para las barras */
+@keyframes wave-dance-1 { 0%, 100% { height: 3px; } 50% { height: 12px; } }
+@keyframes wave-dance-2 { 0%, 100% { height: 3px; } 50% { height: 9px; } }
+@keyframes wave-dance-3 { 0%, 100% { height: 3px; } 50% { height: 14px; } }
+
+.music-vinyl-wrapper.playing ~ .music-waves .music-wave-bar:nth-child(1),
+.music-large-info.playing .music-waves .music-wave-bar:nth-child(1),
+.music-dropdown-card.playing .music-waves .music-wave-bar:nth-child(1) {
+  animation: wave-dance-1 0.8s ease-in-out infinite;
+}
+
+.music-vinyl-wrapper.playing ~ .music-waves .music-wave-bar:nth-child(2),
+.music-large-info.playing .music-waves .music-wave-bar:nth-child(2),
+.music-dropdown-card.playing .music-waves .music-wave-bar:nth-child(2) {
+  animation: wave-dance-2 0.6s ease-in-out infinite 0.15s;
+}
+
+.music-vinyl-wrapper.playing ~ .music-waves .music-wave-bar:nth-child(3),
+.music-large-info.playing .music-waves .music-wave-bar:nth-child(3),
+.music-dropdown-card.playing .music-waves .music-wave-bar:nth-child(3) {
+  animation: wave-dance-3 0.7s ease-in-out infinite 0.3s;
+}
+
+/* ==========================================================================
+   3. DROPDOWN CARD (PC / DESKTOP)
+   ========================================================================== */
+.music-dropdown-card {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 290px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(var(--blur-amount));
+  -webkit-backdrop-filter: blur(var(--blur-amount));
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 16px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+}
+
+[data-theme="dark"] .music-dropdown-card {
+  background: rgba(18, 18, 18, 0.82);
+}
+
+.music-dropdown-card::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 24px;
+  width: 12px;
+  height: 12px;
+  background: inherit;
+  border-left: 1px solid var(--border-glass);
+  border-top: 1px solid var(--border-glass);
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+.music-dropdown-card.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* InformaciÃ³n del Dropdown */
+.music-track-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.music-track-title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-track-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.music-live-badge {
+  display: inline-block;
+  background: var(--color-accent);
+  color: var(--text-on-accent);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  animation: pulse-live 1.5s infinite;
+}
+
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Selector de Fuentes */
+.music-source-selector {
+  display: flex;
+  background: var(--bg-body);
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+}
+
+.music-source-btn {
+  flex: 1;
+  padding: 6px 10px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.music-source-btn.active {
+  background: var(--bg-card);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Controles de ReproducciÃ³n y Volumen */
+.music-control-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 2px;
+}
+
+.music-dropdown-play-btn {
+  width: 36px;
+  height: 36px;
+  background: var(--color-primary);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px var(--music-glow-color);
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.music-dropdown-play-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 14px var(--music-glow-color);
+}
+
+.music-dropdown-play-btn:active {
+  transform: scale(0.98);
+}
+
+.music-dropdown-play-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* Slider de Volumen */
+.music-volume-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-grow: 1;
+  background: var(--bg-body);
+  padding: 6px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+}
+
+.music-volume-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: color var(--transition-fast);
+}
+
+.music-volume-btn:hover {
+  color: var(--color-primary);
+}
+
+.music-volume-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.music-volume-slider {
+  flex-grow: 1;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--border-color);
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.music-volume-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+}
+
+.music-volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  margin-top: -3px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: transform var(--transition-fast);
+}
+
+.music-volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.3);
+}
+
+/* ==========================================================================
+   4. INTERFAZ PARA MÃ“VIL (FAB & DRAWER)
+   ========================================================================== */
+
+/* BotÃ³n Flotante (FAB) en mÃ³viles */
+.music-mobile-fab {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-full);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  touch-action: manipulation;
+}
+
+@media (max-width: 768px) {
+  .music-mobile-fab {
+    display: flex; /* Mostrar solo en dispositivos mÃ³viles */
+  }
+}
+
+.music-mobile-fab:hover {
+  transform: scale(1.05);
+}
+
+.music-mobile-fab::after {
+  content: '';
+  position: absolute;
+  top: -2px; left: -2px; right: -2px; bottom: -2px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-primary);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.music-mobile-fab.playing::after {
+  opacity: 0.3;
+  animation: fab-pulsate 1.5s infinite;
+}
+
+@keyframes fab-pulsate {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.15); opacity: 0; }
+}
+
+.music-mobile-fab .music-mini-cover {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.music-mobile-fab .music-waves {
+  position: absolute;
+  bottom: 6px;
+  background: var(--bg-card);
+  padding: 2px 4px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  scale: 0.8;
+}
+
+/* Overlay del CajÃ³n */
+.music-drawer-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 9998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.music-drawer-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* CajÃ³n Deslizable (Drawer) */
+.music-drawer {
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%;
+  background: var(--bg-card);
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  padding: 20px 24px 34px 24px;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  max-height: 85vh;
+}
+
+.music-drawer.active {
+  transform: translateY(0);
+}
+
+.music-drawer-handle-bar {
+  width: 36px;
+  height: 5px;
+  background: var(--text-tertiary);
+  border-radius: var(--radius-full);
+  margin: 0 auto;
+  opacity: 0.4;
+  cursor: pointer;
+}
+
+.music-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.music-drawer-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.music-drawer-close {
+  background: var(--bg-body);
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.4rem;
+  font-weight: 500;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.music-drawer-close:active {
+  background: var(--border-color);
+}
+
+/* Gran Vinilo en el MÃ³vil Drawer */
+.music-drawer-vinyl-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.music-large-vinyl {
+  width: var(--music-vinyl-size-drawer);
+  height: var(--music-vinyl-size-drawer);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-lg), 0 10px 20px rgba(0,0,0,0.15);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-large-vinyl .music-vinyl-disc {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-full);
+}
+
+.music-large-vinyl .music-vinyl-disc::after {
+  width: 22%;
+  height: 22%;
+  border: 4px solid rgba(0,0,0,0.85);
+}
+
+.music-drawer-vinyl-container.playing .music-vinyl-disc {
+  animation: spin-vinyl 6s linear infinite;
+}
+
+/* Info de pista en el mÃ³vil */
+.music-large-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+
+.music-large-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 80%;
+}
+
+.music-large-text .music-track-title {
+  font-size: 1.1rem;
+}
+
+.music-large-text .music-track-subtitle {
+  font-size: 0.85rem;
+}
+
+/* Controles Grandes del Drawer */
+.music-drawer-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 4px;
+}
+
+.music-drawer-play-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.music-large-play-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: var(--text-on-accent);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px var(--music-glow-color);
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.music-large-play-btn:active {
+  transform: scale(0.95);
+}
+
+.music-large-play-btn svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.music-drawer-controls .music-volume-container {
+  padding: 10px 16px;
+}
+
+/* ==========================================================================
+   5. SOPORTE DE TEMA Y ESTILOS EXTRA
+   ========================================================================== */
+
+/* Contenedor Oculto de YouTube IFrame API */
+.music-yt-hidden {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* Glow animado para reproducciÃ³n activa */
+.music-glowing-active {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 4px 14px var(--music-glow-color) !important;
+}
+
+[data-theme="dark"] .music-source-selector {
+  background: #1e1e1e;
+}
+[data-theme="dark"] .music-volume-container {
+  background: #1e1e1e;
+}
+
+/* ==========================================================================
+   6. PERSONALIZACIÃ“N UX/UI PREMIUM - LLAMATIVOS Y SIN ERRORES
+   ========================================================================== */
+
+/* Etiqueta ðŸ“» RADIO EN VIVO que parpadea y llama la atenciÃ³n en el Header */
+.music-header-live-tag {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  background: rgba(98, 0, 238, 0.08);
+  border: 1px dashed var(--color-primary);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  letter-spacing: 0.5px;
+  transition: all var(--transition-fast);
+  animation: music-tag-pulse 2s infinite ease-in-out;
+}
+
+[data-theme="dark"] .music-header-live-tag {
+  background: rgba(138, 63, 252, 0.12);
+  border-color: var(--color-primary);
+  color: var(--text-primary);
+}
+
+.music-header-control:hover .music-header-live-tag {
+  color: var(--text-on-accent);
+  background: var(--color-primary);
+  border-color: transparent;
+  box-shadow: 0 0 10px var(--music-glow-color);
+  transform: scale(1.02);
+}
+
+@keyframes music-tag-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(0.96);
+  }
+}
+
+/* ==========================================================================
+   6. REDISEÃ‘O UX/UI PREMIUM NAVEGACIÃ“N Y CABECERA (MAESTRO UX)
+   ========================================================================== */
+
+/* Cabecera Flotante con Profundidad VolumÃ©trica */
+.site-header {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  transition: all var(--transition-smooth) !important;
+}
+
+[data-theme="dark"] .site-header {
+  box-shadow: 0 4px 35px rgba(0, 0, 0, 0.4) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.header-container {
+  padding: 0 24px !important;
+}
+
+/* Logotipo Futurista */
+.logo {
+  font-family: var(--font-heading) !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.6px !important;
+  text-shadow: 0 2px 10px rgba(98, 0, 238, 0.05);
+  transition: all var(--transition-fast) !important;
+}
+
+.logo:hover {
+  transform: translateY(-0.5px) scale(1.01) !important;
+  text-shadow: 0 4px 15px rgba(98, 0, 238, 0.15) !important;
+}
+
+/* Interruptor de Tema Premium */
+.theme-toggle-btn {
+  background: var(--bg-body) !important;
+  border: 1px solid var(--border-color) !important;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm) !important;
+  color: var(--text-secondary) !important;
+  transition: all var(--transition-fast) !important;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--bg-card) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  box-shadow: 0 4px 12px var(--music-glow-color) !important;
+  transform: scale(1.06);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.94);
+}
+
+/* Etiqueta ðŸ“» RADIO EN VIVO que parpadea y llama la atenciÃ³n en el Header */
+.music-header-live-tag {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  background: rgba(98, 0, 238, 0.06);
+  border: 1px dashed var(--color-primary);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  letter-spacing: 0.5px;
+  transition: all var(--transition-fast);
+  animation: music-tag-pulse 2s infinite ease-in-out;
+}
+
+[data-theme="dark"] .music-header-live-tag {
+  background: rgba(138, 63, 252, 0.1);
+  border-color: var(--color-primary);
+  color: var(--text-primary);
+}
+
+.music-header-control:hover .music-header-live-tag {
+  color: var(--text-on-accent);
+  background: var(--color-primary);
+  border-color: transparent;
+  box-shadow: 0 0 10px var(--music-glow-color);
+  transform: scale(1.02);
+}
+
+
+
+
+/* ==========================================================================
+   SALEPERU.PE - HOJA DE ESTILOS PRINCIPAL (AGREGADA)
+   ========================================================================== */
+
+
+
+/* ==========================================================================
+   ESTILOS GENERALES ADICIONALES (SI APLICAN)
+   ========================================================================== */
+
+/* Controles de selecciÃ³n de texto */
+::selection {
+  background-color: var(--color-primary);
+  color: var(--text-on-accent);
+}
+
+/* Scrollbar Personalizado Premium para Navegadores Modernos */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-body);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}

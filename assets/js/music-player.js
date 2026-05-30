@@ -37,8 +37,8 @@ const AEROSMITH_SONG_URL = "https://archive.org/download/rockmusic_201703/Aerosm
 
 // URLs del arte de portada elegantes desde Unsplash
 const ALBUM_ARTWORKS = {
-  song: "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=300&q=80", // Rock Concert
-  radio: "https://images.unsplash.com/photo-1484755560693-a4074577af3a?w=300&q=80" // Retro Radio
+  song: "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=200&q=70&auto=format&fit=crop", // Rock Concert
+  radio: "https://images.unsplash.com/photo-1484755560693-a4074577af3a?w=200&q=70&auto=format&fit=crop" // Retro Radio
 };
 
 // Helper para acceso a LocalStorage seguro
@@ -147,7 +147,7 @@ function setupAudioElement() {
   // Configuración de controles nativos y precarga
   audioPlayer.volume = musicState.isMuted ? 0 : musicState.volume;
   audioPlayer.muted = musicState.isMuted;
-  audioPlayer.preload = "auto";
+  audioPlayer.preload = "none";
   
   // Establecer la fuente inicial (Aerosmith)
   audioPlayer.src = AEROSMITH_SONG_URL;

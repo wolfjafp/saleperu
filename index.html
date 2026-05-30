@@ -38,17 +38,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
-  <!-- Carga Directa de Fuentes de Google (Máxima velocidad de renderizado de texto) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Candidatos de Preconexión Críticos para Datos y Streaming -->
+  <link rel="preconnect" href="https://docs.google.com">
+  <link rel="preconnect" href="https://dn721501.ca.archive.org">
   
-  <!-- Archivos de Estilos en Paralelo (Carga simultánea sin cascada bloqueante) -->
-  <link rel="stylesheet" href="assets/css/reset.css">
-  <link rel="stylesheet" href="assets/css/variables.css">
-  <link rel="stylesheet" href="assets/css/layout.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-  <link rel="stylesheet" href="assets/css/animations.css">
-  <link rel="stylesheet" href="assets/css/music-player.css">
-  <link rel="stylesheet" href="assets/css/main.css">
+  <!-- Carga Directa de Fuentes de Google (Optimizado Asíncrono para evitar bloqueo) -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+  
+  <!-- Archivo de Estilos Consolidado y Optimizado (Elimina bloqueo de renderizado en cascada) -->
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
@@ -107,7 +106,7 @@
           <div class="music-header-control" id="music-header-control" title="Reproductor de Música">
             <span class="music-header-live-tag">📻 RADIO EN VIVO</span>
             <div class="music-vinyl-wrapper" id="music-header-vinyl">
-              <div class="music-vinyl-disc" style="background-image: url('https://images.unsplash.com/photo-1506157786151-b8491531f063?w=300&q=80')"></div>
+              <div class="music-vinyl-disc" style="background-image: url('https://images.unsplash.com/photo-1506157786151-b8491531f063?w=200&q=70&auto=format&fit=crop')"></div>
             </div>
             <button class="music-header-play-btn" id="music-header-play-btn" aria-label="Reproducir / Pausar Música">
               <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -173,7 +172,37 @@
   <aside class="stories-section">
     <div class="container">
       <div class="stories-container" id="stories-container" role="list">
-        <!-- Renderizado dinámico desde JS -->
+        <!-- Skeletons estáticos iniciales para evitar CLS (Cumulative Layout Shift) -->
+        <div class="story-circle-item">
+          <div class="story-ring" style="background: var(--border-color)">
+            <div class="skeleton skeleton-story-avatar"></div>
+          </div>
+          <div class="skeleton skeleton-story-text"></div>
+        </div>
+        <div class="story-circle-item">
+          <div class="story-ring" style="background: var(--border-color)">
+            <div class="skeleton skeleton-story-avatar"></div>
+          </div>
+          <div class="skeleton skeleton-story-text"></div>
+        </div>
+        <div class="story-circle-item">
+          <div class="story-ring" style="background: var(--border-color)">
+            <div class="skeleton skeleton-story-avatar"></div>
+          </div>
+          <div class="skeleton skeleton-story-text"></div>
+        </div>
+        <div class="story-circle-item">
+          <div class="story-ring" style="background: var(--border-color)">
+            <div class="skeleton skeleton-story-avatar"></div>
+          </div>
+          <div class="skeleton skeleton-story-text"></div>
+        </div>
+        <div class="story-circle-item">
+          <div class="story-ring" style="background: var(--border-color)">
+            <div class="skeleton skeleton-story-avatar"></div>
+          </div>
+          <div class="skeleton skeleton-story-text"></div>
+        </div>
       </div>
     </div>
   </aside>
@@ -224,7 +253,51 @@
 
       <!-- Cuadrícula Principal del Feed -->
       <section class="feed-grid" id="feed-grid" aria-label="Feed de ofertas y descuentos">
-        <!-- Renderizado dinámico de tarjetas y skeletons en JS -->
+        <!-- Skeletons estáticos iniciales para evitar CLS (Cumulative Layout Shift) -->
+        <div class="deal-card">
+          <div class="skeleton skeleton-card-media"></div>
+          <div class="card-body">
+            <div class="skeleton skeleton-card-line skeleton-card-title1"></div>
+            <div class="skeleton skeleton-card-line skeleton-card-title2"></div>
+            <div class="skeleton skeleton-card-line skeleton-card-desc1"></div>
+            <div class="skeleton skeleton-card-line skeleton-card-desc2"></div>
+            <div class="skeleton skeleton-card-price"></div>
+            <div class="skeleton skeleton-card-btn"></div>
+          </div>
+        </div>
+        <div class="deal-card">
+          <div class="skeleton skeleton-card-media"></div>
+          <div class="card-body">
+            <div class="skeleton skeleton-card-line skeleton-card-title1"></div>
+            <div class="skeleton skeleton-card-line skeleton-card-title2"></div>
+            <div class="skeleton skeleton-card-line skeleton-card-desc1"></div>
+            <div class="skeleton skeleton-card-line skeleton-card-desc2"></div>
+            <div class="skeleton skeleton-card-price"></div>
+            <div class="skeleton skeleton-card-btn"></div>
+          </div>
+        </div>
+        <div class="deal-card">
+          <div class="skeleton skeleton-card-media"></div>
+          <div class="card-body">
+            <div class="skeleton skeleton-card-line skeleton-card-title1"></div>
+            <div class="skeleton skeleton-card-line skeleton-card-title2"></div>
+            <div class="skeleton skeleton-card-line skeleton-card-desc1"></div>
+            <div class="skeleton skeleton-card-line skeleton-card-desc2"></div>
+            <div class="skeleton skeleton-card-price"></div>
+            <div class="skeleton skeleton-card-btn"></div>
+          </div>
+        </div>
+        <div class="deal-card">
+          <div class="skeleton skeleton-card-media"></div>
+          <div class="card-body">
+            <div class="skeleton skeleton-card-line skeleton-card-title1"></div>
+            <div class="skeleton skeleton-card-line skeleton-card-title2"></div>
+            <div class="skeleton skeleton-card-line skeleton-card-desc1"></div>
+            <div class="skeleton skeleton-card-line skeleton-card-desc2"></div>
+            <div class="skeleton skeleton-card-price"></div>
+            <div class="skeleton skeleton-card-btn"></div>
+          </div>
+        </div>
       </section>
 
       <!-- Contenedor del Botón de Cargar Más -->
@@ -354,7 +427,7 @@
   <!-- Botón Flotante para Móviles (FAB) -->
   <div class="music-mobile-fab" id="music-mobile-fab" aria-label="Abrir Reproductor de Música">
     <div class="music-vinyl-wrapper" id="music-mobile-vinyl">
-      <div class="music-vinyl-disc" style="background-image: url('https://images.unsplash.com/photo-1506157786151-b8491531f063?w=300&q=80')"></div>
+      <div class="music-vinyl-disc" style="background-image: url('https://images.unsplash.com/photo-1506157786151-b8491531f063?w=200&q=70&auto=format&fit=crop')"></div>
     </div>
     <div class="music-waves">
       <span class="music-wave-bar"></span>
@@ -377,7 +450,7 @@
     <!-- Vinilo grande giratorio -->
     <div class="music-drawer-vinyl-container" id="music-drawer-vinyl-container">
       <div class="music-large-vinyl">
-        <div class="music-vinyl-disc" style="background-image: url('https://images.unsplash.com/photo-1506157786151-b8491531f063?w=300&q=80')"></div>
+        <div class="music-vinyl-disc" style="background-image: url('https://images.unsplash.com/photo-1506157786151-b8491531f063?w=200&q=70&auto=format&fit=crop')"></div>
       </div>
     </div>
 
@@ -428,7 +501,7 @@
   </div>
 
   <!-- Elemento de Audio Nativo Único (Soporta reproducción en segundo plano) -->
-  <audio id="musica" style="display:none;" preload="auto"></audio>
+  <audio id="musica" style="display:none;" preload="none"></audio>
 
   <!-- ==========================================================================
        SCRIPTS DE CONTROL Y FUNCIONALIDAD (CARGA DIFERIDA Y NO BLOQUEANTE)

@@ -1,0 +1,92 @@
+/* ==========================================================================
+   SALEPERU.PE - SISTEMA DE DISEÑO Y VARIABLES CSS
+   ========================================================================== */
+
+
+
+:root {
+  /* Fuentes */
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Colores Base (Modo Claro Premium - Minimalist Soft-White) */
+  --bg-body: #f7f8fc;
+  --bg-card: #ffffff;
+  --bg-navbar: rgba(247, 248, 252, 0.8);
+  --bg-skeleton: #e8eaf0;
+  
+  --text-primary: #121214;
+  --text-secondary: #5c5f6b;
+  --text-tertiary: #848694;
+  --text-on-accent: #ffffff;
+
+  /* Bordes y Separadores */
+  --border-color: rgba(0, 0, 0, 0.05);
+  --border-glass: rgba(255, 255, 255, 0.8);
+  
+  /* Sombras Modernas (Soft Premium Shadows) */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 24px 50px rgba(0, 0, 0, 0.06);
+  --shadow-hot: 0 8px 24px rgba(255, 69, 0, 0.12);
+
+  /* Identidad y Acentos */
+  --color-primary: #6b11ff;
+  --color-accent: #ff4d4d;
+  
+  /* Gradientes Premium */
+  --grad-premium: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%); /* Fuego / Hot */
+  --grad-royal: linear-gradient(135deg, #7b2cbf 0%, #ff4d6d 50%, #ff8531 100%); /* Tech / Sunset Premium Fire */
+  --grad-error: linear-gradient(135deg, #e60000 0%, #ff3300 100%);    /* Error de Precio */
+  --grad-flash: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);    /* Flash Deals */
+  --grad-stories: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); /* Instagram Ring */
+
+  /* Estados de Etiquetas */
+  --color-hot: #ff4500;
+  --color-flash: #ffa500;
+  --color-error: #ff3b30;
+  --color-coupon: #34c759;
+  --color-tech: #007aff;
+  --color-gaming: #af52de;
+  --color-moda: #ff2d55;
+  --color-hogar: #5856d6;
+  --color-viajes: #5ac8fa;
+  --color-supermercado: #ff9500;
+
+  /* Tamaños & Bordes */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Transiciones */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  
+  /* Blur de Glassmorphism */
+  --blur-amount: 20px;
+}
+
+/* Variables para Modo Oscuro Premium ("Obsidian Indigo") */
+[data-theme="dark"] {
+  --bg-body: #0b0a16;
+  --bg-card: #141324;
+  --bg-navbar: rgba(11, 10, 22, 0.8);
+  --bg-skeleton: #1d1b33;
+  
+  --text-primary: #f0eff5;
+  --text-secondary: #9b9aa8;
+  --text-tertiary: #6c6a7a;
+  --text-on-accent: #ffffff;
+
+  --border-color: rgba(255, 255, 255, 0.05);
+  --border-glass: rgba(255, 255, 255, 0.02);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 24px 50px rgba(0, 0, 0, 0.6);
+  --shadow-hot: 0 8px 24px rgba(255, 77, 109, 0.18);
+  
+  /* Ajustes de color primario en modo oscuro para mayor contraste vibrante */
+  --color-primary: #9d4edd;
+}
