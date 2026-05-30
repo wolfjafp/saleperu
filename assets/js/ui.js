@@ -76,11 +76,18 @@ function initHeaderScrollEffect() {
   header.style.boxShadow = "";
   header.style.borderBottomColor = "";
 
+  let scrollRunning = false;
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 30) {
-      header.classList.add("scrolled");
-    } else {
-      header.classList.remove("scrolled");
+    if (!scrollRunning) {
+      scrollRunning = true;
+      requestAnimationFrame(() => {
+        if (window.scrollY > 30) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+        scrollRunning = false;
+      });
     }
   }, { passive: true });
 }
@@ -373,4 +380,19 @@ function setupSearchUX() {
       }
     });
   });
+}
+
+/**
+ * Método global de sanitización para prevenir ataques de inyección XSS de Google Sheets
+ * @param {string} str - Texto plano a escapar
+ * @returns {string} Texto debidamente saneado y seguro para renderizado HTML
+ */
+function escapeHTML(str) {
+  if (str === null || str === undefined) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }

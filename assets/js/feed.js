@@ -8,6 +8,20 @@ let currentCategory = "todos";
 let currentSort = "recientes";
 let searchQuery = "";
 
+// Variables de Paginación de Alto Rendimiento para DOM Ligero
+let currentPage = 1;
+const ITEMS_PER_PAGE = 12;
+
+/**
+ * Función auxiliar para extraer el número secuencial de los IDs
+ * Ejemplo: "SP-005" -> 5, "SP-120" -> 120
+ */
+function getNumericId(idStr) {
+  if (!idStr) return 0;
+  const match = String(idStr).match(/\d+/);
+  return match ? parseInt(match[0], 10) : 0;
+}
+
 /**
  * Inicializa el feed con los datos descargados
  * @param {Array} offersData - Listado de ofertas procesadas de Sheets
@@ -96,7 +110,11 @@ function setupSearchInput() {
 /**
  * Aplica lógica combinada de Categorías, Búsqueda y Ordenamiento
  */
-function applyFiltersAndSort() {
+function applyFiltersAndSort(resetPage = true) {
+  if (resetPage) {
+    currentPage = 1; // Reiniciar paginación al filtrar o buscar
+  }
+  
   let result = [...allOffers];
 
   // 1. Filtrar por Categoría Inteligente
@@ -129,8 +147,9 @@ function applyFiltersAndSort() {
   }
 
   if (currentSort === "recientes") {
-    // Por ID descendente (asumiendo que IDs más altos o indexación física son recientes)
-    result.reverse(); 
+    // Ordenar de forma descendente por la numeración de los IDs
+    // Esto asegura que el ID más alto (el más nuevo) salga al inicio, sin importar si se insertó al inicio o al final en Sheets.
+    result.sort((a, b) => getNumericId(b.id) - getNumericId(a.id));
   } else if (currentSort === "descuento") {
     result.sort((a, b) => {
       const pctA = a.originalPrice ? ((a.originalPrice - a.offerPrice) / a.originalPrice) : 0;
@@ -192,10 +211,17 @@ function renderFeedCards() {
         <p>Prueba buscando con palabras clave diferentes o selecciona otra categoría.</p>
       </div>
     `;
+    
+    // Limpiar contenedor de Cargar Más si no hay ofertas
+    const loadMoreContainer = document.getElementById("load-more-container");
+    if (loadMoreContainer) loadMoreContainer.innerHTML = "";
     return;
   }
 
-  filteredOffers.forEach((offer, index) => {
+  // Paginación: Cortar el arreglo a la página actual * ítems por página
+  const paginatedOffers = filteredOffers.slice(0, currentPage * ITEMS_PER_PAGE);
+
+  paginatedOffers.forEach((offer, index) => {
     // Calcular porcentaje de descuento
     let discountPercent = 0;
     if (offer.originalPrice && offer.originalPrice > offer.offerPrice) {
@@ -205,12 +231,14 @@ function renderFeedCards() {
     const card = document.createElement("article");
     card.className = "deal-card slide-up";
     card.id = offer.id;
-    card.style.animationDelay = `${index * 0.05}s`; // Staggered loading para visual premium
+    // Animación escalonada optimizada para los ítems visibles de la página activa
+    const pageIndex = index % ITEMS_PER_PAGE;
+    card.style.animationDelay = `${pageIndex * 0.04}s`;
 
     // Determinar etiqueta de expiración (si expira hoy)
     const isExpiringToday = checkIsExpiringToday(offer.expiration);
 
-    // Renderizado estructurado
+    // Renderizado estructurado con SANEAMIENTO escapeHTML para protección total contra XSS
     card.innerHTML = `
       <div class="card-media-wrapper">
         <div class="card-badges">
@@ -220,8 +248,11 @@ function renderFeedCards() {
           ${isExpiringToday ? '<span class="badge badge-error">⏳ Expira Hoy</span>' : ''}
           ${offer.couponCode ? '<span class="badge badge-coupon">🎟️ Cupón</span>' : ''}
         </div>
-        <img class="card-image" src="${offer.image}" alt="${offer.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80'">
-        <span class="card-store">${offer.store}</span>
+        <img class="card-image" src="${offer.image}" alt="${escapeHTML(offer.title)}" 
+             loading="${index < 2 ? 'eager' : 'lazy'}" 
+             ${index < 2 ? 'fetchpriority="high"' : ''}
+             onerror="this.src='https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80'">
+        <span class="card-store">${escapeHTML(offer.store)}</span>
         
         <!-- Botón flotante para compartir -->
         <button class="card-share-btn" onclick="openShareModal('${offer.id}', event)" aria-label="Compartir Oferta">
@@ -230,9 +261,9 @@ function renderFeedCards() {
       </div>
 
       <div class="card-body">
-        <span class="card-category" style="color: var(--color-${getCategoryColorClass(offer.category)})">${offer.category}</span>
-        <h3 class="card-title">${offer.title}</h3>
-        <p class="card-description">${offer.description}</p>
+        <span class="card-category" style="color: var(--color-${getCategoryColorClass(offer.category)})">${escapeHTML(offer.category)}</span>
+        <h3 class="card-title">${escapeHTML(offer.title)}</h3>
+        <p class="card-description">${escapeHTML(offer.description)}</p>
         
         <div class="card-price-row">
           <span class="price-offer">S/. ${offer.offerPrice.toFixed(2)}</span>
@@ -243,7 +274,7 @@ function renderFeedCards() {
         ${offer.couponCode ? `
           <div class="card-coupon-container">
             <span class="coupon-text">Cupón:</span>
-            <span class="coupon-code-badge" onclick="copyCouponCode('${offer.couponCode}', event)" title="Copiar cupón">${offer.couponCode}</span>
+            <span class="coupon-code-badge" onclick="copyCouponCode('${escapeHTML(offer.couponCode)}', event)" title="Copiar cupón">${escapeHTML(offer.couponCode)}</span>
           </div>
         ` : ''}
 
@@ -255,6 +286,20 @@ function renderFeedCards() {
 
     grid.appendChild(card);
   });
+
+  // Renderizar o remover el Botón "Cargar Más" dinámicamente
+  const loadMoreContainer = document.getElementById("load-more-container");
+  if (loadMoreContainer) {
+    if (filteredOffers.length > currentPage * ITEMS_PER_PAGE) {
+      loadMoreContainer.innerHTML = `
+        <button class="load-more-btn slide-up" onclick="loadNextPage()" aria-label="Ver más ofertas">
+          Ver más ofertas ⚡
+        </button>
+      `;
+    } else {
+      loadMoreContainer.innerHTML = "";
+    }
+  }
 }
 
 /**
@@ -298,4 +343,12 @@ function copyCouponCode(code, event) {
   }).catch(err => {
     console.error("No se pudo copiar el cupón:", err);
   });
+}
+
+/**
+ * Función disparadora de la paginación para cargar el bloque siguiente
+ */
+function loadNextPage() {
+  currentPage++;
+  renderFeedCards();
 }

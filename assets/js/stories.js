@@ -54,9 +54,11 @@ function initStoriesSystem(storiesData) {
 
     item.innerHTML = `
       <div class="story-ring">
-        <img class="story-avatar" src="${story.coverImage}" alt="${story.title}" loading="lazy">
+        <img class="story-avatar" src="${story.coverImage}" alt="${escapeHTML(story.title)}" 
+             loading="${idx < 4 ? 'eager' : 'lazy'}"
+             ${idx < 4 ? 'fetchpriority="high"' : ''}>
       </div>
-      <span class="story-label">${story.title}</span>
+      <span class="story-label">${escapeHTML(story.title)}</span>
     `;
 
     item.addEventListener("click", () => {
@@ -108,8 +110,8 @@ function renderActiveStorySlide() {
   const headerContainer = document.querySelector(".story-user-info");
   headerContainer.innerHTML = `
     <div class="story-profile">
-      <img class="story-profile-img" src="${story.coverImage}" alt="${story.title}">
-      <span class="story-profile-name">${story.title}</span>
+      <img class="story-profile-img" src="${story.coverImage}" alt="${escapeHTML(story.title)}">
+      <span class="story-profile-name">${escapeHTML(story.title)}</span>
     </div>
     <button class="story-close-btn" onclick="closeStoryViewer()">&times;</button>
   `;
@@ -144,13 +146,13 @@ function renderActiveStorySlide() {
     <div class="story-nav-tap story-nav-left"></div>
     <div class="story-nav-tap story-nav-right"></div>
     
-    <img class="story-media" src="${story.mediaUrl}" alt="${story.caption}">
+    <img class="story-media" src="${story.mediaUrl}" alt="${escapeHTML(story.caption)}">
   `;
 
   // Renderizar pie de historia
   const footerContainer = document.getElementById("story-footer");
   footerContainer.innerHTML = `
-    <p class="story-caption">${story.caption}</p>
+    <p class="story-caption">${escapeHTML(story.caption)}</p>
     <a href="${story.offerLink}" target="_blank" class="story-action-btn" id="story-action-link" rel="sponsored nofollow noopener noreferrer">
       Ver Oferta ⚡
     </a>
