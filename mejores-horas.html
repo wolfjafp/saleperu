@@ -226,43 +226,62 @@
 
   <!-- PIE DE PÁGINA (FOOTER) -->
   <footer class="site-footer">
-    <div class="container footer-content">
-      
-      <!-- Logotipo del Footer -->
-      <div class="logo" style="margin-bottom: 4px;">
-        <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width: 28px; height: 28px;">
-          <path d="M12.5 2.5C11.9 1.9 11.1 1.9 10.5 2.5L2.5 10.5C1.9 11.1 1.9 11.9 2.5 12.5L10.5 20.5C11.1 21.1 11.9 21.1 12.5 20.5L20.5 12.5C21.1 11.9 21.1 11.1 20.5 10.5L12.5 2.5Z" stroke="url(#logo-grad)" stroke-width="2.2" stroke-linejoin="round"/>
-          <circle cx="8" cy="8" r="1.5" fill="url(#logo-grad)"/>
-          <path d="M12 8.5C12 8.5 14 11 14 13C14 15.2 12.8 17 12 18C11.2 17 10 15.2 10 13C10 11 12 8.5 12 8.5Z" fill="url(#logo-grad)"/>
-        </svg>
-        SALEPERU.PE
-      </div>
-      
-      <!-- Enlaces del menú del pie (Navegación e Información SEO) -->
-      <div class="footer-links" style="margin-bottom: 16px;">
-        <a href="./#todos" class="footer-link">⚡ Ofertas del Cyber</a>
-        <a href="./#hot" class="footer-link">🔥 Ofertas Calientes</a>
-        <a href="./#error" class="footer-link">💥 Errores de Precio</a>
-        <a href="https://instagram.com/saleperu.pe" target="_blank" rel="noopener" class="footer-link">📸 Instagram</a>
-        <a href="https://tiktok.com/@saleperu.pe" target="_blank" rel="noopener" class="footer-link">🎵 TikTok</a>
-      </div>
-      
-      <div class="footer-links" style="font-size: 0.82rem; border-top: 1px solid var(--border-color); padding-top: 16px; width: 100%; justify-content: center; opacity: 0.85; flex-wrap: wrap;">
-        <a href="quienes-somos.html" class="footer-link">👥 Quiénes Somos</a>
-        <a href="contacto.html" class="footer-link">📩 Contacto</a>
-        <a href="guia-ofertas.html" class="footer-link">📖 Guía de Ofertas</a>
-        <a href="calendario-ofertas.html" class="footer-link">📅 Calendario Anual</a>
-        <a href="mejores-horas.html" class="footer-link" style="color: var(--color-primary); font-weight: 700;">⏰ Mejores Horas</a>
-        <a href="preguntas-frecuentes.html" class="footer-link">❓ Preguntas Frecuentes</a>
-        <a href="politica-privacidad.html" class="footer-link">🔒 Privacidad</a>
-        <a href="terminos-condiciones.html" class="footer-link">📝 Términos y Condiciones</a>
+    <div class="container footer-grid">
+      <!-- Columna 1: Marca y Propósito -->
+      <div class="footer-col brand-col">
+        <div class="logo" style="margin-bottom: 12px;">
+          <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width: 28px; height: 28px;">
+            <path d="M12.5 2.5C11.9 1.9 11.1 1.9 10.5 2.5L2.5 10.5C1.9 11.1 1.9 11.9 2.5 12.5L10.5 20.5C11.1 21.1 11.9 21.1 12.5 20.5L20.5 12.5C21.1 11.9 21.1 11.1 20.5 10.5L12.5 2.5Z" stroke="url(#logo-grad)" stroke-width="2.2" stroke-linejoin="round"/>
+            <circle cx="8" cy="8" r="1.5" fill="url(#logo-grad)"/>
+            <path d="M12 8.5C12 8.5 14 11 14 13C14 15.2 12.8 17 12 18C11.2 17 10 15.2 10 13C10 11 12 8.5 12 8.5Z" fill="url(#logo-grad)"/>
+          </svg>
+          SALEPERU.PE
+        </div>
+        <p class="footer-brand-desc">
+          Monitoreamos, filtramos y publicamos en tiempo real las mejores ofertas, cupones y errores de precio de las principales tiendas de retail en el Perú. Ahorro inteligente 100% verificado por humanos.
+        </p>
       </div>
 
+      <!-- Columna 2: Navegación Principal -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">⚡ Explora</h4>
+        <ul class="footer-col-links">
+          <li><a href="./#todos" class="footer-link">⚡ Ofertas Cyber</a></li>
+          <li><a href="./#hot" class="footer-link">🔥 Ofertas Calientes</a></li>
+          <li><a href="./#error" class="footer-link">💥 Errores de Precio</a></li>
+          <li><a href="https://instagram.com/saleperu.pe" target="_blank" rel="noopener" class="footer-link">📸 Instagram</a></li>
+          <li><a href="https://tiktok.com/@saleperu.pe" target="_blank" rel="noopener" class="footer-link">🎵 TikTok</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Información y EEAT -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">📖 Recursos</h4>
+        <ul class="footer-col-links">
+          <li><a href="quienes-somos.html" class="footer-link">👥 Quiénes Somos</a></li>
+          <li><a href="contacto.html" class="footer-link">📩 Contacto</a></li>
+          <li><a href="guia-ofertas.html" class="footer-link">📖 Guía de Ofertas</a></li>
+          <li><a href="calendario-ofertas.html" class="footer-link">📅 Calendario Anual</a></li>
+          <li><a href="mejores-horas.html" class="footer-link" style="color: var(--color-primary); font-weight: 700;">⏰ Mejores Horas</a></li>
+          <li><a href="preguntas-frecuentes.html" class="footer-link">❓ Preguntas Frecuentes</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 4: Legal -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">🔒 Legal</h4>
+        <ul class="footer-col-links">
+          <li><a href="politica-privacidad.html" class="footer-link">🔒 Privacidad</a></li>
+          <li><a href="terminos-condiciones.html" class="footer-link">📝 Términos y Condiciones</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
       <p class="footer-copy">
         &copy; 2026 SALEPERU.PE. Todos los derechos reservados. <br>
         Hecho con amor y optimización premium 🇵🇪 para encontrar las mejores promociones.
       </p>
-
     </div>
   </footer>
 
