@@ -42,6 +42,21 @@ function initFeedSystem(offersData) {
   // Pintar categorías dinámicas en la barra de píldoras
   renderCategoryFilters();
   
+  // Leer parámetros de búsqueda en la URL para redirección inteligente SEO
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchParam = urlParams.get("search");
+  if (searchParam) {
+    searchQuery = searchParam.toLowerCase().trim();
+    // Sincronizar visualmente los inputs de búsqueda
+    const searchInputs = document.querySelectorAll(".search-input");
+    searchInputs.forEach(input => {
+      input.value = searchParam;
+      // Mostrar botón de limpiar búsqueda
+      const clearBtn = input.parentElement.querySelector(".search-clear-btn");
+      if (clearBtn) clearBtn.classList.add("visible");
+    });
+  }
+  
   // Pintar el feed inicial
   applyFiltersAndSort();
   

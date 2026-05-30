@@ -2,12 +2,16 @@
    SALEPERU.PE - SERVICE WORKER DE PWA (CACHÉ Y SOPORTE OFFLINE)
    ========================================================================== */
 
-const CACHE_NAME = "saleperu-pwa-v2";
+const CACHE_NAME = "saleperu-pwa-v3";
 
 // Listado de archivos base a precachear
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
+  "./404.html",
+  "./guia-compras-peru.html",
+  "./quienes-somos.html",
+  "./contacto.html",
   "./robots.txt",
   "./sitemap.xml",
   "./manifest.json",

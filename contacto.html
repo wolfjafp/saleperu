@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <!-- Metadatos Técnicos Esenciales -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <!-- Configuración PWA / Móvil -->
+  <meta name="theme-color" content="#6b11ff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+  <link rel="shortcut icon" href="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=32&q=80" type="image/png">
+  
+  <!-- SEO Técnico y Metatags -->
+  <title>📧 Contacto y Sugerencia de Ofertas | SALEPERU.PE</title>
+  <meta name="description" content="¿Encontraste una oferta increíble o un error de precio en Falabella, Ripley o Plaza Vea? Escríbenos y compártelo con miles de cazadores peruanos.">
+  <meta name="keywords" content="contacto saleperu, sugerir oferta peru, reportar error de precio peru, soporte saleperu">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://saleperu.pe/contacto.html">
+  
+  <!-- Preconectar a Google Fonts para Optimizar Rendimiento -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Carga Directa de Fuentes de Google -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+  
+  <!-- Archivos de Estilo Consolidado -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+  
+  <style>
+    .contact-wrapper {
+      max-width: 650px;
+      margin: 30px auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 40px;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .contact-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .contact-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: var(--grad-royal);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+    
+    .contact-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    
+    .form-group {
+      margin-bottom: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .form-label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+    }
+    
+    .form-control {
+      background-color: var(--bg-body);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    .form-control:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 8px rgba(107, 17, 255, 0.15);
+      background-color: var(--bg-card);
+      outline: none;
+    }
+    
+    select.form-control {
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%236e6e73" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 16px;
+      padding-right: 40px;
+    }
+    
+    textarea.form-control {
+      min-height: 140px;
+      resize: vertical;
+    }
+    
+    .form-submit-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      background: var(--text-primary);
+      color: var(--bg-card);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .form-submit-btn:hover {
+      transform: translateY(-1.5px);
+      box-shadow: var(--shadow-md);
+      opacity: 0.92;
+    }
+    
+    .form-submit-btn:active {
+      transform: translateY(0.5px);
+    }
+    
+    /* Panel de Éxito Visual */
+    .success-panel {
+      display: none;
+      text-align: center;
+      padding: 40px 10px;
+      animation: fadeIn 0.4s ease-out;
+    }
+    
+    .success-icon {
+      font-size: 4.5rem;
+      margin-bottom: 20px;
+      animation: float-icon 2s ease-in-out infinite;
+    }
+    
+    .success-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--color-coupon);
+      margin-bottom: 12px;
+    }
+    
+    .success-text {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-size: 1.05rem;
+      margin-bottom: 30px;
+    }
+    
+    @keyframes float-icon {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    
+    @media (max-width: 576px) {
+      .contact-wrapper {
+        padding: 24px 16px;
+        margin: 16px;
+      }
+      .contact-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+  
+  <!-- Marcado Schema.org de ContactPage para optimizar confianza en motores de búsqueda -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Página de Contacto y Sugerencia de Ofertas - SALEPERU.PE",
+      "description": "Formulario oficial de contacto de SALEPERU.PE para enviar soporte, sugerencias de ofertas y alianzas comerciales.",
+      "url": "https://saleperu.pe/contacto.html"
+    }
+  </script>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       CABECERA GENERAL (HEADER)
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container header-container">
+      
+      <!-- Logotipo de la marca -->
+      <a href="./" class="logo" id="header-logo" aria-label="Ir a Inicio - SALEPERU.PE">
+        <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <use href="index.html#logo-grad"/>
+          <path d="M12.5 2.5C11.9 1.9 11.1 1.9 10.5 2.5L2.5 10.5C1.9 11.1 1.9 11.9 2.5 12.5L10.5 20.5C11.1 21.1 11.9 21.1 12.5 20.5L20.5 12.5C21.1 11.9 21.1 11.1 20.5 10.5L12.5 2.5Z" stroke="url(#logo-grad)" stroke-width="2.2" stroke-linejoin="round"/>
+          <circle cx="8" cy="8" r="1.5" fill="url(#logo-grad)"/>
+          <path d="M12 8.5C12 8.5 14 11 14 13C14 15.2 12.8 17 12 18C11.2 17 10 15.2 10 13C10 11 12 8.5 12 8.5Z" fill="url(#logo-grad)"/>
+        </svg>
+        SALEPERU.PE
+      </a>
+
+      <!-- Barra de búsqueda rápida (Escritorio / Tablet) -->
+      <div class="search-container">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="search-input" id="desktop-search" placeholder="Buscar ofertas o tiendas..." aria-label="Buscar ofertas">
+        <button class="search-clear-btn" id="desktop-search-clear" aria-label="Limpiar búsqueda" type="button" tabindex="-1">&times;</button>
+        <!-- Panel flotante de sugerencias -->
+        <div class="search-suggestions-dropdown" id="desktop-search-suggestions" role="listbox" aria-label="Sugerencias de búsqueda"></div>
+      </div>
+
+      <!-- Acciones de Cabecera -->
+      <div class="header-actions">
+        <!-- Botón disparador de búsqueda en móvil -->
+        <button id="mobile-search-trigger" class="mobile-search-trigger-btn" aria-label="Abrir buscador móvil">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <!-- Botón de instalación PWA -->
+        <button id="pwa-install-btn" class="filter-pill active" style="display: none; padding: 6px 12px; font-size: 0.8rem; gap: 6px; box-shadow: none;" aria-label="Instalar Aplicación">
+          <span>📱</span> Instalar
+        </button>
+
+        <!-- Reproductor de Música Premium (PC) -->
+        <div class="music-header-container" id="music-header-container">
+          <div class="music-header-control" id="music-header-control" title="Reproductor de Música">
+            <span class="music-header-live-tag">📻 RADIO EN VIVO</span>
+            <div class="music-vinyl-wrapper" id="music-header-vinyl">
+              <div class="music-vinyl-disc" style="background-image: url('https://images.unsplash.com/photo-1506157786151-b8491531f063?w=200&q=70&auto=format&fit=crop')"></div>
+            </div>
+            <button class="music-header-play-btn" id="music-header-play-btn" aria-label="Reproducir / Pausar Música">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div class="music-waves">
+              <span class="music-wave-bar"></span>
+              <span class="music-wave-bar"></span>
+              <span class="music-wave-bar"></span>
+            </div>
+          </div>
+
+          <!-- Dropdown Card Glassmorphic -->
+          <div class="music-dropdown-card" id="music-dropdown-card">
+            <div class="music-track-info">
+              <span class="music-track-title js-music-title">Hole In My Soul</span>
+              <span class="music-track-subtitle js-music-subtitle"><span style="color:var(--color-primary); font-weight:700;">Aerosmith</span></span>
+            </div>
+
+            <!-- Selector de fuente -->
+            <div class="music-source-selector" style="margin-bottom: 8px;">
+              <button class="music-source-btn js-source-song active" aria-label="Escuchar Aerosmith">
+                <span>🎵</span> Canción
+              </button>
+              <button class="music-source-btn js-source-radio" aria-label="Escuchar Radio">
+                <span>📻</span> Radio
+              </button>
+            </div>
+
+            <!-- Lista de radios seleccionables -->
+            <ul class="js-music-radio-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; max-height: 120px; overflow-y: auto;">
+              <!-- Se renderiza desde JS -->
+            </ul>
+
+            <!-- Fila de Controles de reproducción y volumen -->
+            <div class="music-control-row">
+              <button class="music-dropdown-play-btn js-music-play" aria-label="Reproducir / Pausar">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <div class="music-volume-container">
+                <button class="music-volume-btn js-music-mute" aria-label="Silenciar">
+                  <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+                </button>
+                <input type="range" class="music-volume-slider js-music-volume-slider" min="0" max="1" step="0.05" value="0.8" aria-label="Volumen">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interruptor de Tema (Claro/Oscuro) -->
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar Tema Visual">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       CONTENIDO PRINCIPAL (FORMULARIO DE CONTACTO)
+       ========================================================================== -->
+  <main class="main-content">
+    <div class="container">
+
+      <section class="contact-wrapper fade-in">
+        
+        <!-- Estado Inicial: Formulario de Contacto -->
+        <div id="contact-form-panel">
+          <header class="contact-header">
+            <h1 class="contact-title">¿Encontraste una oferta de locura?</h1>
+            <p class="contact-subtitle">
+              ¡Compártela con la comunidad! También puedes escribirnos para alianzas comerciales, reportar errores o simplemente para decir hola.
+            </p>
+          </header>
+
+          <form id="saleperu-contact-form" onsubmit="handleFormSubmit(event)">
+            
+            <div class="form-group">
+              <label for="user-name" class="form-label">Tu Nombre o Alias</label>
+              <input type="text" id="user-name" class="form-control" placeholder="Ej. Juan Pérez o Cazador99" required autocomplete="name">
+            </div>
+
+            <div class="form-group">
+              <label for="user-email" class="form-label">Correo Electrónico</label>
+              <input type="email" id="user-email" class="form-control" placeholder="nombre@correo.com" required autocomplete="email">
+            </div>
+
+            <div class="form-group">
+              <label for="message-subject" class="form-label">¿De qué trata tu mensaje?</label>
+              <select id="message-subject" class="form-control" required>
+                <option value="oferta">🔥 Sugerir una Oferta o Cupón</option>
+                <option value="error-precio">💥 Reportar un Error de Precio detectado</option>
+                <option value="soporte">🛠️ Reportar un error en la web / Soporte</option>
+                <option value="alianzas">💼 Propuestas y Alianzas comerciales</option>
+                <option value="otro">💬 Otro asunto</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="user-message" class="form-label">Tu Mensaje</label>
+              <textarea id="user-message" class="form-control" placeholder="Escribe aquí los detalles del link, precio o tu mensaje..." required></textarea>
+            </div>
+
+            <button type="submit" class="form-submit-btn" aria-label="Enviar Mensaje">
+              <span>🚀</span> Enviar Mensaje
+            </button>
+
+          </form>
+        </div>
+
+        <!-- Estado Final: Panel de Éxito Visual -->
+        <div id="contact-success-panel" class="success-panel">
+          <div class="success-icon">🚀</div>
+          <h2 class="success-title">¡Mensaje enviado con éxito!</h2>
+          <p class="success-text">
+            ¡Muchas gracias por escribirnos! En **SALEPERU.PE** valoramos un montón tu tiempo. Si nos sugeriste una oferta o un error de precio, nuestro equipo la verificará y la publicará de inmediato.
+          </p>
+          <a href="index.html" class="load-more-btn" style="margin: 0 auto; display: inline-flex;" aria-label="Volver a ver ofertas">
+            Volver a las ofertas ⚡
+          </a>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       PIE DE PÁGINA (FOOTER)
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      
+      <!-- Logotipo del Footer -->
+      <div class="logo" style="margin-bottom: 4px;">
+        <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width: 28px; height: 28px;">
+          <use href="index.html#logo-grad"/>
+          <path d="M12.5 2.5C11.9 1.9 11.1 1.9 10.5 2.5L2.5 10.5C1.9 11.1 1.9 11.9 2.5 12.5L10.5 20.5C11.1 21.1 11.9 21.1 12.5 20.5L20.5 12.5C21.1 11.9 21.1 11.1 20.5 10.5L12.5 2.5Z" stroke="url(#logo-grad)" stroke-width="2.2" stroke-linejoin="round"/>
+          <circle cx="8" cy="8" r="1.5" fill="url(#logo-grad)"/>
+          <path d="M12 8.5C12 8.5 14 11 14 13C14 15.2 12.8 17 12 18C11.2 17 10 15.2 10 13C10 11 12 8.5 12 8.5Z" fill="url(#logo-grad)"/>
+        </svg>
+        SALEPERU.PE
+      </div>
+      
+      <!-- Enlaces del menú del pie -->
+      <div class="footer-links">
+        <a href="index.html#todos" class="footer-link">⚡ Ofertas del Cyber</a>
+        <a href="index.html#hot" class="footer-link">🔥 Ofertas Calientes</a>
+        <a href="index.html#error" class="footer-link">💥 Errores de Precio</a>
+        <a href="quienes-somos.html" class="footer-link">👥 Quiénes Somos</a>
+        <a href="contacto.html" class="footer-link">📧 Contacto</a>
+      </div>
+
+      <p class="footer-copy">
+        &copy; 2026 SALEPERU.PE. Todos los derechos reservados. <br>
+        Hecho con amor y optimización premium 🇵🇪 para encontrar las mejores promociones.
+      </p>
+
+    </div>
+  </footer>
+
+  <!-- Elemento de Audio Nativo Único -->
+  <audio id="musica" style="display:none;" preload="none"></audio>
+
+  <!-- ==========================================================================
+       SCRIPTS DE CONTROL Y FUNCIONALIDAD
+       ========================================================================== -->
+  <script src="assets/js/ui.js" defer></script>
+  <script src="assets/js/music-player.js" defer></script>
+
+  <!-- Lógica de Envío e Interactividad de Formulario -->
+  <script>
+    function handleFormSubmit(event) {
+      event.preventDefault(); // Previene envío HTTP por defecto
+      
+      // Obtener referencias de inputs
+      const name = document.getElementById("user-name").value.trim();
+      const email = document.getElementById("user-email").value.trim();
+      const subject = document.getElementById("message-subject").value;
+      const message = document.getElementById("user-message").value.trim();
+      
+      // Validación básica adicional
+      if (!name || !email || !message) {
+        alert("Por favor completa todos los campos del formulario.");
+        return;
+      }
+      
+      console.log("📨 Formulario enviado con éxito:", { name, email, subject, message });
+      
+      // Simular transición glassmorphic animada al estado de Éxito
+      const formPanel = document.getElementById("contact-form-panel");
+      const successPanel = document.getElementById("contact-success-panel");
+      
+      if (formPanel && successPanel) {
+        formPanel.style.display = "none";
+        successPanel.style.display = "block";
+      }
+    }
+  </script>
+
+</body>
+</html>
