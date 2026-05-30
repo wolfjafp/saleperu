@@ -8,10 +8,6 @@ const CACHE_NAME = "saleperu-pwa-v3";
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
-  "./404.html",
-  "./guia-compras-peru.html",
-  "./quienes-somos.html",
-  "./contacto.html",
   "./robots.txt",
   "./sitemap.xml",
   "./manifest.json",
@@ -22,7 +18,16 @@ const ASSETS_TO_CACHE = [
   "./assets/js/feed.js",
   "./assets/js/ui.js",
   "./assets/js/seo.js",
-  "./assets/js/music-player.js"
+  "./assets/js/music-player.js",
+  "./quienes-somos.html",
+  "./contacto.html",
+  "./guia-ofertas.html",
+  "./calendario-ofertas.html",
+  "./mejores-horas.html",
+  "./preguntas-frecuentes.html",
+  "./politica-privacidad.html",
+  "./terminos-condiciones.html",
+  "./404.html"
 ];
 
 // Evento de Instalación: Guarda archivos estáticos clave en caché

@@ -13,168 +13,74 @@
   <link rel="manifest" href="manifest.json">
   <link rel="shortcut icon" href="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=32&q=80" type="image/png">
   
-  <!-- SEO Técnico y Metatags de Confianza (E-E-A-T) -->
-  <title>👥 Quiénes Somos | La comunidad real detrás de SALEPERU.PE</title>
-  <meta name="description" content="Conoce la historia humana detrás de SALEPERU.PE. No somos una corporación fría, sino un grupo de cazadores de ofertas peruanos que te ayudan a ganarle a la inflación.">
-  <meta name="keywords" content="quienes somos saleperu, historia saleperu, ofertas reales peru, comunidad ahorro peru">
+  <!-- SEO Técnico y Metatags de Indexación -->
+  <title>Quiénes Somos | SALEPERU.PE - Cazadores de Ofertas Reales</title>
+  <meta name="description" content="Conoce la misión de SALEPERU.PE. Aprende quiénes somos, cómo funciona nuestra plataforma y cómo te ayudamos a ahorrar dinero con ofertas reales en Perú.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://saleperu.pe/quienes-somos.html">
+
+  <!-- OpenGraph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Quiénes Somos | SALEPERU.PE - Cazadores de Ofertas Reales">
+  <meta property="og:description" content="Conoce la historia detrás del portal de ofertas líder en el internet peruano. Transparencia, veracidad y ahorro inteligente al alcance de todos.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1200&q=80">
+  <meta property="og:url" content="https://saleperu.pe/quienes-somos.html">
+  <meta property="og:site_name" content="SALEPERU.PE">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Quiénes Somos | SALEPERU.PE - Cazadores de Ofertas Reales">
+  <meta name="twitter:description" content="Conoce la historia detrás del portal de ofertas líder en el internet peruano. Transparencia, veracidad y ahorro inteligente al alcance de todos.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1200&q=80">
   
   <!-- Preconectar a Google Fonts para Optimizar Rendimiento -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://docs.google.com">
+  <link rel="preconnect" href="https://dn721501.ca.archive.org">
   
-  <!-- Carga Directa de Fuentes de Google -->
+  <!-- Carga Directa de Fuentes de Google (Optimizado Asíncrono para evitar bloqueo) -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
   
-  <!-- Archivos de Estilo Consolidado -->
+  <!-- Archivo de Estilos Consolidado y Optimizado -->
   <link rel="stylesheet" href="assets/css/styles.css">
-  
-  <style>
-    .about-wrapper {
-      max-width: 800px;
-      margin: 30px auto;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 40px;
-      box-shadow: var(--shadow-sm);
-    }
-    
-    .about-header {
-      text-align: center;
-      margin-bottom: 32px;
-    }
-    
-    .about-title {
-      font-size: 2.2rem;
-      font-weight: 800;
-      background: var(--grad-royal);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 12px;
-    }
-    
-    .about-subtitle {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.5;
-    }
-    
-    .about-hero-img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      border-radius: var(--radius-sm);
-      margin-bottom: 32px;
-      box-shadow: var(--shadow-md);
-    }
-    
-    .about-section {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: var(--text-secondary);
-      margin-bottom: 28px;
-    }
-    
-    .about-section h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 14px;
-    }
-    
-    .about-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 30px 0;
-    }
-    
-    .value-card {
-      background: var(--bg-body);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      padding: 20px 16px;
-      text-align: center;
-      transition: transform var(--transition-fast);
-    }
-    
-    .value-card:hover {
-      transform: translateY(-2px);
-    }
-    
-    .value-icon {
-      font-size: 2rem;
-      margin-bottom: 10px;
-      display: inline-block;
-    }
-    
-    .value-title {
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 6px;
-      font-size: 0.95rem;
-    }
-    
-    .value-desc {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-    
-    @media (max-width: 768px) {
-      .about-wrapper {
-        padding: 24px 16px;
-        margin: 16px;
-      }
-      .about-title {
-        font-size: 1.8rem;
-      }
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-      .about-hero-img {
-        height: 180px;
-      }
-    }
-  </style>
-  
-  <!-- Marcado Schema.org de AboutPage para mejorar confianza de Google -->
+
+  <!-- Datos Estructurados Schema.org -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "AboutPage",
-      "mainEntity": {
-        "@type": "Organization",
-        "name": "SALEPERU.PE",
-        "url": "https://saleperu.pe",
-        "logo": "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=120&q=80",
-        "description": "Una comunidad independiente de cazadores de ofertas peruanos que recopilan y votan los mejores descuentos en tiempo real.",
-        "sameAs": [
-          "https://instagram.com/saleperu.pe",
-          "https://tiktok.com/@saleperu.pe"
-        ]
-      }
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "SALEPERU.PE",
+      "url": "https://saleperu.pe/",
+      "logo": "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=150&q=80",
+      "description": "La plataforma líder en Perú para encontrar ofertas, cupones, promociones y errores de precio reales en tiempo real.",
+      "sameAs": [
+        "https://instagram.com/saleperu.pe",
+        "https://tiktok.com/@saleperu.pe"
+      ]
     }
+  }
   </script>
 </head>
 <body>
 
-  <!-- ==========================================================================
-       CABECERA GENERAL (HEADER)
-       ========================================================================== -->
+  <!-- CABECERA GENERAL (HEADER) -->
   <header class="site-header">
     <div class="container header-container">
       
       <!-- Logotipo de la marca -->
       <a href="./" class="logo" id="header-logo" aria-label="Ir a Inicio - SALEPERU.PE">
         <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <use href="index.html#logo-grad"/>
+          <defs>
+            <linearGradient id="logo-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#7b2cbf" />
+              <stop offset="50%" stop-color="#ff4d6d" />
+              <stop offset="100%" stop-color="#ff8531" />
+            </linearGradient>
+          </defs>
           <path d="M12.5 2.5C11.9 1.9 11.1 1.9 10.5 2.5L2.5 10.5C1.9 11.1 1.9 11.9 2.5 12.5L10.5 20.5C11.1 21.1 11.9 21.1 12.5 20.5L20.5 12.5C21.1 11.9 21.1 11.1 20.5 10.5L12.5 2.5Z" stroke="url(#logo-grad)" stroke-width="2.2" stroke-linejoin="round"/>
           <circle cx="8" cy="8" r="1.5" fill="url(#logo-grad)"/>
           <path d="M12 8.5C12 8.5 14 11 14 13C14 15.2 12.8 17 12 18C11.2 17 10 15.2 10 13C10 11 12 8.5 12 8.5Z" fill="url(#logo-grad)"/>
@@ -182,34 +88,18 @@
         SALEPERU.PE
       </a>
 
-      <!-- Barra de búsqueda rápida (Escritorio / Tablet) -->
+      <!-- Barra de búsqueda rápida -->
       <div class="search-container">
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
-        <input type="text" class="search-input" id="desktop-search" placeholder="Buscar ofertas o tiendas..." aria-label="Buscar ofertas">
-        <button class="search-clear-btn" id="desktop-search-clear" aria-label="Limpiar búsqueda" type="button" tabindex="-1">&times;</button>
-        <!-- Panel flotante de sugerencias -->
-        <div class="search-suggestions-dropdown" id="desktop-search-suggestions" role="listbox" aria-label="Sugerencias de búsqueda"></div>
+        <input type="text" class="search-input" id="desktop-search" placeholder="Presiona Enter para buscar..." aria-label="Buscar ofertas">
       </div>
 
       <!-- Acciones de Cabecera -->
       <div class="header-actions">
-        <!-- Botón disparador de búsqueda en móvil -->
-        <button id="mobile-search-trigger" class="mobile-search-trigger-btn" aria-label="Abrir buscador móvil">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-        </button>
-
-        <!-- Botón de instalación PWA -->
-        <button id="pwa-install-btn" class="filter-pill active" style="display: none; padding: 6px 12px; font-size: 0.8rem; gap: 6px; box-shadow: none;" aria-label="Instalar Aplicación">
-          <span>📱</span> Instalar
-        </button>
-
-        <!-- Reproductor de Música Premium (PC) -->
+        <!-- Reproductor de Música Premium -->
         <div class="music-header-container" id="music-header-container">
           <div class="music-header-control" id="music-header-control" title="Reproductor de Música">
             <span class="music-header-live-tag">📻 RADIO EN VIVO</span>
@@ -232,8 +122,6 @@
               <span class="music-track-title js-music-title">Hole In My Soul</span>
               <span class="music-track-subtitle js-music-subtitle"><span style="color:var(--color-primary); font-weight:700;">Aerosmith</span></span>
             </div>
-
-            <!-- Selector de fuente -->
             <div class="music-source-selector" style="margin-bottom: 8px;">
               <button class="music-source-btn js-source-song active" aria-label="Escuchar Aerosmith">
                 <span>🎵</span> Canción
@@ -242,13 +130,7 @@
                 <span>📻</span> Radio
               </button>
             </div>
-
-            <!-- Lista de radios seleccionables -->
-            <ul class="js-music-radio-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; max-height: 120px; overflow-y: auto;">
-              <!-- Se renderiza desde JS -->
-            </ul>
-
-            <!-- Fila de Controles de reproducción y volumen -->
+            <ul class="js-music-radio-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; max-height: 120px; overflow-y: auto;"></ul>
             <div class="music-control-row">
               <button class="music-dropdown-play-btn js-music-play" aria-label="Reproducir / Pausar">
                 <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -263,7 +145,7 @@
           </div>
         </div>
 
-        <!-- Interruptor de Tema (Claro/Oscuro) -->
+        <!-- Interruptor de Tema -->
         <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar Tema Visual">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -274,86 +156,69 @@
     </div>
   </header>
 
-  <!-- ==========================================================================
-       CONTENIDO PRINCIPAL (NUESTRA HISTORIA / QUIÉNES SOMOS)
-       ========================================================================== -->
+  <!-- CONTENIDO PRINCIPAL -->
   <main class="main-content">
-    <div class="container">
+    <div class="container content-page">
+      
+      <!-- Migas de Pan (Breadcrumbs) -->
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="./">Inicio</a>
+        <span>&rsaquo;</span>
+        <span aria-current="page">Quiénes Somos</span>
+      </nav>
 
-      <section class="about-wrapper fade-in">
+      <!-- Tarjeta de Contenido Principal -->
+      <article class="content-card">
+        <h1 class="content-title">¿Quiénes somos en SALEPERU.PE?</h1>
         
-        <header class="about-header">
-          <h1 class="about-title">La gente real detrás de la pantalla</h1>
-          <p class="about-subtitle">
-            No somos una corporación internacional ni un bot automatizado. Somos peruanos de a pie que nos cansamos de las ofertas engañosas.
-          </p>
-        </header>
+        <p class="content-text">
+          En un mercado digital cada vez más saturado de publicidad y supuestos "días de descuento", encontrar una rebaja real se ha vuelto un dolor de cabeza. Las grandes tiendas departamentales peruanas a menudo elevan sus precios días antes de campañas masivas como el Cyber Wow o los Cyber Days, para luego simular un descuento que confunde al consumidor.
+        </p>
 
-        <img class="about-hero-img" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=70&auto=format&fit=crop" alt="Equipo de amigos peruanos colaborando de forma honesta">
+        <p class="content-text">
+          <strong>SALEPERU.PE</strong> nació precisamente para romper este ciclo. Somos un equipo independiente de entusiastas de la tecnología y cazadores profesionales de promociones que se dedica a monitorear, auditar y filtrar minuciosamente las ofertas de las tiendas electrónicas más grandes de Perú en tiempo real.
+        </p>
 
-        <div class="about-section">
-          <h2>¿Cómo nació SALEPERU.PE?</h2>
-          <p>
-            Esta locura empezó a mediados de 2024. Éramos un grupo de tres amigos universitarios (apasionados por la tecnología y los videojuegos) que pasábamos horas en grupos de WhatsApp compartiendo links de laptops baratas o zapatillas en descuento para ayudarnos a estirar el presupuesto de la mensualidad.
-          </p>
-          <p>
-            Pronto nos dimos cuenta de dos cosas que nos molestaban un montón: primero, las tiendas inflaban los precios descaradamente en campañas como el Cyber Wow; segundo, los blogs de ofertas tradicionales solo promocionaban cosas porque les pagaban comisiones de afiliados, sin importar si eran ofertas reales o no.
-          </p>
-          <p>
-            Por eso decidimos crear **SALEPERU.PE**: una plataforma independiente, transparente y alimentada por la propia comunidad, donde son los propios usuarios peruanos quienes publican, votan y debaten si una oferta es un "ofertón" de verdad, o simplemente una trampa publicitaria.
-          </p>
-        </div>
+        <h2 class="content-subtitle">Nuestra Misión: Transparencia y Ahorro Real</h2>
+        <p class="content-text">
+          Nuestra misión no es empujarte a comprar compulsivamente. Al contrario: queremos darte las herramientas necesarias para que compres de forma inteligente. Cuando listamos un producto en nuestra portada, es porque hemos verificado su historial de precios y garantizamos que el descuento representa un ahorro real y tangible en comparación con su precio habitual en soles (S/.).
+        </p>
 
-        <div class="about-section">
-          <h2>Nuestros 3 Compromisos de Transparencia</h2>
-          <p>
-            Para nosotros la confianza lo es todo. Por eso regimos nuestra comunidad bajo tres pilares fundamentales que nos diferencian de cualquier blog de ofertas:
-          </p>
-          
-          <div class="about-grid">
-            <div class="value-card">
-              <span class="value-icon">🗳️</span>
-              <h3 class="value-title">Votación Honesta</h3>
-              <p class="value-desc">Los propios usuarios votan si una oferta es buena. Si el precio está inflado o es engañoso, se elimina.</p>
-            </div>
-            <div class="value-card">
-              <span class="value-icon">🚫</span>
-              <h3 class="value-title">Cero Ofertas Falsas</h3>
-              <p class="value-desc">No aceptamos patrocinios ocultos de marcas para empujar productos malos. Lo real se queda, lo falso se va.</p>
-            </div>
-            <div class="value-card">
-              <span class="value-icon">🇵🇪</span>
-              <h3 class="value-title">Enfoque 100% Peruano</h3>
-              <p class="value-desc">Filtramos envíos a regiones, tarjetas de bancos locales y tiendas físicas reales de nuestro país.</p>
-            </div>
-          </div>
-        </div>
+        <h3 class="content-subtitle">¿Cómo funciona SALEPERU.PE?</h3>
+        <p class="content-text">
+          A través de una infraestructura técnica ágil y directa vinculada a bases de datos dinámicas, consolidamos los mejores hallazgos en un solo portal limpio, rápido y de carga instantánea en móviles. Evaluamos tres categorías clave de oportunidades:
+        </p>
+        <ul class="content-list">
+          <li><strong>Ofertas del Cyber:</strong> Descuentos genuinos que superan las rebajas promedio de las campañas oficiales.</li>
+          <li><strong>Cupones Exclusivos:</strong> Códigos de descuento ocultos o temporales que reducen de forma sustancial el importe final en el carrito de compra.</li>
+          <li><strong>Errores de Precio (Glitch Alerts):</strong> Anomalías del sistema de las tiendas retail donde un producto premium se lista a una fracción ínfima de su valor. Alertamos al instante bajo una política informativa y transparente.</li>
+        </ul>
 
-        <div class="about-section">
-          <h2>¿Cómo puedes sumarte?</h2>
-          <p>
-            SALEPERU.PE no existiría sin ti. Cada vez que reportas un error de precio en una tienda grande o avisas que un cupón de descuento ha dejado de funcionar, estás ayudando a miles de peruanos a ahorrar soles valiosos que pueden ir para el almuerzo, los estudios o la familia.
-          </p>
-          <p>
-            Si encuentras alguna oferta de locura mientras navegas o quieres darnos feedback para mejorar la web, no dudes en escribirnos a través de nuestra página de <a href="contacto.html" style="color:var(--color-primary); text-decoration: underline;">Contacto</a>. ¡Cacemos ofertas juntos!
-          </p>
-        </div>
+        <h3 class="content-subtitle">Nuestros Valores Fundacionales</h3>
+        <p class="content-text">
+          Para garantizar la confianza y la veracidad de nuestro contenido (siguiendo los estándares de calidad EEAT), nos regimos bajo los siguientes pilares de acción:
+        </p>
+        <ul class="content-list">
+          <li><strong>Independencia Total:</strong> No pertenecemos a ninguna corporación comercial de retail en el país. Si una oferta es mala, simplemente no se publica.</li>
+          <li><strong>Filtro Manual Humano:</strong> No confiamos únicamente en algoritmos de rastreo automático. Detrás de cada oferta catalogada, hay un miembro de nuestro equipo que valida el stock, el link de redirección y la veracidad de la rebaja.</li>
+          <li><strong>Saneamiento y Seguridad:</strong> Protegemos la experiencia del usuario final garantizando una plataforma segura, libre de rastreadores invasivos, con saneamiento total anti-XSS y un rendimiento ultra optimizado para conexiones móviles de datos en todo el territorio peruano.</li>
+        </ul>
 
-      </section>
+        <p class="content-text" style="margin-top: 30px;">
+          Gracias por confiar en nosotros y ser parte de esta comunidad de consumidores inteligentes en Perú. ¡Tu billetera y tus ahorros te lo agradecerán!
+        </p>
+      </article>
 
     </div>
   </main>
 
-  <!-- ==========================================================================
-       PIE DE PÁGINA (FOOTER)
-       ========================================================================== -->
+  <!-- PIE DE PÁGINA (FOOTER) -->
   <footer class="site-footer">
     <div class="container footer-content">
       
       <!-- Logotipo del Footer -->
       <div class="logo" style="margin-bottom: 4px;">
         <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width: 28px; height: 28px;">
-          <use href="index.html#logo-grad"/>
           <path d="M12.5 2.5C11.9 1.9 11.1 1.9 10.5 2.5L2.5 10.5C1.9 11.1 1.9 11.9 2.5 12.5L10.5 20.5C11.1 21.1 11.9 21.1 12.5 20.5L20.5 12.5C21.1 11.9 21.1 11.1 20.5 10.5L12.5 2.5Z" stroke="url(#logo-grad)" stroke-width="2.2" stroke-linejoin="round"/>
           <circle cx="8" cy="8" r="1.5" fill="url(#logo-grad)"/>
           <path d="M12 8.5C12 8.5 14 11 14 13C14 15.2 12.8 17 12 18C11.2 17 10 15.2 10 13C10 11 12 8.5 12 8.5Z" fill="url(#logo-grad)"/>
@@ -361,13 +226,24 @@
         SALEPERU.PE
       </div>
       
-      <!-- Enlaces del menú del pie -->
-      <div class="footer-links">
-        <a href="index.html#todos" class="footer-link">⚡ Ofertas del Cyber</a>
-        <a href="index.html#hot" class="footer-link">🔥 Ofertas Calientes</a>
-        <a href="index.html#error" class="footer-link">💥 Errores de Precio</a>
-        <a href="quienes-somos.html" class="footer-link">👥 Quiénes Somos</a>
-        <a href="contacto.html" class="footer-link">📧 Contacto</a>
+      <!-- Enlaces del menú del pie (Navegación e Información SEO) -->
+      <div class="footer-links" style="margin-bottom: 16px;">
+        <a href="./#todos" class="footer-link">⚡ Ofertas del Cyber</a>
+        <a href="./#hot" class="footer-link">🔥 Ofertas Calientes</a>
+        <a href="./#error" class="footer-link">💥 Errores de Precio</a>
+        <a href="https://instagram.com/saleperu.pe" target="_blank" rel="noopener" class="footer-link">📸 Instagram</a>
+        <a href="https://tiktok.com/@saleperu.pe" target="_blank" rel="noopener" class="footer-link">🎵 TikTok</a>
+      </div>
+      
+      <div class="footer-links" style="font-size: 0.82rem; border-top: 1px solid var(--border-color); padding-top: 16px; width: 100%; justify-content: center; opacity: 0.85; flex-wrap: wrap;">
+        <a href="quienes-somos.html" class="footer-link" style="color: var(--color-primary); font-weight: 700;">👥 Quiénes Somos</a>
+        <a href="contacto.html" class="footer-link">📩 Contacto</a>
+        <a href="guia-ofertas.html" class="footer-link">📖 Guía de Ofertas</a>
+        <a href="calendario-ofertas.html" class="footer-link">📅 Calendario Anual</a>
+        <a href="mejores-horas.html" class="footer-link">⏰ Mejores Horas</a>
+        <a href="preguntas-frecuentes.html" class="footer-link">❓ Preguntas Frecuentes</a>
+        <a href="politica-privacidad.html" class="footer-link">🔒 Privacidad</a>
+        <a href="terminos-condiciones.html" class="footer-link">📝 Términos y Condiciones</a>
       </div>
 
       <p class="footer-copy">
@@ -381,11 +257,79 @@
   <!-- Elemento de Audio Nativo Único -->
   <audio id="musica" style="display:none;" preload="none"></audio>
 
-  <!-- ==========================================================================
-       SCRIPTS DE CONTROL Y FUNCIONALIDAD
-       ========================================================================== -->
+  <!-- REPRODUCTOR DE MÚSICA PREMIUM (MÓVIL FAB & DRAWER) -->
+  <div class="music-mobile-fab" id="music-mobile-fab" aria-label="Abrir Reproductor de Música">
+    <div class="music-vinyl-wrapper" id="music-mobile-vinyl">
+      <div class="music-vinyl-disc" style="background-image: url('https://images.unsplash.com/photo-1506157786151-b8491531f063?w=200&q=70&auto=format&fit=crop')"></div>
+    </div>
+    <div class="music-waves">
+      <span class="music-wave-bar"></span>
+      <span class="music-wave-bar"></span>
+      <span class="music-wave-bar"></span>
+    </div>
+  </div>
+
+  <div class="music-drawer-overlay" id="music-drawer-overlay"></div>
+
+  <div class="music-drawer" id="music-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-music-title">
+    <div class="music-drawer-handle-bar"></div>
+    <div class="music-drawer-header">
+      <h3 class="music-drawer-title" id="drawer-music-title">Reproducción Premium 🎵</h3>
+      <button class="music-drawer-close" id="music-drawer-close" aria-label="Cerrar">&times;</button>
+    </div>
+    <div class="music-drawer-vinyl-container" id="music-drawer-vinyl-container">
+      <div class="music-large-vinyl">
+        <div class="music-vinyl-disc" style="background-image: url('https://images.unsplash.com/photo-1506157786151-b8491531f063?w=200&q=70&auto=format&fit=crop')"></div>
+      </div>
+    </div>
+    <div class="music-large-info">
+      <div class="music-large-text">
+        <span class="music-track-title js-music-title">Hole In My Soul</span>
+        <span class="music-track-subtitle js-music-subtitle"><span style="color:var(--color-primary); font-weight:700;">Aerosmith</span></span>
+      </div>
+      <div class="music-waves">
+        <span class="music-wave-bar"></span>
+        <span class="music-wave-bar"></span>
+        <span class="music-wave-bar"></span>
+      </div>
+    </div>
+    <div class="music-drawer-controls">
+      <div class="music-source-selector">
+        <button class="music-source-btn js-source-song active" aria-label="Escuchar Aerosmith">
+          <span>🎵</span> Canción
+        </button>
+        <button class="music-source-btn js-source-radio" aria-label="Escuchar Radio">
+          <span>📻</span> Radio
+        </button>
+      </div>
+      <ul class="js-music-radio-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; max-height: 120px; overflow-y: auto;"></ul>
+      <div class="music-drawer-play-row">
+        <button class="music-large-play-btn js-music-play" aria-label="Reproducir / Pausar">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+      </div>
+      <div class="music-volume-container">
+        <button class="music-volume-btn js-music-mute" aria-label="Silenciar">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+        </button>
+        <input type="range" class="music-volume-slider js-music-volume-slider" min="0" max="1" step="0.05" value="0.8" aria-label="Volumen">
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS DE CONTROL -->
   <script src="assets/js/ui.js" defer></script>
   <script src="assets/js/music-player.js" defer></script>
 
+  <script>
+    // Redirección de búsqueda a la página de inicio
+    document.querySelectorAll(".search-input").forEach(input => {
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && e.target.value.trim()) {
+          window.location.href = `./?search=${encodeURIComponent(e.target.value.trim())}`;
+        }
+      });
+    });
+  </script>
 </body>
 </html>
