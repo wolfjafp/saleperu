@@ -3003,7 +3003,8 @@ body.modal-open {
    ESTILOS DE PÁGINAS DE CONTENIDO Y ARTÍCULOS SEO (EXPANSIÓN)
    ========================================================================== */
 .content-page {
-  padding: 40px 0 80px 0;
+  padding-top: 40px;
+  padding-bottom: 80px;
 }
 .content-card {
   background-color: var(--bg-card);
