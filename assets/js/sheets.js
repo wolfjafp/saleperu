@@ -300,9 +300,9 @@ async function loadAppData(forceRefresh = false) {
                      window.location.protocol === "file:";
 
   if (!forceRefresh && !isLocalDev) {
-    const cached = localStorage.getItem(CACHE_KEY);
-    if (cached) {
-      try {
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (cached) {
         const cacheData = JSON.parse(cached);
         // Validar que el ID del sheet en caché coincida con el ID actual en ejecución
         if (cacheData.sheetId === SPREADSHEET_ID) {
@@ -314,9 +314,9 @@ async function loadAppData(forceRefresh = false) {
         } else {
           console.log("🔄 El ID de Google Sheets cambió. Ignorando caché antigua...");
         }
-      } catch (e) {
-        console.error("Error leyendo caché, se re-solicitará:", e);
       }
+    } catch (e) {
+      console.error("Error leyendo caché, se re-solicitará:", e);
     }
   }
 
