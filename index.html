@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="light">
 <head>
+  <!-- Script síncrono para bloquear FOUC (Flicker de Tema) en carga de página -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem("saleperu_theme") || "light";
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    })();
+  </script>
   <!-- Metadatos Técnicos Esenciales -->
   <meta charset="UTF-8">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com data:; media-src 'self' https://archive.org https://*.archive.org https://*.streamtheworld.com https://playerservices.streamtheworld.com; connect-src 'self' https://docs.google.com https://archive.org https://*.archive.org https://*.streamtheworld.com https://playerservices.streamtheworld.com;">
@@ -60,17 +67,25 @@
       
       <!-- Logotipo de la marca -->
       <a href="./" class="logo" id="header-logo" aria-label="Ir a Inicio - SALEPERU.PE">
-        <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <svg class="logo-svg" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
-            <linearGradient id="logo-grad" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#7b2cbf" />
-              <stop offset="50%" stop-color="#ff4d6d" />
-              <stop offset="100%" stop-color="#ff8531" />
+            <linearGradient id="peru-red-grad" x1="0" y1="0" x2="0" y2="20" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#ff1a40" />
+              <stop offset="100%" stop-color="#cc0024" />
             </linearGradient>
+            <linearGradient id="peru-white-grad" x1="9.33" y1="0" x2="9.33" y2="20" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#ffffff" />
+              <stop offset="100%" stop-color="#f2f2f2" />
+            </linearGradient>
+            <clipPath id="flag-clip">
+              <rect width="28" height="20" rx="3.5" />
+            </clipPath>
           </defs>
-          <path d="M12.5 2.5C11.9 1.9 11.1 1.9 10.5 2.5L2.5 10.5C1.9 11.1 1.9 11.9 2.5 12.5L10.5 20.5C11.1 21.1 11.9 21.1 12.5 20.5L20.5 12.5C21.1 11.9 21.1 11.1 20.5 10.5L12.5 2.5Z" stroke="url(#logo-grad)" stroke-width="2.2" stroke-linejoin="round"/>
-          <circle cx="8" cy="8" r="1.5" fill="url(#logo-grad)"/>
-          <path d="M12 8.5C12 8.5 14 11 14 13C14 15.2 12.8 17 12 18C11.2 17 10 15.2 10 13C10 11 12 8.5 12 8.5Z" fill="url(#logo-grad)"/>
+          <g clip-path="url(#flag-clip)">
+            <rect width="9.33" height="20" fill="url(#peru-red-grad)" />
+            <rect x="9.33" width="9.34" height="20" fill="url(#peru-white-grad)" />
+            <rect x="18.67" width="9.33" height="20" fill="url(#peru-red-grad)" />
+          </g>
         </svg>
         SALEPERU.PE
       </a>
@@ -232,6 +247,20 @@
         </div>
       </div>
 
+      <!-- Buscador Destacado para Dispositivos Móviles (Inline) -->
+      <div class="mobile-inline-search-container">
+        <div class="search-container">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" class="search-input" id="inline-mobile-search" placeholder="Buscar ofertas o tiendas..." aria-label="Buscar ofertas móvil">
+          <button class="search-clear-btn" id="inline-mobile-search-clear" aria-label="Limpiar búsqueda" type="button" tabindex="-1">&times;</button>
+          <!-- Panel flotante de sugerencias -->
+          <div class="search-suggestions-dropdown" id="inline-mobile-search-suggestions" role="listbox" aria-label="Sugerencias de búsqueda móvil"></div>
+        </div>
+      </div>
+
       <!-- Barra de Filtros de Categorías e Indicador de Filtros -->
       <div class="filters-header-row" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
         <div class="filters-wrapper" style="flex-grow: 1;">
@@ -316,11 +345,25 @@
       <!-- Columna 1: Marca y Redes -->
       <div class="footer-col brand-col">
         <div class="logo" style="margin-bottom: 12px; justify-content: flex-start;">
-          <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width: 28px; height: 28px;">
-            <use href="#logo-grad"/>
-            <path d="M12.5 2.5C11.9 1.9 11.1 1.9 10.5 2.5L2.5 10.5C1.9 11.1 1.9 11.9 2.5 12.5L10.5 20.5C11.1 21.1 11.9 21.1 12.5 20.5L20.5 12.5C21.1 11.9 21.1 11.1 20.5 10.5L12.5 2.5Z" stroke="url(#logo-grad)" stroke-width="2.2" stroke-linejoin="round"/>
-            <circle cx="8" cy="8" r="1.5" fill="url(#logo-grad)"/>
-            <path d="M12 8.5C12 8.5 14 11 14 13C14 15.2 12.8 17 12 18C11.2 17 10 15.2 10 13C10 11 12 8.5 12 8.5Z" fill="url(#logo-grad)"/>
+          <svg class="logo-svg" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="peru-red-grad-footer" x1="0" y1="0" x2="0" y2="20" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#ff1a40" />
+                <stop offset="100%" stop-color="#cc0024" />
+              </linearGradient>
+              <linearGradient id="peru-white-grad-footer" x1="9.33" y1="0" x2="9.33" y2="20" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="100%" stop-color="#f2f2f2" />
+              </linearGradient>
+              <clipPath id="flag-clip-footer">
+                <rect width="28" height="20" rx="3.5" />
+              </clipPath>
+            </defs>
+            <g clip-path="url(#flag-clip-footer)">
+              <rect width="9.33" height="20" fill="url(#peru-red-grad-footer)" />
+              <rect x="9.33" width="9.34" height="20" fill="url(#peru-white-grad-footer)" />
+              <rect x="18.67" width="9.33" height="20" fill="url(#peru-red-grad-footer)" />
+            </g>
           </svg>
           SALEPERU.PE
         </div>

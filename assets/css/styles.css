@@ -272,8 +272,9 @@ body.modal-open {
 
 .logo-svg {
   display: inline-block;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 20px;
+  flex-shrink: 0;
   -webkit-text-fill-color: initial;
   transition: transform var(--transition-smooth), filter var(--transition-smooth);
 }
@@ -679,12 +680,17 @@ body.modal-open {
 }
 
 
-/* Contenedor del Buscador MÃ³vil (Oculto en Escritorio por defecto) */
+/* Contenedor del Buscador Móvil (Oculto en Escritorio por defecto) */
 .mobile-search-wrapper {
   display: none;
   margin-bottom: 16px;
   position: relative;
-  z-index: 300; /* Prioridad de apilamiento por encima de imÃ¡genes y botones del feed */
+  z-index: 300; /* Prioridad de apilamiento por encima de imágenes y botones del feed */
+}
+
+/* Buscador inline destacado para dispositivos móviles */
+.mobile-inline-search-container {
+  display: none;
 }
 
 /* BotÃ³n Disparador de BÃºsqueda MÃ³vil en Cabecera */
@@ -715,19 +721,19 @@ body.modal-open {
    CONSULTAS DE RESPONSIVIDAD (MOBILE FIRST)
    ========================================================================== */
 
-/* MÃ³viles PequeÃ±os y Medianos (Max 576px) */
-@media (max-width: 576px) {
+/* Móviles Pequeños y Medianos (Max 800px) */
+@media (max-width: 800px) {
   .header-container {
     height: 60px;
   }
   
-  /* Mantener cabecera estable en mÃ³vil sin encogerse */
+  /* Mantener cabecera estable en móvil sin encogerse */
   .site-header.scrolled .header-container {
     height: 60px;
   }
   
   .search-container {
-    display: none; /* Se oculta de la cabecera e irÃ¡ al cuerpo principal o un botÃ³n */
+    display: none; /* Se oculta de la cabecera e irá al cuerpo principal o un botón */
   }
   
   .mobile-search-trigger-btn {
@@ -806,6 +812,45 @@ body.modal-open {
     box-shadow: 0 10px 25px rgba(98, 0, 238, 0.14);
   }
   
+  /* Mostrar buscador inline destacado en móvil */
+  .mobile-inline-search-container {
+    display: block;
+    margin: 12px 0 20px 0;
+    width: 100%;
+    position: relative;
+    z-index: 1000;
+  }
+
+  .mobile-inline-search-container .search-container {
+    display: flex !important;
+    width: 100% !important;
+    max-width: 100%;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    position: relative;
+    z-index: 1001;
+  }
+
+  .mobile-inline-search-container .search-input {
+    font-size: 0.95rem;
+    padding: 12px 40px 12px 42px;
+  }
+
+  .mobile-inline-search-container .search-suggestions-dropdown {
+    width: 100%;
+    left: 0;
+    padding: 12px;
+    border-radius: var(--radius-md);
+    background: var(--bg-card) !important;
+    border: 1.5px solid var(--border-color) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: var(--shadow-lg);
+    z-index: 99999 !important;
+  }
+  
   .feed-grid {
     grid-template-columns: repeat(2, 1fr); /* Rejilla doble de alta densidad */
     gap: 12px;
@@ -867,8 +912,8 @@ body.modal-open {
   }
 }
 
-/* Tablets (Entre 577px y 992px) */
-@media (min-width: 577px) and (max-width: 992px) {
+/* Tablets (Entre 801px y 992px) */
+@media (min-width: 801px) and (max-width: 992px) {
   .search-container {
     width: 210px;
   }
@@ -1513,22 +1558,28 @@ body.modal-open {
 }
 
 .story-close-btn {
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: #ffffff;
-  font-size: 1.8rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  gap: 6px;
+  padding: 6px 14px;
   border-radius: var(--radius-full);
-  transition: background-color var(--transition-fast);
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .story-close-btn:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
 }
 
 /* Cuerpo de la Historia (Multimedia) */
@@ -2535,72 +2586,81 @@ body.modal-open {
    4. INTERFAZ PARA MÃ“VIL (FAB & DRAWER)
    ========================================================================== */
 
-/* BotÃ³n Flotante (FAB) en mÃ³viles */
+/* Botón Flotante (FAB) en móviles - Rediseñado en forma de Pill Premium */
 .music-mobile-fab {
   display: none;
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 50px;
-  height: 50px;
+  height: 48px; /* Altura cómoda y táctil */
+  padding: 6px 14px 6px 8px; /* Espacio para vinilo izquierda, texto centro, ecualizador derecha */
   border-radius: var(--radius-full);
-  background: var(--bg-card);
+  background: rgba(255, 255, 255, 0.85); /* Glassmorphism Premium */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-lg), 0 4px 15px rgba(107, 17, 255, 0.15);
   z-index: 999;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all var(--transition-smooth);
   touch-action: manipulation;
+}
+
+[data-theme="dark"] .music-mobile-fab {
+  background: rgba(20, 19, 36, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-lg), 0 4px 20px rgba(157, 78, 221, 0.25);
 }
 
 @media (max-width: 768px) {
   .music-mobile-fab {
-    display: flex; /* Mostrar solo en dispositivos mÃ³viles */
+    display: flex; /* Mostrar en móviles */
   }
 }
 
 .music-mobile-fab:hover {
-  transform: scale(1.05);
+  transform: translateY(-2px) scale(1.02);
 }
 
-.music-mobile-fab::after {
-  content: '';
-  position: absolute;
-  top: -2px; left: -2px; right: -2px; bottom: -2px;
-  border-radius: var(--radius-full);
-  border: 2px solid var(--color-primary);
-  opacity: 0;
-  transition: opacity var(--transition-fast);
+.music-mobile-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  pointer-events: none;
 }
 
-.music-mobile-fab.playing::after {
-  opacity: 0.3;
-  animation: fab-pulsate 1.5s infinite;
+.music-mobile-title {
+  font-family: var(--font-heading);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
 }
 
-@keyframes fab-pulsate {
-  0% { transform: scale(1); opacity: 0.5; }
-  100% { transform: scale(1.15); opacity: 0; }
-}
-
-.music-mobile-fab .music-mini-cover {
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-full);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+.music-mobile-status {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+  max-width: 90px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .music-mobile-fab .music-waves {
-  position: absolute;
-  bottom: 6px;
-  background: var(--bg-card);
-  padding: 2px 4px;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
-  scale: 0.8;
+  position: static;
+  background: transparent;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  scale: 0.9;
+  margin-left: 2px;
 }
 
 /* Overlay del CajÃ³n */

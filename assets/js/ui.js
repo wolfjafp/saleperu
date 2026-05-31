@@ -122,7 +122,8 @@ function openShareModal(offerId, event) {
   }
 
   currentShareOfferId = offerId;
-  const offer = allOffers.find(o => o.id === offerId);
+  const offersList = (typeof allOffers !== "undefined") ? allOffers : [];
+  const offer = offersList.find(o => o.id === offerId);
   if (!offer) return;
 
   const overlay = document.getElementById("share-modal-overlay");
@@ -168,7 +169,8 @@ function closeShareModal() {
  * Acciones de redes sociales en el modal
  */
 function shareOnWhatsApp() {
-  const offer = allOffers.find(o => o.id === currentShareOfferId);
+  const offersList = (typeof allOffers !== "undefined") ? allOffers : [];
+  const offer = offersList.find(o => o.id === currentShareOfferId);
   if (!offer) return;
 
   const shareUrl = `${window.location.origin}${window.location.pathname}#${currentShareOfferId}`;
@@ -179,7 +181,8 @@ function shareOnWhatsApp() {
 }
 
 function shareOnTelegram() {
-  const offer = allOffers.find(o => o.id === currentShareOfferId);
+  const offersList = (typeof allOffers !== "undefined") ? allOffers : [];
+  const offer = offersList.find(o => o.id === currentShareOfferId);
   if (!offer) return;
 
   const shareUrl = `${window.location.origin}${window.location.pathname}#${currentShareOfferId}`;
@@ -250,17 +253,20 @@ function initPwaInstallEvent() {
 function setupSearchUX() {
   const desktopSearch = document.getElementById("desktop-search");
   const mobileSearch = document.getElementById("mobile-search");
+  const inlineMobileSearch = document.getElementById("inline-mobile-search");
   
   const desktopClear = document.getElementById("desktop-search-clear");
   const mobileClear = document.getElementById("mobile-search-clear");
+  const inlineMobileClear = document.getElementById("inline-mobile-search-clear");
   
   const desktopSuggest = document.getElementById("desktop-search-suggestions");
   const mobileSuggest = document.getElementById("mobile-search-suggestions");
+  const inlineMobileSuggest = document.getElementById("inline-mobile-search-suggestions");
 
-  const searchPairs = [
-    { input: desktopSearch, clear: desktopClear, suggest: desktopSuggest },
-    { input: mobileSearch, clear: mobileClear, suggest: mobileSuggest }
-  ];
+  const searchPairs = [];
+  if (desktopSearch) searchPairs.push({ input: desktopSearch, clear: desktopClear, suggest: desktopSuggest });
+  if (mobileSearch) searchPairs.push({ input: mobileSearch, clear: mobileClear, suggest: mobileSuggest });
+  if (inlineMobileSearch) searchPairs.push({ input: inlineMobileSearch, clear: inlineMobileClear, suggest: inlineMobileSuggest });
 
   // Configuración de los datos de sugerencia premium
   const suggestionsHTML = `

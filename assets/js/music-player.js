@@ -32,8 +32,27 @@ const RADIO_STATIONS = [
   }
 ];
 
-// Canción de Aerosmith directa de Archive.org (Servicio premium, rápido y que permite reproducirse bloqueado en el móvil)
-const AEROSMITH_SONG_URL = "https://archive.org/download/rockmusic_201703/Aerosmith%20-%20Hole%20In%20My%20Soul.mp3";
+// Canciones directas de Archive.org (Servicio premium, rápido y que permite reproducirse bloqueado en el móvil)
+const SONGS = [
+  {
+    title: "Hole In My Soul",
+    artist: "Aerosmith",
+    url: "https://archive.org/download/rockmusic_201703/Aerosmith%20-%20Hole%20In%20My%20Soul.mp3",
+    cover: "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=200&q=70&auto=format&fit=crop"
+  },
+  {
+    title: "Creep (Live)",
+    artist: "Radiohead",
+    url: "https://archive.org/download/Radiohead_Glastonbury_1997_bootleg/07%20-%20Radiohead%20-%20Creep%20%28Live%20at%20Glastonbury%201997%29.mp3",
+    cover: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=200&q=70&auto=format&fit=crop"
+  },
+  {
+    title: "Losing My Religion",
+    artist: "R.E.M.",
+    url: "https://archive.org/download/06itsafreeworldbaby/11%20Losing%20My%20Religion.mp3",
+    cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200&q=70&auto=format&fit=crop"
+  }
+];
 
 // URLs del arte de portada elegantes desde Unsplash
 const ALBUM_ARTWORKS = {
@@ -62,10 +81,11 @@ function safeSetStorage(key, value) {
 // Estado general de la aplicación
 let musicState = {
   isPlaying: false,
-  currentSource: 'song', // 'song' | 'radio'
+  currentSource: safeGetStorage('music-source', 'song'), // 'song' | 'radio'
   volume: parseFloat(safeGetStorage('music-volume', '0.8')),
   isMuted: safeGetStorage('music-muted', 'false') === 'true',
   activeRadioIndex: parseInt(safeGetStorage('music-radio-index', '0')),
+  activeSongIndex: parseInt(safeGetStorage('music-song-index', '0')),
   hasInteracted: false
 };
 
@@ -81,6 +101,9 @@ function initMusicPlayer() {
   
   // 1. Obtener referencias del DOM
   cacheDomElements();
+  
+  // Inyectar dinámicamente el contenedor de texto en el FAB móvil
+  setupMobileFabText();
   
   // 2. Crear y configurar elemento HTML5 Audio único
   setupAudioElement();
@@ -99,6 +122,26 @@ function initMusicPlayer() {
 
   // 7. Enriquecer con Atributos de Accesibilidad WCAG (ARIA)
   setupAriaAccessibility();
+}
+
+/**
+ * Inyecta dinámicamente la etiqueta de texto en el FAB móvil para transformarlo en Pill
+ */
+function setupMobileFabText() {
+  if (uiElements.mobileFab) {
+    const textContainer = document.createElement('div');
+    textContainer.className = 'music-mobile-text-container';
+    textContainer.innerHTML = `
+      <span class="music-mobile-title js-music-mobile-title">RADIO / MÚSICA</span>
+      <span class="music-mobile-status js-music-mobile-status">Pausado</span>
+    `;
+    
+    // Insertar después del vinilo
+    const vinyl = uiElements.mobileFab.querySelector('#music-mobile-vinyl');
+    if (vinyl) {
+      vinyl.after(textContainer);
+    }
+  }
 }
 
 /**
@@ -152,8 +195,9 @@ function setupAudioElement() {
   audioPlayer.muted = musicState.isMuted;
   audioPlayer.preload = "none";
   
-  // Establecer la fuente inicial (Aerosmith)
-  audioPlayer.src = AEROSMITH_SONG_URL;
+  // Establecer la fuente inicial
+  const initialUrl = musicState.currentSource === 'song' ? SONGS[musicState.activeSongIndex].url : RADIO_STATIONS[musicState.activeRadioIndex].url;
+  audioPlayer.src = initialUrl;
 
   // Manejar errores de red o stream
   audioPlayer.addEventListener('error', (e) => {
@@ -309,55 +353,90 @@ function bindUiEvents() {
     });
   }
 
-  // Renderizar la lista de radios seleccionables
-  renderRadiosList();
+  // Renderizar la lista de reproducción (canciones o radios)
+  renderPlaylist();
 }
 
 /**
- * Renderiza los botones de estaciones de radio
+ * Renderiza la lista de reproducción dinámica (canciones o radios)
  */
-function renderRadiosList() {
+function renderPlaylist() {
   if (!uiElements.radioSelectorContainers || uiElements.radioSelectorContainers.length === 0) return;
   
   uiElements.radioSelectorContainers.forEach(container => {
     container.innerHTML = '';
     
-    RADIO_STATIONS.forEach((station, index) => {
-      const li = document.createElement('li');
-      li.style.margin = '4px 0';
-      
-      const activeClass = (musicState.activeRadioIndex === index && musicState.currentSource === 'radio') ? 'active' : '';
-      
-      li.innerHTML = `
-        <button class="music-source-btn js-radio-item ${activeClass}" data-index="${index}" style="width:100%; text-align:left; justify-content:flex-start; padding: 8px 12px; font-size:0.78rem;">
-          <span style="font-size: 1rem;">📻</span>
-          <div style="display:flex; flex-direction:column; align-items:flex-start;">
-            <span style="font-weight: 700; line-height: 1.2;">${station.name}</span>
-            <span style="font-size: 0.68rem; color: var(--text-tertiary); font-weight: 500;">${station.desc}</span>
-          </div>
-        </button>
-      `;
-      
-      li.querySelector('button').addEventListener('click', (e) => {
-        e.stopPropagation();
-        changeRadio(index);
+    if (musicState.currentSource === 'song') {
+      SONGS.forEach((song, index) => {
+        const li = document.createElement('li');
+        li.style.margin = '4px 0';
+        
+        const activeClass = (musicState.activeSongIndex === index && musicState.currentSource === 'song') ? 'active' : '';
+        
+        li.innerHTML = `
+          <button class="music-source-btn js-radio-item ${activeClass}" data-index="${index}" style="width:100%; text-align:left; justify-content:flex-start; padding: 8px 12px; font-size:0.78rem;">
+            <span style="font-size: 1rem;">🎵</span>
+            <div style="display:flex; flex-direction:column; align-items:flex-start;">
+              <span style="font-weight: 700; line-height: 1.2;">${song.title}</span>
+              <span style="font-size: 0.68rem; color: var(--text-tertiary); font-weight: 500;">${song.artist}</span>
+            </div>
+          </button>
+        `;
+        
+        li.querySelector('button').addEventListener('click', (e) => {
+          e.stopPropagation();
+          changeSong(index);
+        });
+        
+        container.appendChild(li);
       });
-      
-      container.appendChild(li);
-    });
+    } else {
+      RADIO_STATIONS.forEach((station, index) => {
+        const li = document.createElement('li');
+        li.style.margin = '4px 0';
+        
+        const activeClass = (musicState.activeRadioIndex === index && musicState.currentSource === 'radio') ? 'active' : '';
+        
+        li.innerHTML = `
+          <button class="music-source-btn js-radio-item ${activeClass}" data-index="${index}" style="width:100%; text-align:left; justify-content:flex-start; padding: 8px 12px; font-size:0.78rem;">
+            <span style="font-size: 1rem;">📻</span>
+            <div style="display:flex; flex-direction:column; align-items:flex-start;">
+              <span style="font-weight: 700; line-height: 1.2;">${station.name}</span>
+              <span style="font-size: 0.68rem; color: var(--text-tertiary); font-weight: 500;">${station.desc}</span>
+            </div>
+          </button>
+        `;
+        
+        li.querySelector('button').addEventListener('click', (e) => {
+          e.stopPropagation();
+          changeRadio(index);
+        });
+        
+        container.appendChild(li);
+      });
+    }
   });
 }
 
 /**
- * Sincroniza visualmente las selecciones en la lista de radios
+ * Sincroniza visualmente las selecciones en la lista de reproducción
  */
 function updateRadioListSelection() {
   const radioButtons = document.querySelectorAll('.js-radio-item');
   radioButtons.forEach((btn, idx) => {
-    if (musicState.currentSource === 'radio' && musicState.activeRadioIndex === idx) {
-      btn.classList.add('active');
-    } else {
-      btn.classList.remove('active');
+    const btnIndex = parseInt(btn.dataset.index);
+    if (musicState.currentSource === 'radio') {
+      if (musicState.activeRadioIndex === btnIndex && btn.querySelector('span').textContent === '📻') {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    } else if (musicState.currentSource === 'song') {
+      if (musicState.activeSongIndex === btnIndex && btn.querySelector('span').textContent === '🎵') {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
     }
   });
 }
@@ -389,7 +468,7 @@ function playMusic() {
   musicState.isPlaying = true;
   musicState.hasInteracted = true;
 
-  const targetSrc = musicState.currentSource === 'song' ? AEROSMITH_SONG_URL : RADIO_STATIONS[musicState.activeRadioIndex].url;
+  const targetSrc = musicState.currentSource === 'song' ? SONGS[musicState.activeSongIndex].url : RADIO_STATIONS[musicState.activeRadioIndex].url;
 
   // Limpiar y normalizar URLs para comparación robusta (evita dobles cargas y falsos positivos de los navegadores)
   const cleanCurrent = audioPlayer.src.split('?')[0].split('#')[0].replace(/\/$/, "").toLowerCase();
@@ -438,10 +517,12 @@ function setSource(source) {
   if (musicState.currentSource === source) return;
   
   musicState.currentSource = source;
+  safeSetStorage('music-source', source);
   
   // Actualizar estados visuales de la interfaz
   updateSourceButtons();
   updateAlbumArt();
+  renderPlaylist();
   
   if (musicState.isPlaying) {
     playMusic();
@@ -462,8 +543,26 @@ function changeRadio(index) {
   
   musicState.hasInteracted = true;
   musicState.currentSource = 'radio';
+  safeSetStorage('music-source', 'radio');
   
   // Forzar reproducción al seleccionar una emisora (UX/UI Premium)
+  playMusic();
+  
+  updateRadioListSelection();
+}
+
+/**
+ * Cambia la canción seleccionada
+ */
+function changeSong(index) {
+  musicState.activeSongIndex = index;
+  safeSetStorage('music-song-index', index);
+  
+  musicState.hasInteracted = true;
+  musicState.currentSource = 'song';
+  safeSetStorage('music-source', 'song');
+  
+  // Forzar reproducción
   playMusic();
   
   updateRadioListSelection();
@@ -525,9 +624,10 @@ function showTrackInfo(title, subtitle) {
 
 function updateTrackMetadata() {
   if (musicState.currentSource === 'song') {
+    const song = SONGS[musicState.activeSongIndex];
     showTrackInfo(
-      "Hole In My Soul", 
-      "<span style='color:var(--color-primary); font-weight:700;'>Aerosmith</span>"
+      song.title, 
+      `<span style='color:var(--color-primary); font-weight:700;'>${song.artist}</span>`
     );
   } else if (musicState.currentSource === 'radio') {
     const radio = RADIO_STATIONS[musicState.activeRadioIndex];
@@ -542,7 +642,7 @@ function updateTrackMetadata() {
  * Intercambiar arte de vinilos
  */
 function updateAlbumArt() {
-  const artUrl = musicState.currentSource === 'song' ? ALBUM_ARTWORKS.song : ALBUM_ARTWORKS.radio;
+  const artUrl = musicState.currentSource === 'song' ? SONGS[musicState.activeSongIndex].cover : ALBUM_ARTWORKS.radio;
   uiElements.vinylDiscs.forEach(disc => {
     if (disc) {
       disc.style.backgroundImage = `url('${artUrl}')`;
@@ -649,6 +749,27 @@ function updateVisuals() {
   });
   if (uiElements.headerPlayBtn) {
     uiElements.headerPlayBtn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
+  }
+
+  // 5. Actualizar el widget de música móvil Pill con el estado del reproductor
+  const fabTitle = document.querySelector('.js-music-mobile-title');
+  const fabStatus = document.querySelector('.js-music-mobile-status');
+  if (fabTitle && fabStatus) {
+    if (isPlaying) {
+      if (musicState.currentSource === 'song') {
+        fabTitle.textContent = 'Canción';
+        fabTitle.style.color = 'var(--color-primary)';
+        fabStatus.textContent = SONGS[musicState.activeSongIndex].title;
+      } else {
+        fabTitle.textContent = '📻 En Vivo';
+        fabTitle.style.color = 'var(--color-accent)';
+        fabStatus.textContent = RADIO_STATIONS[musicState.activeRadioIndex].name;
+      }
+    } else {
+      fabTitle.textContent = 'Música / Radio';
+      fabTitle.style.color = 'var(--text-tertiary)';
+      fabStatus.textContent = 'Pausado';
+    }
   }
 }
 

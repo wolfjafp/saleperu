@@ -258,7 +258,7 @@ function renderFeedCards() {
         <span class="card-store">${escapeHTML(offer.store)}</span>
         
         <!-- Botón flotante para compartir -->
-        <button class="card-share-btn" onclick="openShareModal('${offer.id}', event)" aria-label="Compartir Oferta">
+        <button class="card-share-btn" data-share-id="${escapeHTML(offer.id)}" aria-label="Compartir Oferta">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
         </button>
       </div>
@@ -277,7 +277,7 @@ function renderFeedCards() {
         ${offer.couponCode ? `
           <div class="card-coupon-container">
             <span class="coupon-text">Cupón:</span>
-            <span class="coupon-code-badge" onclick="copyCouponCode('${escapeHTML(offer.couponCode)}', event)" title="Copiar cupón">${escapeHTML(offer.couponCode)}</span>
+            <span class="coupon-code-badge" data-coupon-code="${escapeHTML(offer.couponCode)}" title="Copiar cupón">${escapeHTML(offer.couponCode)}</span>
           </div>
         ` : ''}
 
@@ -287,11 +287,31 @@ function renderFeedCards() {
       </div>
     `;
 
-    // Hacer que toda la tarjeta sea clickable de forma intuitiva, respetando botones interactivos
+    // Hacer que toda la tarjeta sea clickable de forma intuitiva, respetando botones interactivos y manejando clics seguros sin onclick inline
     card.addEventListener("click", (e) => {
-      if (e.target.closest(".card-share-btn, .coupon-code-badge, .card-btn")) {
-        return; // Dejar que actúen sus propios manejadores
+      const shareBtn = e.target.closest(".card-share-btn");
+      const couponBadge = e.target.closest(".coupon-code-badge");
+      
+      if (shareBtn) {
+        e.stopPropagation();
+        e.preventDefault();
+        const shareId = shareBtn.dataset.shareId;
+        openShareModal(shareId, e);
+        return;
       }
+      
+      if (couponBadge) {
+        e.stopPropagation();
+        e.preventDefault();
+        const couponCodeVal = couponBadge.dataset.couponCode;
+        copyCouponCode(couponCodeVal, e);
+        return;
+      }
+
+      if (e.target.closest(".card-btn")) {
+        return; // Dejar que actúe su href nativo
+      }
+      
       window.open(offer.link, "_blank", "noopener,noreferrer");
     });
 
@@ -334,7 +354,7 @@ function checkIsExpiringToday(dateStr) {
  * @returns {string} Clase de color asignada
  */
 function getCategoryColorClass(category) {
-  const cat = category.toLowerCase().trim();
+  const cat = String(category || "").toLowerCase().trim();
   if (cat.includes("tecn")) return "tech";
   if (cat.includes("gam") || cat.includes("jue")) return "gaming";
   if (cat.includes("mod") || cat.includes("ropa")) return "moda";

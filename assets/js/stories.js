@@ -4,13 +4,13 @@
 
 let activeStories = [];
 let currentStoryIndex = 0;
-let storyTimer = null;
 let storyProgressInterval = null;
 let storyDuration = 5000; // 5 segundos por historia
 let storyPaused = false;
 let storyPauseStartTime = 0;
 let storyElapsedTime = 0;
 let storyLastTickTime = 0;
+let controlsInitialized = false;
 
 // Registro de historias vistas en LocalStorage
 const VIEWED_STORIES_KEY = "saleperu_viewed_stories";
@@ -90,8 +90,16 @@ function openStoryViewer(index) {
   // Renderizar la historia activa
   renderActiveStorySlide();
   
-  // Agregar gestos táctiles y listeners
+  // Agregar gestos táctiles y listeners (solo se vinculan una vez)
   setupStoryControls();
+
+  // Escuchar teclado para accesibilidad WCAG 2.1
+  window.addEventListener("keydown", handleStoryKeyboardNav);
+
+  // Interceptar el botón atrás del móvil empujando un estado artificial al historial
+  if (!window.history.state || !window.history.state.storyViewerActive) {
+    window.history.pushState({ storyViewerActive: true }, "");
+  }
 }
 
 /**
@@ -113,7 +121,7 @@ function renderActiveStorySlide() {
       <img class="story-profile-img" src="${story.coverImage}" alt="${escapeHTML(story.title)}">
       <span class="story-profile-name">${escapeHTML(story.title)}</span>
     </div>
-    <button class="story-close-btn" onclick="closeStoryViewer()" aria-label="Cerrar reproductor de historias">&times;</button>
+    <button class="story-close-btn" onclick="closeStoryViewer()" aria-label="Cerrar reproductor de historias">✕ Cerrar</button>
   `;
 
   // Crear barra de progreso segmentada
@@ -236,8 +244,9 @@ function regressStory() {
 
 /**
  * Cierra el reproductor de historias
+ * @param {boolean} triggerHistoryBack - Si es true, retira el estado artificial del historial
  */
-function closeStoryViewer() {
+function closeStoryViewer(triggerHistoryBack = true) {
   stopStoryTimer();
   const overlay = document.getElementById("story-viewer-overlay");
   const body = document.body;
@@ -247,6 +256,14 @@ function closeStoryViewer() {
   }
   body.classList.remove("modal-open");
   
+  // Remover escuchador de teclado para liberar recursos
+  window.removeEventListener("keydown", handleStoryKeyboardNav);
+
+  // Si se cerró explícitamente (no por el botón atrás), devolvemos el historial a su estado previo
+  if (triggerHistoryBack && window.history.state && window.history.state.storyViewerActive) {
+    window.history.back();
+  }
+
   // Refrescar estado visto en la barra horizontal de círculos
   const circles = document.querySelectorAll(".story-circle-item");
   const viewedIds = getViewedStories();
@@ -256,6 +273,19 @@ function closeStoryViewer() {
       circle.classList.add("viewed");
     }
   });
+}
+
+/**
+ * Manejador de eventos de teclado global para historias (Cumplimiento WCAG 2.1)
+ */
+function handleStoryKeyboardNav(e) {
+  if (e.key === "Escape" || e.key === "Esc") {
+    closeStoryViewer();
+  } else if (e.key === "ArrowRight") {
+    advanceStory();
+  } else if (e.key === "ArrowLeft") {
+    regressStory();
+  }
 }
 
 /**
@@ -277,8 +307,10 @@ function resumeStory() {
  * Configura los eventos de clic / gestos para interactuar con la historia
  */
 function setupStoryControls() {
+  if (controlsInitialized) return;
   const container = document.getElementById("story-viewer-container");
   if (!container) return;
+  controlsInitialized = true;
 
   // 1. GESTOS TÁCTILES - ARRASCAR HACIA ABAJO PARA CERRAR (Drag down to dismiss)
   container.addEventListener("touchstart", (e) => {
@@ -387,3 +419,11 @@ function markStoryAsViewed(storyId) {
     console.error("Error guardando historia vista:", e);
   }
 }
+
+// Escuchador global de retroceso del navegador/móvil para cerrar historias sin salir de la web
+window.addEventListener("popstate", (e) => {
+  const overlay = document.getElementById("story-viewer-overlay");
+  if (overlay && overlay.style.display === "flex") {
+    closeStoryViewer(false);
+  }
+});
