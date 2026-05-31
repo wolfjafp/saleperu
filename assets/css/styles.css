@@ -737,7 +737,7 @@ body.modal-open {
   }
   
   .mobile-search-trigger-btn {
-    display: flex !important;
+    display: none !important;
   }
   
   /* Buscador mÃ³vil inmersivo overlay */
