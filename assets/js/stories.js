@@ -49,6 +49,7 @@ function initStoriesSystem(storiesData) {
     const isViewed = viewedIds.includes(story.id);
     const item = document.createElement("div");
     item.className = `story-circle-item ${isViewed ? 'viewed' : ''}`;
+    item.setAttribute("role", "listitem");
     item.dataset.id = story.id;
     item.dataset.index = idx;
 

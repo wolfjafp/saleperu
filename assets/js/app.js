@@ -42,6 +42,9 @@ function renderInitialSkeletons() {
   // Skeletons de la barra de Historias
   const storiesContainer = document.getElementById("stories-container");
   if (storiesContainer) {
+    // Si ya hay skeletons estáticos pre-renderizados en el HTML, los respetamos para evitar doble renderizado y CLS
+    if (storiesContainer.querySelector(".story-circle-item")) return;
+    
     storiesContainer.innerHTML = "";
     for (let i = 0; i < 6; i++) {
       const sk = document.createElement("div");

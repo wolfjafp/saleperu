@@ -13,7 +13,7 @@ const CACHE_EXPIRY_MS = 5 * 60 * 1000; // 5 minutos de caché inteligente
  * Optimiza dinámicamente URLs de Unsplash con formatos modernos,
  * compresión inteligente y dimensiones exactas.
  */
-function getOptimizedImageUrl(url, width = 400, quality = 70) {
+function getOptimizedImageUrl(url, width = 350, quality = 60) {
   if (!url) return `https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=${width}&q=${quality}&auto=format&fit=crop`;
   
   if (url.includes("images.unsplash.com")) {
@@ -341,7 +341,7 @@ async function loadAppData(forceRefresh = false) {
         id: o.id || `SP-${Math.random().toString(36).slice(2, 11)}`,
         title: o.title || "Oferta sin título",
         description: o.description || "",
-        image: getOptimizedImageUrl(o.image || "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80", 400, 70),
+        image: getOptimizedImageUrl(o.image || "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=350&q=60", 350, 60),
         category: o.category || "Tecnología",
         originalPrice: Number(o.originalprice) || 0,
         offerPrice: Number(o.offerprice) || 0,
@@ -357,8 +357,8 @@ async function loadAppData(forceRefresh = false) {
       const formattedStories = (parsedStories || []).map(s => ({
         id: s.id || `ST-${Math.random().toString(36).slice(2, 11)}`,
         title: s.title || "Historia",
-        coverImage: getOptimizedImageUrl(s.coverimage || "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=150&q=80", 150, 70),
-        mediaUrl: getOptimizedImageUrl(s.mediaurl || "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80", 400, 70),
+        coverImage: getOptimizedImageUrl(s.coverimage || "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=100&q=60", 100, 60),
+        mediaUrl: getOptimizedImageUrl(s.mediaurl || "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=350&q=60", 350, 60),
         mediaType: s.mediatype || "image",
         caption: s.caption || "",
         offerLink: s.offerlink || "#",
@@ -391,13 +391,13 @@ async function loadAppData(forceRefresh = false) {
     // Formatear dinámicamente Mock Data para optimizar sus imágenes en tiempo real
     const formattedMockOffers = MOCK_DATA.offers.map(o => ({
       ...o,
-      image: getOptimizedImageUrl(o.image, 400, 70)
+      image: getOptimizedImageUrl(o.image, 350, 60)
     }));
 
     const formattedMockStories = MOCK_DATA.stories.map(s => ({
       ...s,
-      coverImage: getOptimizedImageUrl(s.coverImage, 150, 70),
-      mediaUrl: getOptimizedImageUrl(s.mediaUrl, 400, 70)
+      coverImage: getOptimizedImageUrl(s.coverImage, 100, 60),
+      mediaUrl: getOptimizedImageUrl(s.mediaUrl, 350, 60)
     }));
 
     return {

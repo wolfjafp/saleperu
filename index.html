@@ -99,7 +99,7 @@
         <input type="text" class="search-input" id="desktop-search" placeholder="Buscar ofertas o tiendas..." aria-label="Buscar ofertas">
         <button class="search-clear-btn" id="desktop-search-clear" aria-label="Limpiar búsqueda" type="button" tabindex="-1">&times;</button>
         <!-- Panel flotante de sugerencias -->
-        <div class="search-suggestions-dropdown" id="desktop-search-suggestions" role="listbox" aria-label="Sugerencias de búsqueda"></div>
+        <div class="search-suggestions-dropdown" id="desktop-search-suggestions" role="region" aria-label="Sugerencias de búsqueda"></div>
       </div>
 
       <!-- Acciones de Cabecera -->
@@ -189,31 +189,31 @@
     <div class="container">
       <div class="stories-container" id="stories-container" role="list">
         <!-- Skeletons estáticos iniciales para evitar CLS (Cumulative Layout Shift) -->
-        <div class="story-circle-item">
+        <div class="story-circle-item" role="listitem">
           <div class="story-ring" style="background: var(--border-color)">
             <div class="skeleton skeleton-story-avatar"></div>
           </div>
           <div class="skeleton skeleton-story-text"></div>
         </div>
-        <div class="story-circle-item">
+        <div class="story-circle-item" role="listitem">
           <div class="story-ring" style="background: var(--border-color)">
             <div class="skeleton skeleton-story-avatar"></div>
           </div>
           <div class="skeleton skeleton-story-text"></div>
         </div>
-        <div class="story-circle-item">
+        <div class="story-circle-item" role="listitem">
           <div class="story-ring" style="background: var(--border-color)">
             <div class="skeleton skeleton-story-avatar"></div>
           </div>
           <div class="skeleton skeleton-story-text"></div>
         </div>
-        <div class="story-circle-item">
+        <div class="story-circle-item" role="listitem">
           <div class="story-ring" style="background: var(--border-color)">
             <div class="skeleton skeleton-story-avatar"></div>
           </div>
           <div class="skeleton skeleton-story-text"></div>
         </div>
-        <div class="story-circle-item">
+        <div class="story-circle-item" role="listitem">
           <div class="story-ring" style="background: var(--border-color)">
             <div class="skeleton skeleton-story-avatar"></div>
           </div>
@@ -243,7 +243,7 @@
           <input type="text" class="search-input" id="mobile-search" placeholder="Buscar ofertas o tiendas..." aria-label="Buscar ofertas móvil" style="width: 100%;">
           <button class="search-clear-btn" id="mobile-search-clear" aria-label="Limpiar búsqueda" type="button" tabindex="-1">&times;</button>
           <!-- Panel flotante de sugerencias -->
-          <div class="search-suggestions-dropdown" id="mobile-search-suggestions" role="listbox" aria-label="Sugerencias de búsqueda móvil"></div>
+          <div class="search-suggestions-dropdown" id="mobile-search-suggestions" role="region" aria-label="Sugerencias de búsqueda móvil"></div>
         </div>
       </div>
 
@@ -257,7 +257,7 @@
           <input type="text" class="search-input" id="inline-mobile-search" placeholder="Buscar ofertas o tiendas..." aria-label="Buscar ofertas móvil">
           <button class="search-clear-btn" id="inline-mobile-search-clear" aria-label="Limpiar búsqueda" type="button" tabindex="-1">&times;</button>
           <!-- Panel flotante de sugerencias -->
-          <div class="search-suggestions-dropdown" id="inline-mobile-search-suggestions" role="listbox" aria-label="Sugerencias de búsqueda móvil"></div>
+          <div class="search-suggestions-dropdown" id="inline-mobile-search-suggestions" role="region" aria-label="Sugerencias de búsqueda móvil"></div>
         </div>
       </div>
 
