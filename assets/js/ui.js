@@ -19,9 +19,9 @@ function initThemeSystem() {
   const themeToggleBtn = document.getElementById("theme-toggle");
   if (!themeToggleBtn) return;
 
-  // Intentar leer preferencia del usuario en localStorage, o forzar la versión clara por defecto (ignorar pre-configuración oscura del SO)
+  // Intentar leer preferencia del usuario en localStorage, o forzar la versión oscura por defecto
   const savedTheme = localStorage.getItem("saleperu_theme");
-  const currentTheme = savedTheme || "light";
+  const currentTheme = savedTheme || "dark";
   
   setTheme(currentTheme);
 

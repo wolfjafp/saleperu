@@ -49,8 +49,14 @@ const SONGS = [
   {
     title: "Losing My Religion",
     artist: "R.E.M.",
-    url: "https://archive.org/download/06itsafreeworldbaby/11%20Losing%20My%20Religion.mp3",
+    url: "https://archive.org/download/y-2mate.com-rem-losing-my-religion-lyrics/y2mate.com%20-%20REM%20%20Losing%20My%20Religion%20Lyrics.mp3",
     cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200&q=70&auto=format&fit=crop"
+  },
+  {
+    title: "The Way",
+    artist: "Fastball",
+    url: "https://archive.org/download/Fastball_The_way/Fastball_The_way.mp4",
+    cover: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=200&q=70&auto=format&fit=crop"
   }
 ];
 
@@ -78,6 +84,25 @@ function safeSetStorage(key, value) {
   }
 }
 
+// Helper para acceso a SessionStorage seguro (para evitar autoplay repetido)
+function safeGetSession(key, defaultValue) {
+  try {
+    const val = sessionStorage.getItem(key);
+    return val !== null ? val : defaultValue;
+  } catch (e) {
+    return defaultValue;
+  }
+}
+
+// Helper para guardar en SessionStorage seguro
+function safeSetSession(key, value) {
+  try {
+    sessionStorage.setItem(key, value);
+  } catch (e) {
+    // Ignore sandbox write exceptions
+  }
+}
+
 // Estado general de la aplicación
 let musicState = {
   isPlaying: false,
@@ -85,7 +110,7 @@ let musicState = {
   volume: parseFloat(safeGetStorage('music-volume', '0.8')),
   isMuted: safeGetStorage('music-muted', 'false') === 'true',
   activeRadioIndex: parseInt(safeGetStorage('music-radio-index', '0')),
-  activeSongIndex: parseInt(safeGetStorage('music-song-index', '0')),
+  activeSongIndex: parseInt(safeGetStorage('music-song-index', '3')),
   hasInteracted: false
 };
 
@@ -226,15 +251,55 @@ function setupAudioElement() {
       updateVisuals();
     }
   });
+
+  // Al terminar una canción, reproducir automáticamente la siguiente en cola (cola / queue continua)
+  audioPlayer.addEventListener('ended', () => {
+    if (musicState.currentSource === 'song') {
+      const nextIndex = (musicState.activeSongIndex + 1) % SONGS.length;
+      changeSong(nextIndex);
+    }
+  });
 }
 
 /**
  * Configurar disparador de interacción para el Autoplay
  */
 function setupAutoplayTrigger() {
-  // Autoplay desactivado por Auditoría UX/Accesibilidad: Se desactiva el inicio automático por clic fortuito.
-  // Ahora la música sólo se inicia si el usuario hace clic de forma explícita en los controles de reproducción.
-  console.log("🎵 Reproducción automática desactivada por política de accesibilidad y UX.");
+  // Detectar si el dispositivo es móvil o PC
+  const isMobile = window.matchMedia('(max-width: 768px)').matches || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const isPC = !isMobile;
+
+  if (isPC) {
+    // Verificar si ya se realizó el autoplay en esta sesión de navegación
+    const autoplayDone = safeGetSession('music-autoplay-done', 'false') === 'true';
+    if (!autoplayDone) {
+      console.log("🎵 Autoplay programado en PC para el primer clic o acción del usuario.");
+      
+      const playOnFirstInteraction = () => {
+        if (!musicState.isPlaying) {
+          console.log("🎵 Primer clic/acción detectado en PC. Iniciando reproducción automática.");
+          playMusic();
+        }
+        
+        // Registrar que ya se realizó la reproducción automática en esta sesión
+        safeSetSession('music-autoplay-done', 'true');
+        
+        // Limpiar los listeners
+        ['click', 'keydown', 'mousedown', 'touchstart'].forEach(evt => {
+          document.removeEventListener(evt, playOnFirstInteraction);
+        });
+      };
+      
+      // Escuchar el primer clic, tecla o toque
+      ['click', 'keydown', 'mousedown', 'touchstart'].forEach(evt => {
+        document.addEventListener(evt, playOnFirstInteraction, { once: true, passive: true });
+      });
+    } else {
+      console.log("🎵 Autoplay en PC omitido: ya se ejecutó en esta sesión.");
+    }
+  } else {
+    console.log("🎵 Dispositivo móvil detectado. Autoplay desactivado por política de accesibilidad y UX (requiere acción explícita).");
+  }
 }
 
 /**
@@ -467,6 +532,9 @@ function closeMobileDrawer() {
 function playMusic() {
   musicState.isPlaying = true;
   musicState.hasInteracted = true;
+
+  // Registrar que ya interactuó explícitamente para evitar autoplay posterior
+  safeSetSession('music-autoplay-done', 'true');
 
   const targetSrc = musicState.currentSource === 'song' ? SONGS[musicState.activeSongIndex].url : RADIO_STATIONS[musicState.activeRadioIndex].url;
 

@@ -489,6 +489,7 @@ body.modal-open {
 .stories-section {
   padding: 24px 0 12px 0;
   overflow: hidden;
+  min-height: 149px; /* Reservar espacio síncrono para evitar CLS en la carga de historias */
 }
 
 /* SecciÃ³n de Contenido Principal (Filtros + Grid Feed) */
@@ -502,6 +503,7 @@ body.modal-open {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 24px;
   margin-top: 24px;
+  min-height: 600px; /* Evita que el contenedor colapse a 0px durante la carga asíncrona, optimizando el CLS */
 }
 
 /* Pie de Página Minimalista y Premium */
