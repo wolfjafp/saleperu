@@ -191,6 +191,7 @@ body.modal-open {
   backdrop-filter: blur(var(--blur-amount));
   -webkit-backdrop-filter: blur(var(--blur-amount));
   border-bottom: 1px solid var(--border-color);
+  padding-top: env(safe-area-inset-top, 0px);
   transition: background-color var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
 }
 
@@ -934,6 +935,9 @@ body.modal-open {
 
 /* Laptops / Desktops Grandes (Min 993px) */
 @media (min-width: 993px) {
+  #pwa-install-btn {
+    display: none !important;
+  }
   .search-container:focus-within {
     width: 340px;
   }
