@@ -25,7 +25,7 @@ function handleHashRouting() {
   const offerId = hash.replace("#", "");
   const card = document.getElementById(offerId);
   
-  if (card) {
+  if (card && card.classList.contains("deal-card")) {
     // Desplazar la tarjeta suavemente al centro de la pantalla
     card.scrollIntoView({ behavior: "smooth", block: "center" });
     
