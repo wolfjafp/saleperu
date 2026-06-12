@@ -2,6 +2,8 @@
    SALEPERU.PE - CONTROLADOR DE SEO TÉCNICO Y ENRUTAMIENTO DINÁMICO
    ========================================================================== */
 
+const CANONICAL_DOMAIN = "https://saleperu.pe";
+
 /**
  * Escucha cambios en el hash del navegador para enrutar directamente a ofertas específicas
  */
@@ -48,6 +50,7 @@ function handleHashRouting() {
  * @param {string} offerId - ID de la oferta seleccionada
  */
 function updateSeoForOffer(offerId) {
+  if (typeof allOffers === "undefined" || !allOffers || !Array.isArray(allOffers)) return;
   const offer = allOffers.find(o => o.id === offerId);
   if (!offer) return;
 
@@ -67,7 +70,9 @@ function updateSeoForOffer(offerId) {
   updateMetaTag("meta[property='og:image']", offer.image);
   updateMetaTag("meta[name='twitter:image']", offer.image);
 
-  updateMetaTag("meta[property='og:url']", `${window.location.origin}${window.location.pathname}#${offerId}`);
+  // Normalizar path de la página para producción
+  const normalizedPath = window.location.pathname.startsWith("/") ? window.location.pathname : `/${window.location.pathname}`;
+  updateMetaTag("meta[property='og:url']", `${CANONICAL_DOMAIN}${normalizedPath}#${offerId}`);
 
   // 3. Inyectar Estructura Schema.org JSON-LD Dinámica (Rich Snippets)
   injectStructuredData(offer);
@@ -106,6 +111,7 @@ function injectStructuredData(offer) {
     oldScript.remove();
   }
 
+  const normalizedPath = window.location.pathname.startsWith("/") ? window.location.pathname : `/${window.location.pathname}`;
   const jsonLd = {
     "@context": "https://schema.org/",
     "@type": "Product",
@@ -113,13 +119,14 @@ function injectStructuredData(offer) {
     "image": [offer.image],
     "description": offer.description,
     "sku": offer.id,
+    "mpn": offer.id,
     "brand": {
       "@type": "Brand",
       "name": offer.store
     },
     "offers": {
       "@type": "Offer",
-      "url": `${window.location.origin}${window.location.pathname}#${offer.id}`,
+      "url": `${CANONICAL_DOMAIN}${normalizedPath}#${offer.id}`,
       "priceCurrency": "PEN",
       "price": offer.offerPrice,
       "priceValidUntil": offer.expiration || "2026-12-31",
@@ -135,7 +142,7 @@ function injectStructuredData(offer) {
   const script = document.createElement("script");
   script.id = "json-ld-dynamic-offer";
   script.type = "application/ld+json";
-  script.text = JSON.stringify(jsonLd);
+  script.text = JSON.stringify(jsonLd).replace(/</g, '\\u003c').replace(/>/g, '\\u003e');
   document.head.appendChild(script);
 }
 
@@ -150,12 +157,12 @@ function injectGlobalWebsiteSchema() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "SALEPERU.PE",
-    "url": window.location.origin,
+    "url": CANONICAL_DOMAIN,
     "potentialAction": {
       "@type": "SearchAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": `${window.location.origin}/?search={search_term_string}`
+        "urlTemplate": `${CANONICAL_DOMAIN}/?search={search_term_string}`
       },
       "query-input": "required name=search_term_string"
     }
@@ -164,6 +171,6 @@ function injectGlobalWebsiteSchema() {
   const script = document.createElement("script");
   script.id = "json-ld-global-site";
   script.type = "application/ld+json";
-  script.text = JSON.stringify(globalJson);
+  script.text = JSON.stringify(globalJson).replace(/</g, '\\u003c').replace(/>/g, '\\u003e');
   document.head.appendChild(script);
 }

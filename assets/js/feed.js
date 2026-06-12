@@ -5,6 +5,7 @@
 let allOffers = [];
 let filteredOffers = [];
 let currentCategory = "todos";
+let currentStoreFilter = "todos";
 let currentSort = "recientes";
 let searchQuery = "";
 
@@ -41,6 +42,25 @@ function initFeedSystem(offersData) {
   
   // Pintar categorías dinámicas en la barra de píldoras
   renderCategoryFilters();
+
+  // Leer parámetro 'search' de la URL para inicializar filtros desde subpáginas
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchParam = urlParams.get("search");
+    if (searchParam) {
+      searchQuery = searchParam.toLowerCase().trim();
+      // Sincronizar inputs de búsqueda
+      document.querySelectorAll(".search-input").forEach(input => {
+        input.value = searchParam;
+      });
+      // Mostrar botones de limpiar búsqueda
+      document.querySelectorAll(".search-clear-btn").forEach(btn => {
+        btn.classList.add("visible");
+      });
+    }
+  } catch (e) {
+    console.warn("No se pudo parsear el parámetro de búsqueda de la URL:", e);
+  }
   
   // Pintar el feed inicial
   applyFiltersAndSort();
@@ -88,21 +108,41 @@ function renderCategoryFilters() {
 }
 
 /**
+ * Función Debounce reutilizable para optimizar el rendimiento de la búsqueda en tiempo real
+ */
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+/**
  * Configura los inputs de búsqueda (escritorio y móviles si los hay)
  */
 function setupSearchInput() {
   const searchInputs = document.querySelectorAll(".search-input");
   
+  const debouncedApplyFilters = debounce(() => {
+    applyFiltersAndSort();
+  }, 250);
+
   searchInputs.forEach(input => {
     input.addEventListener("input", (e) => {
       searchQuery = e.target.value.toLowerCase().trim();
       
-      // Sincronizar todos los inputs con el mismo valor
+      // Sincronizar todos los inputs con el mismo valor de inmediato para coherencia visual
       searchInputs.forEach(si => {
         if (si !== input) si.value = e.target.value;
       });
 
-      applyFiltersAndSort();
+      // Filtrar y ordenar de forma diferida (debounce) para liberar el hilo principal
+      debouncedApplyFilters();
     });
   });
 }
@@ -130,12 +170,16 @@ function applyFiltersAndSort(resetPage = true) {
     }
   }
 
-  // 2. Filtrar por Búsqueda (Título, descripción, marca o tienda)
+  // 2. Filtrar por Tienda Seleccionada (Intersección con pills de tienda)
+  if (currentStoreFilter !== "todos") {
+    result = result.filter(o => o.store && o.store.toLowerCase().trim() === currentStoreFilter);
+  }
+
+  // 3. Filtrar por Búsqueda (Título, descripción o categoría)
   if (searchQuery) {
     result = result.filter(o => 
       o.title.toLowerCase().includes(searchQuery) ||
       o.description.toLowerCase().includes(searchQuery) ||
-      o.store.toLowerCase().includes(searchQuery) ||
       o.category.toLowerCase().includes(searchQuery)
     );
   }
@@ -147,15 +191,11 @@ function applyFiltersAndSort(resetPage = true) {
   }
 
   if (currentSort === "recientes") {
-    // Ordenar de forma descendente por la numeración de los IDs
-    // Esto asegura que el ID más alto (el más nuevo) salga al inicio, sin importar si se insertó al inicio o al final en Sheets.
-    result.sort((a, b) => getNumericId(b.id) - getNumericId(a.id));
+    // Ordenar de forma descendente por la numeración de los IDs ya precalculada
+    result.sort((a, b) => b.numericId - a.numericId);
   } else if (currentSort === "descuento") {
-    result.sort((a, b) => {
-      const pctA = a.originalPrice ? ((a.originalPrice - a.offerPrice) / a.originalPrice) : 0;
-      const pctB = b.originalPrice ? ((b.originalPrice - b.offerPrice) / b.originalPrice) : 0;
-      return pctB - pctA;
-    });
+    // Ordenar de forma descendente por el descuento precalculado
+    result.sort((a, b) => b.discountPercent - a.discountPercent);
   } else if (currentSort === "hot") {
     // Primero los isHot
     result.sort((a, b) => (b.isHot ? 1 : 0) - (a.isHot ? 1 : 0));
@@ -225,11 +265,9 @@ function renderFeedCards() {
   const paginatedOffers = filteredOffers.slice(0, currentPage * ITEMS_PER_PAGE);
 
   paginatedOffers.forEach((offer, index) => {
-    // Calcular porcentaje de descuento
-    let discountPercent = 0;
-    if (offer.originalPrice && offer.originalPrice > offer.offerPrice) {
-      discountPercent = Math.round(((offer.originalPrice - offer.offerPrice) / offer.originalPrice) * 100);
-    }
+    // Distintivo geográfico para tiendas locales vs importación
+    const isStoreAliExpress = offer.store && offer.store.toLowerCase().trim() === "aliexpress";
+    const storeLabelPrefix = isStoreAliExpress ? "✈️ " : "🇵🇪 ";
 
     const card = document.createElement("article");
     card.className = "deal-card slide-up";
@@ -251,11 +289,13 @@ function renderFeedCards() {
           ${isExpiringToday ? '<span class="badge badge-error">⏳ Expira Hoy</span>' : ''}
           ${offer.couponCode ? '<span class="badge badge-coupon">🎟️ Cupón</span>' : ''}
         </div>
-        <img class="card-image" src="${offer.image}" alt="${escapeHTML(offer.title)}" 
+        <img class="card-image" src="${sanitizeUrl(offer.image)}" alt="${escapeHTML(offer.title)}" 
+             width="350" height="200"
              loading="${index < 4 ? 'eager' : 'lazy'}" 
              ${index < 4 ? 'fetchpriority="high"' : ''}
-             onerror="this.src='https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&q=70&auto=format&fit=crop'">
-        <span class="card-store">${escapeHTML(offer.store)}</span>
+             decoding="async"
+             onerror="this.src='https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=350&h=200&q=70&auto=format&fit=crop'">
+        <span class="card-store">${storeLabelPrefix}${escapeHTML(offer.store)}</span>
         
         <!-- Botón flotante para compartir -->
         <button class="card-share-btn" data-share-id="${escapeHTML(offer.id)}" aria-label="Compartir Oferta">
@@ -271,7 +311,7 @@ function renderFeedCards() {
         <div class="card-price-row">
           <span class="price-offer">S/. ${offer.offerPrice.toFixed(2)}</span>
           ${offer.originalPrice > offer.offerPrice ? `<span class="price-original">S/. ${offer.originalPrice.toFixed(2)}</span>` : ''}
-          ${discountPercent > 0 ? `<span class="price-discount">-${discountPercent}%</span>` : ''}
+          ${offer.discountPercent > 0 ? `<span class="price-discount">-${offer.discountPercent}%</span>` : ''}
         </div>
 
         ${offer.couponCode ? `
@@ -281,7 +321,7 @@ function renderFeedCards() {
           </div>
         ` : ''}
 
-        <a href="${offer.link}" target="_blank" class="card-btn" rel="sponsored nofollow noopener noreferrer">
+        <a href="${sanitizeUrl(offer.link)}" target="_blank" class="card-btn" rel="sponsored nofollow noopener noreferrer">
           Ir a oferta ↗
         </a>
       </div>
@@ -312,7 +352,10 @@ function renderFeedCards() {
         return; // Dejar que actúe su href nativo
       }
       
-      window.open(offer.link, "_blank", "noopener,noreferrer");
+      const safeLink = sanitizeUrl(offer.link);
+      if (safeLink !== "#") {
+        window.open(safeLink, "_blank", "noopener,noreferrer");
+      }
     });
 
     grid.appendChild(card);
@@ -382,4 +425,23 @@ function copyCouponCode(code, event) {
 function loadNextPage() {
   currentPage++;
   renderFeedCards();
+}
+
+/**
+ * Sanitiza URLs para prevenir inyecciones maliciosas de javascript: o vbscript:
+ * @param {string} url - La URL a analizar
+ * @returns {string} URL saneada y segura
+ */
+function sanitizeUrl(url) {
+  if (!url) return "#";
+  const cleanUrl = String(url).trim();
+  // Rechazar javascript: y esquemas peligrosos
+  if (/^(javascript|vbscript|data):/i.test(cleanUrl)) {
+    // Permitir URIs de datos seguras si son imágenes
+    if (/^data:image\//i.test(cleanUrl)) {
+      return escapeHTML(cleanUrl);
+    }
+    return "#";
+  }
+  return escapeHTML(cleanUrl);
 }

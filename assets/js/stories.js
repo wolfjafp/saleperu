@@ -55,9 +55,11 @@ function initStoriesSystem(storiesData) {
 
     item.innerHTML = `
       <div class="story-ring">
-        <img class="story-avatar" src="${story.coverImage}" alt="${escapeHTML(story.title)}" 
+        <img class="story-avatar" src="${sanitizeUrl(story.coverImage)}" alt="${escapeHTML(story.title)}" 
+             width="64" height="64"
              loading="${idx < 4 ? 'eager' : 'lazy'}"
-             ${idx < 4 ? 'fetchpriority="high"' : ''}>
+             ${idx < 4 ? 'fetchpriority="high"' : ''}
+             decoding="async">
       </div>
       <span class="story-label">${escapeHTML(story.title)}</span>
     `;
@@ -119,7 +121,7 @@ function renderActiveStorySlide() {
   const headerContainer = document.querySelector(".story-user-info");
   headerContainer.innerHTML = `
     <div class="story-profile">
-      <img class="story-profile-img" src="${story.coverImage}" alt="${escapeHTML(story.title)}">
+      <img class="story-profile-img" src="${sanitizeUrl(story.coverImage)}" alt="${escapeHTML(story.title)}">
       <span class="story-profile-name">${escapeHTML(story.title)}</span>
     </div>
     <button class="story-close-btn" onclick="closeStoryViewer()" aria-label="Cerrar reproductor de historias">✕ Cerrar</button>
@@ -155,14 +157,15 @@ function renderActiveStorySlide() {
     <div class="story-nav-tap story-nav-left"></div>
     <div class="story-nav-tap story-nav-right"></div>
     
-    <img class="story-media" src="${story.mediaUrl}" alt="${escapeHTML(story.caption)}">
+    <img class="story-media" src="${sanitizeUrl(story.mediaUrl)}" alt="${escapeHTML(story.caption)}" 
+         width="350" height="600" decoding="async">
   `;
 
   // Renderizar pie de historia
   const footerContainer = document.getElementById("story-footer");
   footerContainer.innerHTML = `
     <p class="story-caption">${escapeHTML(story.caption)}</p>
-    <a href="${story.offerLink}" target="_blank" class="story-action-btn" id="story-action-link" rel="sponsored nofollow noopener noreferrer">
+    <a href="${sanitizeUrl(story.offerLink)}" target="_blank" class="story-action-btn" id="story-action-link" rel="sponsored nofollow noopener noreferrer">
       Ver Oferta ⚡
     </a>
   `;
@@ -428,3 +431,22 @@ window.addEventListener("popstate", (e) => {
     closeStoryViewer(false);
   }
 });
+
+/**
+ * Sanitiza URLs para prevenir inyecciones maliciosas de javascript: o vbscript:
+ * @param {string} url - La URL a analizar
+ * @returns {string} URL saneada y segura
+ */
+function sanitizeUrl(url) {
+  if (!url) return "#";
+  const cleanUrl = String(url).trim();
+  // Rechazar javascript: y esquemas peligrosos
+  if (/^(javascript|vbscript|data):/i.test(cleanUrl)) {
+    // Permitir URIs de datos seguras si son imágenes
+    if (/^data:image\//i.test(cleanUrl)) {
+      return escapeHTML(cleanUrl);
+    }
+    return "#";
+  }
+  return escapeHTML(cleanUrl);
+}

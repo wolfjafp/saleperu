@@ -10,7 +10,7 @@
   </script>
   <!-- Metadatos Técnicos Esenciales -->
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com data:; media-src 'self' https://archive.org https://*.archive.org https://*.streamtheworld.com https://playerservices.streamtheworld.com; connect-src 'self' https://docs.google.com https://archive.org https://*.archive.org https://*.streamtheworld.com https://playerservices.streamtheworld.com https://images.unsplash.com;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data:; media-src 'self' https://archive.org https://*.archive.org https://*.streamtheworld.com https://playerservices.streamtheworld.com; connect-src 'self' https://docs.google.com https://archive.org https://*.archive.org https://*.streamtheworld.com https://playerservices.streamtheworld.com https://images.unsplash.com;">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   
@@ -19,8 +19,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="manifest" href="manifest.json">
-  <link rel="shortcut icon" href="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=32&q=80" type="image/png">
+  <link rel="shortcut icon" href="assets/img/favicon.png" type="image/png">
   
   <!-- SEO Técnico y Metatags de Indexación -->
   <title>Preguntas Frecuentes (FAQ) | SALEPERU.PE</title>
@@ -112,7 +113,6 @@
     <div class="container header-container">
       
       <!-- Logotipo de la marca -->
-            <!-- Logotipo de la marca -->
       <a href="./" class="logo" id="header-logo" aria-label="Ir a Inicio - SALEPERU.PE">
         <svg class="logo-svg" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
@@ -137,18 +137,34 @@
         SALEPERU.PE
       </a>
 
-      <!-- Barra de búsqueda rápida -->
+      <!-- Barra de búsqueda rápida (Escritorio / Tablet) -->
       <div class="search-container">
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
-        <input type="text" class="search-input" id="desktop-search" placeholder="Presiona Enter para buscar..." aria-label="Buscar ofertas">
+        <input type="text" class="search-input" id="desktop-search" placeholder="Buscar ofertas o tiendas..." aria-label="Buscar ofertas">
+        <button class="search-clear-btn" id="desktop-search-clear" aria-label="Limpiar búsqueda" type="button" tabindex="-1">&times;</button>
+        <!-- Panel flotante de sugerencias -->
+        <div class="search-suggestions-dropdown" id="desktop-search-suggestions" role="region" aria-label="Sugerencias de búsqueda"></div>
       </div>
 
       <!-- Acciones de Cabecera -->
       <div class="header-actions">
-        <!-- Reproductor de Música Premium -->
+        <!-- Botón disparador de búsqueda en móvil (Solo visible en celular) -->
+        <button id="mobile-search-trigger" class="mobile-search-trigger-btn" aria-label="Abrir buscador móvil">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <!-- Botón de instalación PWA (Oculto inicialmente por CSS/JS) -->
+        <button id="pwa-install-btn" class="filter-pill active" style="display: none; padding: 6px 12px; font-size: 0.8rem; gap: 6px; box-shadow: none;" aria-label="Instalar Aplicación">
+          <span>📱</span> Instalar
+        </button>
+
+        <!-- Reproductor de Música Premium (PC) -->
         <div class="music-header-container" id="music-header-container">
           <div class="music-header-control" id="music-header-control" title="Reproductor de Música">
             <span class="music-header-live-tag">📻 RADIO EN VIVO</span>
@@ -171,6 +187,8 @@
               <span class="music-track-title js-music-title">Hole In My Soul</span>
               <span class="music-track-subtitle js-music-subtitle"><span style="color:var(--color-primary); font-weight:700;">Aerosmith</span></span>
             </div>
+
+            <!-- Selector de fuente -->
             <div class="music-source-selector" style="margin-bottom: 8px;">
               <button class="music-source-btn js-source-song active" aria-label="Escuchar Aerosmith">
                 <span>🎵</span> Canción
@@ -179,7 +197,13 @@
                 <span>📻</span> Radio
               </button>
             </div>
-            <ul class="js-music-radio-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; max-height: 120px; overflow-y: auto;"></ul>
+
+            <!-- Lista de radios seleccionables -->
+            <ul class="js-music-radio-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; max-height: 120px; overflow-y: auto;">
+              <!-- Se renderiza desde JS -->
+            </ul>
+
+            <!-- Fila de Controles de reproducción y volumen -->
             <div class="music-control-row">
               <button class="music-dropdown-play-btn js-music-play" aria-label="Reproducir / Pausar">
                 <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -194,7 +218,7 @@
           </div>
         </div>
 
-        <!-- Interruptor de Tema -->
+        <!-- Interruptor de Tema (Claro/Oscuro) -->
         <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar Tema Visual">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -208,6 +232,24 @@
   <!-- CONTENIDO PRINCIPAL -->
   <main class="main-content">
     <div class="container content-page" style="max-width: 800px;">
+
+      <!-- Búsqueda en móvil (Buscador Inmersivo Overlay) -->
+      <div class="mobile-search-wrapper" id="mobile-search-overlay">
+        <div class="mobile-search-overlay-header">
+          <span class="mobile-search-overlay-title">Buscar ofertas 🔎</span>
+          <button class="mobile-search-close-btn" id="mobile-search-close" aria-label="Cerrar búsqueda">&times;</button>
+        </div>
+        <div class="search-container" style="position: relative; display: block; width: 100%;">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="left: 14px;">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" class="search-input" id="mobile-search" placeholder="Buscar ofertas o tiendas..." aria-label="Buscar ofertas móvil" style="width: 100%;">
+          <button class="search-clear-btn" id="mobile-search-clear" aria-label="Limpiar búsqueda" type="button" tabindex="-1">&times;</button>
+          <!-- Panel flotante de sugerencias -->
+          <div class="search-suggestions-dropdown" id="mobile-search-suggestions" role="region" aria-label="Sugerencias de búsqueda móvil"></div>
+        </div>
+      </div>
       
       <!-- Migas de Pan -->
       <nav class="breadcrumbs" aria-label="Breadcrumb">
@@ -302,7 +344,6 @@
     <div class="container footer-grid">
       
       <!-- Columna 1: Marca y Redes -->
-            <!-- Columna 1: Marca y Redes -->
       <div class="footer-col brand-col">
         <div class="logo" style="margin-bottom: 12px; justify-content: flex-start;">
           <svg class="logo-svg" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -347,6 +388,7 @@
           <li><a href="./#todos" class="footer-link">⚡ Ofertas del Cyber</a></li>
           <li><a href="./#hot" class="footer-link">🔥 Ofertas Calientes</a></li>
           <li><a href="./#error" class="footer-link">💥 Errores de Precio</a></li>
+          <li><a href="aliexpress.html" class="footer-link">🇨🇳 AliExpress</a></li>
         </ul>
       </div>
 

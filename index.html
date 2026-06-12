@@ -10,7 +10,7 @@
   </script>
   <!-- Metadatos Técnicos Esenciales -->
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com data:; media-src 'self' https://archive.org https://*.archive.org https://*.streamtheworld.com https://playerservices.streamtheworld.com; connect-src 'self' https://docs.google.com https://archive.org https://*.archive.org https://*.streamtheworld.com https://playerservices.streamtheworld.com https://images.unsplash.com;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data:; media-src 'self' https://archive.org https://*.archive.org https://*.streamtheworld.com https://playerservices.streamtheworld.com; connect-src 'self' https://docs.google.com https://archive.org https://*.archive.org https://*.streamtheworld.com https://playerservices.streamtheworld.com https://images.unsplash.com;">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   
@@ -19,9 +19,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=180&h=180&fit=crop&fm=png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="manifest" href="manifest.json">
-  <link rel="shortcut icon" href="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=32&q=80" type="image/png">
+  <link rel="shortcut icon" href="assets/img/favicon.png" type="image/png">
   
   <!-- SEO Técnico y Metatags de Indexación -->
   <title>🔥 SALEPERU.PE | Ofertas, Descuentos y Errores de Precio en Perú</title>
@@ -263,6 +263,64 @@
         </div>
       </div>
 
+      <!-- Banner Promocional de AliExpress en Portada -->
+      <a href="aliexpress.html" class="aliexpress-home-banner" aria-label="Ver sección de AliExpress: Los productos más vendidos y en tendencia">
+        <div class="aliexpress-home-banner-content">
+          <span class="aliexpress-home-banner-tag">🛒 NUEVA SECCIÓN: IMPORTACIONES</span>
+          <h2 class="aliexpress-home-banner-title">AliExpress: Los Productos Más Vendidos y en Tendencia</h2>
+          <p class="aliexpress-home-banner-desc">Encuentra los artículos virales, moda del momento y gadgets tecnológicos más comprados en AliExpress. ¡Calidad top y ahorro a precios de fábrica con envío directo a Perú!</p>
+        </div>
+        <span class="aliexpress-home-banner-btn" aria-hidden="true">
+          Ver Productos en Tendencia ↗
+        </span>
+        <button class="aliexpress-banner-toggle" id="aliexpress-banner-toggle" aria-label="Minimizar banner" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+          </svg>
+        </button>
+        <div class="aliexpress-home-banner-decor" aria-hidden="true">CN</div>
+      </a>
+
+      <!-- Título de Sección con Psicología de Venta y Enfoque en Confianza Local -->
+      <div class="section-title-wrapper" style="margin-top: 24px; margin-bottom: 16px;">
+        <h1 class="section-main-title" style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; display: flex; align-items: center; gap: 8px; color: var(--text-primary); margin: 0;">
+          <span>🇵🇪</span> Ofertas Verificadas en Tiendas Oficiales de Perú
+        </h1>
+        <p class="section-subtitle" style="font-family: var(--font-body); font-size: 0.82rem; color: var(--text-secondary); margin-top: 4px; margin-bottom: 0; line-height: 1.4;">
+          Monitoreamos precios reales y evitamos estafas cazando chollos en Saga Falabella, Ripley, Plaza Vea, Mercado Libre y retailers de confianza del país.
+        </p>
+      </div>
+
+      <!-- Barra de Filtros Rápidos de Tiendas Nacionales Monitoreadas -->
+      <div class="store-filters-wrapper" style="margin-bottom: 24px; position: relative;">
+        <div class="store-filters-container" id="store-filters-container" style="display: flex; gap: 8px; overflow-x: auto; padding: 4px 2px; scrollbar-width: none; -ms-overflow-style: none;">
+          <button class="store-pill active" data-store="todos" style="display: flex; align-items: center; gap: 6px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 700; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 14px; border-radius: var(--radius-full); cursor: pointer; transition: all var(--transition-fast); white-space: nowrap; box-shadow: var(--shadow-sm);">
+            <span>🏢</span> Todas las Tiendas
+          </button>
+          <button class="store-pill" data-store="falabella" style="display: flex; align-items: center; gap: 6px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 700; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 14px; border-radius: var(--radius-full); cursor: pointer; transition: all var(--transition-fast); white-space: nowrap; box-shadow: var(--shadow-sm);">
+            <span style="color: #62a13b; font-size: 0.9rem;">●</span> Falabella
+          </button>
+          <button class="store-pill" data-store="ripley" style="display: flex; align-items: center; gap: 6px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 700; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 14px; border-radius: var(--radius-full); cursor: pointer; transition: all var(--transition-fast); white-space: nowrap; box-shadow: var(--shadow-sm);">
+            <span style="color: #7b2cbf; font-size: 0.9rem;">●</span> Ripley
+          </button>
+          <button class="store-pill" data-store="plaza vea" style="display: flex; align-items: center; gap: 6px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 700; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 14px; border-radius: var(--radius-full); cursor: pointer; transition: all var(--transition-fast); white-space: nowrap; box-shadow: var(--shadow-sm);">
+            <span style="color: #ffcc00; font-size: 0.9rem;">●</span> Plaza Vea
+          </button>
+          <button class="store-pill" data-store="mercado libre" style="display: flex; align-items: center; gap: 6px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 700; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 14px; border-radius: var(--radius-full); cursor: pointer; transition: all var(--transition-fast); white-space: nowrap; box-shadow: var(--shadow-sm);">
+            <span style="color: #00a8e8; font-size: 0.9rem;">●</span> Mercado Libre
+          </button>
+          <button class="store-pill" data-store="oechsle" style="display: flex; align-items: center; gap: 6px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 700; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 14px; border-radius: var(--radius-full); cursor: pointer; transition: all var(--transition-fast); white-space: nowrap; box-shadow: var(--shadow-sm);">
+            <span style="color: #d81b60; font-size: 0.9rem;">●</span> Oechsle
+          </button>
+          <button class="store-pill" data-store="sodimac" style="display: flex; align-items: center; gap: 6px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 700; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 14px; border-radius: var(--radius-full); cursor: pointer; transition: all var(--transition-fast); white-space: nowrap; box-shadow: var(--shadow-sm);">
+            <span style="color: #e60000; font-size: 0.9rem;">●</span> Sodimac
+          </button>
+          <button class="store-pill" data-store="hiraoka" style="display: flex; align-items: center; gap: 6px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 700; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 14px; border-radius: var(--radius-full); cursor: pointer; transition: all var(--transition-fast); white-space: nowrap; box-shadow: var(--shadow-sm);">
+            <span style="color: #ff6f00; font-size: 0.9rem;">●</span> Hiraoka
+          </button>
+        </div>
+      </div>
+
       <!-- Barra de Filtros de Categorías e Indicador de Filtros -->
       <div class="filters-header-row" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
         <div class="filters-wrapper" style="flex-grow: 1;">
@@ -274,7 +332,7 @@
         <!-- Selector de ordenamiento moderno -->
         <div class="sort-container" style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
           <label for="sort-select" style="font-size: 0.82rem; color: var(--text-secondary); font-weight: 500; white-space: nowrap;">Ordenar:</label>
-          <select id="sort-select" onchange="applyFiltersAndSort()" style="background-color: var(--bg-card); border: 1px solid var(--border-color); padding: 8px 24px 8px 12px; border-radius: var(--radius-sm); font-size: 0.82rem; font-weight: 600; color: var(--text-primary); cursor: pointer; outline: none; box-shadow: var(--shadow-sm); appearance: none; -webkit-appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%236e6e73\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"6 9 12 15 18 9\"></polyline></svg>'); background-repeat: no-repeat; background-position: right 8px center; background-size: 14px;">
+          <select id="sort-select" onchange="applyFiltersAndSort()">
             <option value="recientes">⚡ Recientes</option>
             <option value="hot">🔥 Calientes</option>
             <option value="descuento">% Descuento</option>
@@ -389,6 +447,7 @@
           <li><a href="#todos" class="footer-link" onclick="document.querySelector('.filter-pill[data-id=\'todos\']').click()">⚡ Ofertas del Cyber</a></li>
           <li><a href="#hot" class="footer-link" onclick="document.querySelector('.filter-pill[data-id=\'hot\']').click()">🔥 Ofertas Calientes</a></li>
           <li><a href="#error" class="footer-link" onclick="document.querySelector('.filter-pill[data-id=\'error\']').click()">💥 Errores de Precio</a></li>
+          <li><a href="aliexpress.html" class="footer-link">🇨🇳 AliExpress</a></li>
         </ul>
       </div>
 

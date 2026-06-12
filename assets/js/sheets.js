@@ -337,22 +337,34 @@ async function loadAppData(forceRefresh = false) {
 
     if (parsedOffers && parsedOffers.length > 0) {
       // Mapear al modelo que el frontend espera
-      const formattedOffers = parsedOffers.map(o => ({
-        id: o.id || `SP-${Math.random().toString(36).slice(2, 11)}`,
-        title: o.title || "Oferta sin título",
-        description: o.description || "",
-        image: getOptimizedImageUrl(o.image || "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=350&q=60", 350, 60),
-        category: o.category || "Tecnología",
-        originalPrice: Number(o.originalprice) || 0,
-        offerPrice: Number(o.offerprice) || 0,
-        link: o.link || "#",
-        expiration: o.expiration || "",
-        isHot: o.ishot === true || o.ishot === "TRUE",
-        isFlash: o.isflash === true || o.isflash === "TRUE",
-        isErrorPrice: o.iserrorprice === true || o.iserrorprice === "TRUE",
-        couponCode: o.couponcode || "",
-        store: o.store || "Tienda"
-      }));
+      const formattedOffers = parsedOffers.map(o => {
+        const orig = Number(o.originalprice) || 0;
+        const off = Number(o.offerprice) || 0;
+        const discPercent = orig > off ? Math.round(((orig - off) / orig) * 100) : 0;
+        const numId = (() => {
+          const match = String(o.id || "").match(/\d+/);
+          return match ? parseInt(match[0], 10) : 0;
+        })();
+        
+        return {
+          id: o.id || `SP-${Math.random().toString(36).slice(2, 11)}`,
+          title: o.title || "Oferta sin título",
+          description: o.description || "",
+          image: getOptimizedImageUrl(o.image || "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=350&q=60", 350, 60),
+          category: o.category || "Tecnología",
+          originalPrice: orig,
+          offerPrice: off,
+          discountPercent: discPercent,
+          numericId: numId,
+          link: o.link || "#",
+          expiration: o.expiration || "",
+          isHot: o.ishot === true || o.ishot === "TRUE",
+          isFlash: o.isflash === true || o.isflash === "TRUE",
+          isErrorPrice: o.iserrorprice === true || o.iserrorprice === "TRUE",
+          couponCode: o.couponcode || "",
+          store: o.store || "Tienda"
+        };
+      });
 
       const formattedStories = (parsedStories || []).map(s => ({
         id: s.id || `ST-${Math.random().toString(36).slice(2, 11)}`,
@@ -388,11 +400,23 @@ async function loadAppData(forceRefresh = false) {
   } catch (err) {
     console.warn("⚠️ Error obteniendo datos de Google Sheets. Usando MOCK_DATA como fallback. Detalle:", err.message);
 
-    // Formatear dinámicamente Mock Data para optimizar sus imágenes en tiempo real
-    const formattedMockOffers = MOCK_DATA.offers.map(o => ({
-      ...o,
-      image: getOptimizedImageUrl(o.image, 350, 60)
-    }));
+    // Formatear dinámicamente Mock Data para optimizar sus imágenes y calcular ordenación en tiempo real
+    const formattedMockOffers = MOCK_DATA.offers.map(o => {
+      const orig = Number(o.originalPrice) || 0;
+      const off = Number(o.offerPrice) || 0;
+      const discPercent = orig > off ? Math.round(((orig - off) / orig) * 100) : 0;
+      const numId = (() => {
+        const match = String(o.id || "").match(/\d+/);
+        return match ? parseInt(match[0], 10) : 0;
+      })();
+
+      return {
+        ...o,
+        image: getOptimizedImageUrl(o.image, 350, 60),
+        discountPercent: discPercent,
+        numericId: numId
+      };
+    });
 
     const formattedMockStories = MOCK_DATA.stories.map(s => ({
       ...s,

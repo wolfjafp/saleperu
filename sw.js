@@ -2,12 +2,13 @@
    SALEPERU.PE - SERVICE WORKER DE PWA (CACHÉ Y SOPORTE OFFLINE)
    ========================================================================== */
 
-const CACHE_NAME = "saleperu-pwa-v13";
+const CACHE_NAME = "saleperu-pwa-v15";
 
 // Listado de archivos base a precachear
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
+  "./aliexpress.html",
   "./robots.txt",
   "./sitemap.xml",
   "./manifest.json",
@@ -59,33 +60,69 @@ self.addEventListener("activate", (e) => {
   self.clients.claim();
 });
 
-// Evento de Intercepción (Fetch): Estrategia "Stale-While-Revalidate" para activos locales y estáticos
+// Evento de Intercepción (Fetch)
 self.addEventListener("fetch", (e) => {
   if (e.request.method !== "GET") return;
 
   const url = new URL(e.request.url);
 
-  // Evitar interceptar consultas directas a Google Sheets para que carguen siempre en vivo
-  if (url.hostname.includes("docs.google.com")) return;
+  // Solo interceptar protocolos HTTP/HTTPS (ignorar chrome-extension y similares)
+  if (!url.protocol.startsWith("http")) return;
 
-  e.respondWith(
-    caches.match(e.request).then((cachedResponse) => {
-      // Lanzar petición en red en segundo plano para refrescar caché
-      const fetchPromise = fetch(e.request)
+  // Evitar interceptar consultas directas a Google Sheets, streaming de música y Archive.org
+  if (url.hostname.includes("docs.google.com") || 
+      url.hostname.includes("archive.org") || 
+      url.hostname.includes("streamtheworld.com") ||
+      url.pathname.endsWith(".mp3") ||
+      url.pathname.endsWith(".mp4")) {
+    return;
+  }
+
+  // Estrategia Network-First para documentos HTML (Navegación)
+  // Garantiza que cuando hay conexión se carguen las ofertas más frescas del servidor
+  if (e.request.mode === "navigate") {
+    e.respondWith(
+      fetch(e.request)
         .then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
+            const cacheCopy = networkResponse.clone();
             caches.open(CACHE_NAME).then((cache) => {
-              cache.put(e.request, networkResponse.clone());
+              cache.put(e.request, cacheCopy);
+            });
+          }
+          return networkResponse;
+        })
+        .catch(() => {
+          // Si falla la red, intentar servir de la caché
+          return caches.match(e.request).then((cachedResponse) => {
+            // Si no está precacheado, retornar el 404 offline precacheado
+            return cachedResponse || caches.match("./404.html");
+          });
+        })
+    );
+    return;
+  }
+
+  // Estrategia Stale-While-Revalidate para activos locales y estáticos
+  e.respondWith(
+    caches.match(e.request).then((cachedResponse) => {
+      const fetchPromise = fetch(e.request)
+        .then((networkResponse) => {
+          // Solo cachear respuestas exitosas de nuestro dominio u origen seguro CORS
+          if (networkResponse && networkResponse.status === 200 && 
+              (networkResponse.type === "basic" || networkResponse.type === "cors")) {
+            const cacheCopy = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(e.request, cacheCopy);
             });
           }
           return networkResponse;
         })
         .catch((err) => {
-          console.warn("[Service Worker] Falló recuperación de red para:", e.request.url, err);
+          console.warn("[Service Worker] Falló recuperación de red para activo estático:", e.request.url, err);
         });
 
-      // Retornar instantáneamente el recurso en caché si existe (0ms latencia!),
-      // de lo contrario esperar por la respuesta de red.
+      // Retornar instantáneamente el recurso en caché si existe, de lo contrario esperar la red
       return cachedResponse || fetchPromise;
     })
   );

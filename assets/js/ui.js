@@ -8,8 +8,21 @@ let currentShareOfferId = "";
 document.addEventListener("DOMContentLoaded", () => {
   initThemeSystem();
   initHeaderScrollEffect();
-  initPwaInstallEvent();
-  setupSearchUX();
+  
+  // Diferir tareas no críticas para liberar el hilo principal durante el renderizado inicial
+  if (typeof requestIdleCallback === "function") {
+    requestIdleCallback(() => {
+      initPwaInstallEvent();
+      setupSearchUX();
+      initCreditsFooter();
+    });
+  } else {
+    setTimeout(() => {
+      initPwaInstallEvent();
+      setupSearchUX();
+      initCreditsFooter();
+    }, 200);
+  }
 });
 
 /* ==========================================================================
@@ -284,19 +297,19 @@ function setupSearchUX() {
     <div>
       <div class="search-suggest-title">Tiendas Destacadas</div>
       <div class="search-suggest-stores">
-        <div class="search-suggest-store" data-type="query" data-val="Falabella">
+        <div class="search-suggest-store" data-type="store" data-val="falabella">
           <span style="font-size: 1.1rem; filter: grayscale(0.2);">🔴</span> <strong>Falabella</strong>
         </div>
-        <div class="search-suggest-store" data-type="query" data-val="Ripley">
+        <div class="search-suggest-store" data-type="store" data-val="ripley">
           <span style="font-size: 1.1rem;">🛍️</span> <strong>Ripley</strong>
         </div>
-        <div class="search-suggest-store" data-type="query" data-val="Plaza Vea">
+        <div class="search-suggest-store" data-type="store" data-val="plaza vea">
           <span style="font-size: 1.1rem;">🟡</span> <strong>Plaza Vea</strong>
         </div>
-        <div class="search-suggest-store" data-type="query" data-val="Oechsle">
+        <div class="search-suggest-store" data-type="store" data-val="oechsle">
           <span style="font-size: 1.1rem;">🔵</span> <strong>Oechsle</strong>
         </div>
-        <div class="search-suggest-store" data-type="query" data-val="Sodimac">
+        <div class="search-suggest-store" data-type="store" data-val="sodimac">
           <span style="font-size: 1.1rem;">🟢</span> <strong>Sodimac</strong>
         </div>
         <div class="search-suggest-store" data-type="query" data-val="Amazon">
@@ -359,22 +372,35 @@ function setupSearchUX() {
       const type = item.dataset.type;
       const val = item.dataset.val;
 
+      const hasFeedGrid = !!document.getElementById("feed-grid");
       if (type === "category") {
-        // Enlazar con las categorías de píldoras existentes
         const pill = document.querySelector(`.filter-pill[data-id="${val}"]`);
-        if (pill) {
+        if (pill && hasFeedGrid) {
           pill.click();
         } else {
-          // Fallback a texto
           input.value = val;
           const event = new Event("input", { bubbles: true });
           input.dispatchEvent(event);
+          if (!hasFeedGrid) {
+            window.location.href = `./?search=${encodeURIComponent(val)}`;
+          }
+        }
+      } else if (type === "store") {
+        const pill = document.querySelector(`.store-pill[data-store="${val}"]`);
+        if (pill && hasFeedGrid) {
+          pill.click();
+        } else {
+          if (!hasFeedGrid) {
+            window.location.href = `./?search=${encodeURIComponent(val)}`;
+          }
         }
       } else {
-        // Buscar por texto
         input.value = val;
         const event = new Event("input", { bubbles: true });
         input.dispatchEvent(event);
+        if (!hasFeedGrid) {
+          window.location.href = `./?search=${encodeURIComponent(val)}`;
+        }
       }
 
       // Cerrar y ocultar botón de limpiar si correspondiera
@@ -435,4 +461,57 @@ function escapeHTML(str) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+/* ==========================================================================
+   7. SISTEMA DE CRÉDITOS Y MASCOTA CON LAZY-LOADING DE IMAGEN
+   ========================================================================== */
+function initCreditsFooter() {
+  const footerBottom = document.querySelector(".footer-bottom-content");
+  if (!footerBottom) return;
+
+  // Crear e inyectar el botón discreto de créditos
+  const creditsBtn = document.createElement("button");
+  creditsBtn.className = "footer-credits-btn";
+  creditsBtn.id = "footer-credits-btn";
+  creditsBtn.textContent = "Créditos 🐾";
+  creditsBtn.setAttribute("aria-label", "Ver créditos de la mascota del sitio");
+  footerBottom.appendChild(creditsBtn);
+
+  creditsBtn.addEventListener("click", () => {
+    let card = document.getElementById("mascot-credits-card");
+
+    // Si no existe el card en el DOM, crearlo e inyectarlo dinámicamente (Lazy Loading completo)
+    if (!card) {
+      card = document.createElement("div");
+      card.id = "mascot-credits-card";
+      card.className = "mascot-credits-card";
+      card.innerHTML = `
+        <button class="mascot-credits-close" id="mascot-credits-close" aria-label="Cerrar ventana de créditos">&times;</button>
+        <div class="mascot-credits-content">
+          <div class="mascot-speech-bubble">
+            <span>chicha morada pe! 🥤</span>
+          </div>
+          <div class="mascot-avatar-wrapper">
+            <img src="assets/img/mascota.png" alt="Mascota Sale-Peru" class="mascot-avatar-img" width="90" height="90" loading="lazy">
+          </div>
+        </div>
+      `;
+      document.body.appendChild(card);
+
+      // Configurar evento de cierre
+      const closeBtn = card.querySelector("#mascot-credits-close");
+      if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+          card.classList.remove("active");
+        });
+      }
+    }
+
+    // Alternar la clase active para la animación de entrada/salida
+    // Usamos un pequeño timeout si se acaba de inyectar para que la animación CSS se active
+    setTimeout(() => {
+      card.classList.toggle("active");
+    }, 10);
+  });
 }

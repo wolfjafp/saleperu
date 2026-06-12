@@ -893,9 +893,17 @@ function setupAriaAccessibility() {
   }
 }
 
-// Inicializar el reproductor automáticamente
+// Inicializar el reproductor automáticamente en tiempo inactivo para no bloquear el hilo principal de renderizado
+const triggerInitMusic = () => {
+  if (typeof requestIdleCallback === 'function') {
+    requestIdleCallback(() => initMusicPlayer());
+  } else {
+    setTimeout(initMusicPlayer, 500);
+  }
+};
+
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initMusicPlayer);
+  document.addEventListener('DOMContentLoaded', triggerInitMusic);
 } else {
-  initMusicPlayer();
+  triggerInitMusic();
 }
