@@ -328,8 +328,14 @@ async function loadAppData(forceRefresh = false) {
 
   try {
     const [resOffers, resStories] = await Promise.all([
-      fetch(urlOffers).then(r => r.text()),
-      fetch(urlStories).then(r => r.text())
+      fetch(urlOffers).then(r => {
+        if (!r.ok) throw new Error(`HTTP error! Status: ${r.status}`);
+        return r.text();
+      }),
+      fetch(urlStories).then(r => {
+        if (!r.ok) throw new Error(`HTTP error! Status: ${r.status}`);
+        return r.text();
+      })
     ]);
 
     const parsedOffers = parseGoogleSheetsResponse(resOffers);
