@@ -34,8 +34,9 @@ function initFeedSystem(offersData) {
 
   allOffers = offersData.filter(offer => {
     if (!offer.expiration) return true;
-    const expDate = new Date(offer.expiration + "T23:59:59");
-    return expDate >= today;
+    const expDate = new Date(offer.expiration);
+    const todayMidnight = new Date(new Date().toDateString());
+    return !(expDate < todayMidnight);
   });
 
   filteredOffers = [...allOffers];
@@ -240,11 +241,13 @@ function renderSkeletonLoading(count = 6) {
 /**
  * Pinta las tarjetas de ofertas procesadas en el contenedor principal
  */
-function renderFeedCards() {
+function renderFeedCards(isAppend = false) {
   const grid = document.getElementById("feed-grid");
   if (!grid) return;
 
-  grid.innerHTML = "";
+  if (!isAppend) {
+    grid.innerHTML = "";
+  }
 
   if (filteredOffers.length === 0) {
     grid.innerHTML = `
@@ -261,10 +264,16 @@ function renderFeedCards() {
     return;
   }
 
-  // Paginación: Cortar el arreglo a la página actual * ítems por página
-  const paginatedOffers = filteredOffers.slice(0, currentPage * ITEMS_PER_PAGE);
+  // ✅ CORREGIDO: Paginación inteligente: si es append, renderizar solo las de la nueva página.
+  const startIndex = isAppend ? (currentPage - 1) * ITEMS_PER_PAGE : 0;
+  const endIndex = currentPage * ITEMS_PER_PAGE;
+  const paginatedOffers = filteredOffers.slice(startIndex, endIndex);
+
+  // ✅ CORREGIDO: Uso de DocumentFragment para realizar batch rendering en una única operación del DOM
+  const fragment = document.createDocumentFragment();
 
   paginatedOffers.forEach((offer, index) => {
+    const overallIndex = startIndex + index;
     // Distintivo geográfico para tiendas locales vs importación
     const isStoreAliExpress = offer.store && offer.store.toLowerCase().trim() === "aliexpress";
     const storeLabelPrefix = isStoreAliExpress ? "✈️ " : "🇵🇪 ";
@@ -273,7 +282,7 @@ function renderFeedCards() {
     card.className = "deal-card slide-up";
     card.id = offer.id;
     // Animación escalonada optimizada para los ítems visibles de la página activa
-    const pageIndex = index % ITEMS_PER_PAGE;
+    const pageIndex = overallIndex % ITEMS_PER_PAGE;
     card.style.animationDelay = `${pageIndex * 0.04}s`;
 
     // Determinar etiqueta de expiración (si expira hoy)
@@ -291,8 +300,8 @@ function renderFeedCards() {
         </div>
         <img class="card-image" src="${sanitizeUrl(offer.image)}" alt="${escapeHTML(offer.title)}" 
              width="350" height="200"
-             loading="${index < 4 ? 'eager' : 'lazy'}" 
-             ${index < 4 ? 'fetchpriority="high"' : ''}
+             loading="${overallIndex < 4 ? 'eager' : 'lazy'}" 
+             ${overallIndex < 4 ? 'fetchpriority="high"' : ''}
              decoding="async"
              onerror="this.src='https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=350&h=200&q=70&auto=format&fit=crop'">
         <span class="card-store">${storeLabelPrefix}${escapeHTML(offer.store)}</span>
@@ -327,7 +336,7 @@ function renderFeedCards() {
       </div>
     `;
 
-    // Hacer que toda la tarjeta sea clickable de forma intuitiva, respetando botones interactivos y manejando clics seguros sin onclick inline
+    // Hacer que toda la tarjeta sea clickable de forma intuitiva
     card.addEventListener("click", (e) => {
       const shareBtn = e.target.closest(".card-share-btn");
       const couponBadge = e.target.closest(".coupon-code-badge");
@@ -344,7 +353,7 @@ function renderFeedCards() {
         e.stopPropagation();
         e.preventDefault();
         const couponCodeVal = couponBadge.dataset.couponCode;
-        copyCouponCode(couponCodeVal, e);
+        copyCouponCode(couponCodeVal, couponBadge, e);
         return;
       }
 
@@ -358,8 +367,10 @@ function renderFeedCards() {
       }
     });
 
-    grid.appendChild(card);
+    fragment.appendChild(card);
   });
+
+  grid.appendChild(fragment);
 
   // Renderizar o remover el Botón "Cargar Más" dinámicamente
   const loadMoreContainer = document.getElementById("load-more-container");
@@ -408,12 +419,21 @@ function getCategoryColorClass(category) {
 }
 
 /**
- * Copia un cupón al portapapeles y muestra confirmación visual (Toast)
+ * Copia un cupón al portapapeles y muestra confirmación visual (Toast + badge update)
  */
-function copyCouponCode(code, event) {
+function copyCouponCode(code, badgeElement, event) {
   if (event) event.stopPropagation();
   navigator.clipboard.writeText(code).then(() => {
     showToastNotification(`🎟️ ¡Cupón "${code}" copiado al portapapeles!`);
+    if (badgeElement) {
+      const originalText = badgeElement.textContent;
+      badgeElement.textContent = "¡Copiado! ✓";
+      badgeElement.classList.add("copied");
+      setTimeout(() => {
+        badgeElement.textContent = originalText;
+        badgeElement.classList.remove("copied");
+      }, 2000);
+    }
   }).catch(err => {
     console.error("No se pudo copiar el cupón:", err);
   });
@@ -424,7 +444,7 @@ function copyCouponCode(code, event) {
  */
 function loadNextPage() {
   currentPage++;
-  renderFeedCards();
+  renderFeedCards(true);
 }
 
 /**

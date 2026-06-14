@@ -104,15 +104,65 @@ function safeSetSession(key, value) {
 }
 
 // Estado general de la aplicación
-let musicState = {
-  isPlaying: false,
-  currentSource: safeGetStorage('music-source', 'song'), // 'song' | 'radio'
-  volume: parseFloat(safeGetStorage('music-volume', '0.8')),
-  isMuted: safeGetStorage('music-muted', 'false') === 'true',
-  activeRadioIndex: parseInt(safeGetStorage('music-radio-index', '0')),
-  activeSongIndex: parseInt(safeGetStorage('music-song-index', '3')),
-  hasInteracted: false
-};
+function loadUnifiedMusicState() {
+  const defaultState = {
+    isPlaying: false,
+    currentSource: 'song',
+    volume: 0.8,
+    isMuted: false,
+    activeRadioIndex: 0,
+    activeSongIndex: 3,
+    hasInteracted: false
+  };
+
+  try {
+    const raw = localStorage.getItem("saleperu_music_state");
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed) {
+        return {
+          isPlaying: false,
+          currentSource: parsed.source || 'song',
+          volume: typeof parsed.volume === 'number' ? parsed.volume : 0.8,
+          isMuted: !!parsed.isMuted,
+          activeRadioIndex: typeof parsed.radioIndex === 'number' ? parsed.radioIndex : 0,
+          activeSongIndex: typeof parsed.trackIndex === 'number' ? parsed.trackIndex : 3,
+          hasInteracted: false
+        };
+      }
+    }
+  } catch (e) {
+    // Fallback silencioso
+  }
+
+  // Fallback a llaves individuales legacy
+  return {
+    isPlaying: false,
+    currentSource: safeGetStorage('music-source', 'song'),
+    volume: parseFloat(safeGetStorage('saleperu_music_volume', '0.8')),
+    isMuted: safeGetStorage('saleperu_music_mute', 'false') === 'true',
+    activeRadioIndex: parseInt(safeGetStorage('music-radio-index', '0')),
+    activeSongIndex: parseInt(safeGetStorage('saleperu_music_track', '3')),
+    hasInteracted: false
+  };
+}
+
+let musicState = loadUnifiedMusicState();
+
+function saveUnifiedMusicState() {
+  try {
+    const stateObj = {
+      source: musicState.currentSource,
+      volume: musicState.volume,
+      isMuted: musicState.isMuted,
+      radioIndex: musicState.activeRadioIndex,
+      trackIndex: musicState.activeSongIndex
+    };
+    localStorage.setItem("saleperu_music_state", JSON.stringify(stateObj));
+  } catch (e) {
+    // Fail silencioso en sandbox
+  }
+}
 
 // Objeto del reproductor nativo único
 let audioPlayer = null;
@@ -266,7 +316,7 @@ function setupAudioElement() {
  */
 function setupAutoplayTrigger() {
   // Detectar si el dispositivo es móvil o PC
-  const isMobile = window.matchMedia('(max-width: 768px)').matches || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const isMobile = window.matchMedia('(max-width: 768px)').matches || window.innerWidth < 768 || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   const isPC = !isMobile;
 
   if (isPC) {
@@ -513,6 +563,9 @@ function openMobileDrawer() {
   if (uiElements.drawer && uiElements.drawerOverlay) {
     uiElements.drawerOverlay.classList.add('active');
     uiElements.drawer.classList.add('active');
+    if (uiElements.mobileFab) {
+      uiElements.mobileFab.setAttribute('aria-expanded', 'true');
+    }
   }
 }
 
@@ -523,6 +576,9 @@ function closeMobileDrawer() {
   if (uiElements.drawer && uiElements.drawerOverlay) {
     uiElements.drawerOverlay.classList.remove('active');
     uiElements.drawer.classList.remove('active');
+    if (uiElements.mobileFab) {
+      uiElements.mobileFab.setAttribute('aria-expanded', 'false');
+    }
   }
 }
 
@@ -545,6 +601,9 @@ function playMusic() {
   if (cleanCurrent !== cleanTarget) {
     audioPlayer.src = targetSrc;
   }
+
+  // ✅ CORREGIDO: Cambiar preload a "auto" justo antes de iniciar la reproducción para evitar precarga innecesaria
+  audioPlayer.preload = "auto";
 
   // Reproducción nativa en HTML5 (soporta bloqueo y reproducción en segundo plano)
   audioPlayer.play().catch(err => {
@@ -585,7 +644,7 @@ function setSource(source) {
   if (musicState.currentSource === source) return;
   
   musicState.currentSource = source;
-  safeSetStorage('music-source', source);
+  saveUnifiedMusicState();
   
   // Actualizar estados visuales de la interfaz
   updateSourceButtons();
@@ -607,11 +666,9 @@ function setSource(source) {
  */
 function changeRadio(index) {
   musicState.activeRadioIndex = index;
-  safeSetStorage('music-radio-index', index);
-  
   musicState.hasInteracted = true;
   musicState.currentSource = 'radio';
-  safeSetStorage('music-source', 'radio');
+  saveUnifiedMusicState();
   
   // Forzar reproducción al seleccionar una emisora (UX/UI Premium)
   playMusic();
@@ -624,11 +681,9 @@ function changeRadio(index) {
  */
 function changeSong(index) {
   musicState.activeSongIndex = index;
-  safeSetStorage('music-song-index', index);
-  
   musicState.hasInteracted = true;
   musicState.currentSource = 'song';
-  safeSetStorage('music-source', 'song');
+  saveUnifiedMusicState();
   
   // Forzar reproducción
   playMusic();
@@ -642,12 +697,12 @@ function changeSong(index) {
 function setVolume(value) {
   value = Math.max(0, Math.min(1, value));
   musicState.volume = value;
-  safeSetStorage('music-volume', value);
   
   if (musicState.isMuted && value > 0) {
     musicState.isMuted = false;
-    safeSetStorage('music-muted', 'false');
   }
+  
+  saveUnifiedMusicState();
   
   if (audioPlayer) {
     audioPlayer.muted = musicState.isMuted;
@@ -669,7 +724,7 @@ function setVolume(value) {
  */
 function toggleMute() {
   musicState.isMuted = !musicState.isMuted;
-  safeSetStorage('music-muted', musicState.isMuted);
+  saveUnifiedMusicState();
   
   if (audioPlayer) {
     audioPlayer.muted = musicState.isMuted;
@@ -890,20 +945,7 @@ function setupAriaAccessibility() {
     uiElements.mobileFab.setAttribute('role', 'button');
     uiElements.mobileFab.setAttribute('aria-label', 'Abrir panel de música flotante');
     uiElements.mobileFab.setAttribute('aria-haspopup', 'dialog');
+    uiElements.mobileFab.setAttribute('aria-expanded', 'false');
+    uiElements.mobileFab.setAttribute('aria-controls', 'music-drawer');
   }
-}
-
-// Inicializar el reproductor automáticamente en tiempo inactivo para no bloquear el hilo principal de renderizado
-const triggerInitMusic = () => {
-  if (typeof requestIdleCallback === 'function') {
-    requestIdleCallback(() => initMusicPlayer());
-  } else {
-    setTimeout(initMusicPlayer, 500);
-  }
-};
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', triggerInitMusic);
-} else {
-  triggerInitMusic();
 }

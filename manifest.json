@@ -2,7 +2,7 @@
   "name": "SALEPERU.PE Ofertas",
   "short_name": "SALEPERU.PE",
   "description": "La plataforma líder de ofertas, descuentos y errores de precio en el Perú. Inspirada en Apple y TikTok.",
-  "start_url": "./index.html",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#6b11ff",

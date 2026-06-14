@@ -1,15 +1,27 @@
-<!DOCTYPE html>
-<html lang="es" data-theme="dark">
+﻿<!DOCTYPE html>
+<html lang="es-PE" data-theme="dark">
 <head>
   <!-- Script síncrono para bloquear FOUC (Flicker de Tema) en carga de página -->
-  <script>
+    <script>
     (function() {
       const savedTheme = localStorage.getItem("saleperu_theme") || "dark";
       document.documentElement.setAttribute("data-theme", savedTheme);
+      
+      const isLocal = window.location.hostname === "localhost" || 
+                      window.location.hostname === "127.0.0.1" || 
+                      window.location.protocol === "file:";
+      if (!isLocal) {
+        window.console.log = function() {};
+        window.console.warn = function() {};
+        window.console.error = function() {};
+      }
     })();
   </script>
   <!-- Metadatos Técnicos Esenciales -->
   <meta charset="UTF-8">
+  <!-- Geolocalizacion para SEO local en Peru -->
+  <meta name="geo.region" content="PE">
+  <meta name="geo.placename" content="Peru">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data:; media-src 'self' https://archive.org https://*.archive.org https://*.streamtheworld.com https://playerservices.streamtheworld.com; connect-src 'self' https://docs.google.com https://archive.org https://*.archive.org https://*.streamtheworld.com https://playerservices.streamtheworld.com https://images.unsplash.com;">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -26,27 +38,31 @@
   <!-- SEO Técnico y Metatags de Indexación -->
   <title>Preguntas Frecuentes (FAQ) | SALEPERU.PE</title>
   <meta name="description" content="Resuelve tus dudas sobre cómo funciona SALEPERU.PE. Aprende a reportar ofertas, copiar cupones y qué hacer ante un error de precio en tiendas.">
+  <meta name="keywords" content="preguntas frecuentes saleperu, faq ofertas peru, como funciona saleperu, reportar error de precio, ayuda compras online peru">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://saleperu.pe/preguntas-frecuentes.html">
 
   <!-- OpenGraph / Facebook -->
+  <meta property="og:locale" content="es_PE">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Preguntas Frecuentes (FAQ) | SALEPERU.PE">
   <meta property="og:description" content="¿Tienes dudas sobre cómo ahorrar, copiar cupones o aprovechar errores de precio en soles? Resolvemos todas las preguntas frecuentes de nuestra comunidad.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1200&q=80">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1200&h=630&fit=crop">
   <meta property="og:url" content="https://saleperu.pe/preguntas-frecuentes.html">
   <meta property="og:site_name" content="SALEPERU.PE">
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@saleperu_pe">
   <meta name="twitter:title" content="Preguntas Frecuentes (FAQ) | SALEPERU.PE">
   <meta name="twitter:description" content="¿Tienes dudas sobre cómo ahorrar, copiar cupones o aprovechar errores de precio en soles? Resolvemos todas las preguntas frecuentes de nuestra comunidad.">
-  <meta name="twitter:image" content="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1200&q=80">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1200&h=630&fit=crop">
   
   <!-- Preconectar a Google Fonts para Optimizar Rendimiento -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://docs.google.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
   <link rel="dns-prefetch" href="https://dn721501.ca.archive.org">
   
   <!-- Carga Directa de Fuentes de Google (Optimizado Asíncrono para evitar bloqueo) -->
@@ -54,7 +70,9 @@
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
   
   <!-- Archivo de Estilos Consolidado -->
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <!-- Preload de estilos criticos para mejorar el LCP y evitar recursos bloqueantes -->
+  <link rel="preload" href="assets/css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="assets/css/styles.css"></noscript>
 
   <!-- Datos Estructurados Schema.org FAQPage -->
   <script type="application/ld+json">
@@ -101,6 +119,28 @@
           "@type": "Answer",
           "text": "No. SALEPERU.PE no comercializa, almacena ni despacha ningún producto. Somos un portal puramente informativo de curación y recomendación. Al hacer clic en 'Ir a oferta', te redirigimos directamente al sitio web oficial y seguro de la tienda que vende el artículo (donde realizarás tu compra habitual de forma segura)."
         }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Datos Estructurados BreadcrumbList para Rich Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Inicio",
+        "item": "https://saleperu.pe/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Preguntas Frecuentes",
+        "item": "https://saleperu.pe/preguntas-frecuentes.html"
       }
     ]
   }
@@ -383,7 +423,7 @@
 
       <!-- Columna 2: Explorar -->
       <div class="footer-col">
-        <h3 class="footer-col-title">Explorar</h3>
+        <h2 class="footer-col-title">Explorar</h2>
         <ul class="footer-col-links">
           <li><a href="./#todos" class="footer-link">⚡ Ofertas del Cyber</a></li>
           <li><a href="./#hot" class="footer-link">🔥 Ofertas Calientes</a></li>
@@ -394,7 +434,7 @@
 
       <!-- Columna 3: Comunidad -->
       <div class="footer-col">
-        <h3 class="footer-col-title">Comunidad</h3>
+        <h2 class="footer-col-title">Comunidad</h2>
         <ul class="footer-col-links">
           <li><a href="quienes-somos.html" class="footer-link">👥 Quiénes Somos</a></li>
           <li><a href="contacto.html" class="footer-link">📩 Contacto</a></li>
@@ -407,7 +447,7 @@
 
       <!-- Columna 4: Legal -->
       <div class="footer-col">
-        <h3 class="footer-col-title">Legal</h3>
+        <h2 class="footer-col-title">Legal</h2>
         <ul class="footer-col-links">
           <li><a href="politica-privacidad.html" class="footer-link">🔒 Privacidad</a></li>
           <li><a href="terminos-condiciones.html" class="footer-link">📝 Términos y Condiciones</a></li>

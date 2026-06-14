@@ -569,7 +569,7 @@ body.modal-open {
 }
 
 .footer-col-title {
-  font-family: var(--font-display);
+  font-family: var(--font-heading);
   font-size: 0.95rem;
   font-weight: 700;
   margin-bottom: 20px;
@@ -2259,6 +2259,8 @@ body.modal-open {
   background-position: center;
   position: relative;
   transition: transform var(--transition-smooth);
+  animation: spin-vinyl 6s linear infinite;
+  animation-play-state: paused;
 }
 
 /* Efecto de vinilo real (surcos y centro) */
@@ -2283,14 +2285,14 @@ body.modal-open {
   box-shadow: inset 0 0 2px rgba(255,255,255,0.5);
 }
 
-/* AnimaciÃ³n de giro */
+/* Animación de giro */
 @keyframes spin-vinyl {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-.music-vinyl-wrapper.playing .music-vinyl-disc {
-  animation: spin-vinyl 5s linear infinite;
+.playing .music-vinyl-disc {
+  animation-play-state: running;
 }
 
 /* BotÃ³n Play/Pause Header */
@@ -2799,9 +2801,7 @@ body.modal-open {
   border: 4px solid rgba(0,0,0,0.85);
 }
 
-.music-drawer-vinyl-container.playing .music-vinyl-disc {
-  animation: spin-vinyl 6s linear infinite;
-}
+
 
 /* Info de pista en el mÃ³vil */
 .music-large-info {
@@ -3712,74 +3712,158 @@ textarea.form-control {
   display: none !important;
 }
 
-/* Botón Créditos Footer */
+/* Botón Créditos Footer Rediseñado */
 .footer-credits-btn {
-  background: none;
-  border: none;
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  color: var(--text-tertiary);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
   cursor: pointer;
-  text-decoration: underline;
-  padding: 4px 8px;
-  transition: color var(--transition-fast);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-smooth);
+  margin-top: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+}
+
+[data-theme="light"] .footer-credits-btn {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: var(--text-primary);
 }
 
 .footer-credits-btn:hover {
-  color: var(--color-primary);
+  color: #ff2a5f;
+  background: rgba(255, 42, 95, 0.05);
+  border-color: rgba(255, 42, 95, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 42, 95, 0.15);
 }
 
-/* Tarjeta Mascot Credits Widget (Glassmorphic) */
-.mascot-credits-card {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 280px;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: var(--radius-md);
-  padding: 16px 20px 20px 20px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-  z-index: 1500;
-  display: flex;
-  flex-direction: column;
+[data-theme="dark"] .footer-credits-btn:hover {
+  background: rgba(255, 42, 95, 0.08);
+  border-color: rgba(255, 42, 95, 0.3);
+}
+
+/* Contenedor del Icono de Corazón y Animación de Latido */
+.heart-pulse-icon {
+  display: inline-flex;
   align-items: center;
-  transform: translateY(100px);
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  color: #ff2a5f;
+  animation: heartPulse 1.6s infinite ease-in-out;
+  transition: transform var(--transition-fast);
+}
+
+.footer-credits-btn:hover .heart-pulse-icon {
+  transform: scale(1.2);
+  animation-duration: 0.8s;
+}
+
+.heart-pulse-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes heartPulse {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.25); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.25); }
+  70% { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
+/* Contenedor del Modal de Créditos (Centrado con Blur) */
+.mascot-credits-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
   visibility: hidden;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s;
+  transition: opacity 0.4s ease, visibility 0.4s;
+  padding: 20px;
 }
 
-.mascot-credits-card.active {
-  transform: translateY(0);
+.mascot-credits-overlay.active {
   opacity: 1;
   visibility: visible;
 }
 
+/* Tarjeta Mascot Credits Widget (Glassmorphic) */
+.mascot-credits-card {
+  width: 100%;
+  max-width: 360px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 28px;
+  padding: 32px 24px 24px 24px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transform: scale(0.85) translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s;
+}
+
+.mascot-credits-overlay.active .mascot-credits-card {
+  transform: scale(1) translateY(0);
+}
+
 [data-theme="dark"] .mascot-credits-card {
-  background: rgba(30, 30, 40, 0.7);
+  background: rgba(22, 21, 35, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
 }
 
 /* Botón cerrar widget créditos */
 .mascot-credits-close {
   position: absolute;
-  top: 8px;
-  right: 10px;
-  background: none;
+  top: 16px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 0, 0, 0.05);
   border: none;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--text-secondary);
   cursor: pointer;
-  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+[data-theme="dark"] .mascot-credits-close {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .mascot-credits-close:hover {
-  color: var(--color-primary);
+  background: rgba(255, 42, 95, 0.1);
+  color: #ff2a5f;
+  transform: scale(1.05);
 }
 
 /* Contenido mascota y globo */
@@ -3788,7 +3872,6 @@ textarea.form-control {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 12px;
 }
 
 .mascot-speech-bubble {
@@ -3798,16 +3881,16 @@ textarea.form-control {
   font-family: var(--font-heading);
   font-size: 0.85rem;
   font-weight: 700;
-  padding: 8px 14px;
-  border-radius: var(--radius-sm);
-  margin-bottom: 14px;
-  box-shadow: 0 4px 12px rgba(107, 17, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 20px rgba(107, 17, 255, 0.25);
   text-align: center;
-  animation: bubbleFloat 2s ease-in-out infinite alternate;
+  animation: bubbleFloat 2.5s ease-in-out infinite alternate;
 }
 
 [data-theme="dark"] .mascot-speech-bubble {
-  box-shadow: 0 4px 12px rgba(157, 78, 221, 0.3);
+  box-shadow: 0 8px 20px rgba(157, 78, 221, 0.3);
 }
 
 .mascot-speech-bubble::after {
@@ -3824,31 +3907,102 @@ textarea.form-control {
 }
 
 .mascot-avatar-wrapper {
-  width: 90px;
-  height: 90px;
+  position: relative;
+  width: 120px;
+  height: 120px;
   border-radius: var(--radius-full);
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
+  overflow: hidden;
   box-shadow: var(--shadow-sm);
+}
+
+
+/* Animación de carga minimalista */
+.mascot-loader-spinner {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(107, 17, 255, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--color-primary);
+  animation: mascotSpinner 0.8s linear infinite;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.mascot-avatar-wrapper.image-loaded .mascot-loader-spinner {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes mascotSpinner {
+  to { transform: rotate(360deg); }
 }
 
 .mascot-avatar-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 1;
+}
+
+.mascot-avatar-wrapper.image-loaded .mascot-avatar-img {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Bloque de créditos tipográficos */
+.mascot-credits-info {
+  text-align: center;
+  width: 100%;
+}
+
+.mascot-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.mascot-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.mascot-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-color) 20%, var(--border-color) 80%, transparent);
+  margin: 16px 0;
+}
+
+.mascot-team-credits {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.mascot-team-credits span {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  display: block;
+  margin-top: 4px;
 }
 
 /* Animaciones */
 @keyframes bubbleFloat {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-4px);
-  }
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-6px); }
 }
 
 /* Responsividad de los créditos y banner en móviles */
@@ -3861,14 +4015,6 @@ textarea.form-control {
   }
   .footer-copy {
     text-align: center;
-  }
-  .mascot-credits-card {
-    right: 50%;
-    transform: translate(50%, 100px);
-    bottom: 20px;
-  }
-  .mascot-credits-card.active {
-    transform: translate(50%, 0);
   }
   .aliexpress-home-banner.collapsed .aliexpress-home-banner-title {
     font-size: 0.8rem;

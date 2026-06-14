@@ -143,7 +143,7 @@ function openShareModal(offerId, event) {
   if (!overlay) return;
 
   // Generar URL única del producto utilizando el hash `#SP-001` para enrutamiento instantáneo
-  const shareUrl = `${window.location.origin}${window.location.pathname}#${offerId}`;
+  const shareUrl = `https://saleperu.pe/#${offerId}`;
   
   // Rellenar input de copiado de link
   const linkInput = document.getElementById("share-link-input");
@@ -464,54 +464,105 @@ function escapeHTML(str) {
 }
 
 /* ==========================================================================
-   7. SISTEMA DE CRÉDITOS Y MASCOTA CON LAZY-LOADING DE IMAGEN
+   7. SISTEMA DE CRÉDITOS Y MASCOTA CON CARGA BAJO DEMANDA (ON-DEMAND)
    ========================================================================== */
 function initCreditsFooter() {
   const footerBottom = document.querySelector(".footer-bottom-content");
   if (!footerBottom) return;
 
-  // Crear e inyectar el botón discreto de créditos
+  // Crear e inyectar el botón de créditos con diseño de corazón
   const creditsBtn = document.createElement("button");
   creditsBtn.className = "footer-credits-btn";
   creditsBtn.id = "footer-credits-btn";
-  creditsBtn.textContent = "Créditos 🐾";
-  creditsBtn.setAttribute("aria-label", "Ver créditos de la mascota del sitio");
+  creditsBtn.innerHTML = `
+    <span>Hecho con</span>
+    <span class="heart-pulse-icon">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+    </span>
+    <span>para Perú 🇵🇪</span>
+  `;
+  creditsBtn.setAttribute("aria-label", "Ver créditos de la mascota y creadores del sitio");
   footerBottom.appendChild(creditsBtn);
 
   creditsBtn.addEventListener("click", () => {
-    let card = document.getElementById("mascot-credits-card");
+    let overlay = document.getElementById("mascot-credits-overlay");
 
-    // Si no existe el card en el DOM, crearlo e inyectarlo dinámicamente (Lazy Loading completo)
-    if (!card) {
-      card = document.createElement("div");
-      card.id = "mascot-credits-card";
-      card.className = "mascot-credits-card";
-      card.innerHTML = `
-        <button class="mascot-credits-close" id="mascot-credits-close" aria-label="Cerrar ventana de créditos">&times;</button>
-        <div class="mascot-credits-content">
-          <div class="mascot-speech-bubble">
-            <span>chicha morada pe! 🥤</span>
-          </div>
-          <div class="mascot-avatar-wrapper">
-            <img src="assets/img/mascota.png" alt="Mascota Sale-Peru" class="mascot-avatar-img" width="90" height="90" loading="lazy">
+    // Si no existe el overlay en el DOM, crearlo e inyectarlo dinámicamente
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "mascot-credits-overlay";
+      overlay.className = "mascot-credits-overlay";
+      overlay.innerHTML = `
+        <div class="mascot-credits-card" id="mascot-credits-card">
+          <button class="mascot-credits-close" id="mascot-credits-close" aria-label="Cerrar ventana de créditos">&times;</button>
+          <div class="mascot-credits-content">
+            <div class="mascot-speech-bubble">
+              <span>chicha morada pe! 🥤</span>
+            </div>
+            <div class="mascot-avatar-wrapper" id="mascot-avatar-wrapper">
+              <div class="mascot-loader-spinner"></div>
+              <img data-src="assets/img/mascota.png" alt="Mascota Sale-Peru" class="mascot-avatar-img" id="mascot-avatar-img" width="120" height="120">
+            </div>
+            <div class="mascot-credits-info">
+              <h4 class="mascot-title">SALEPERU.PE Mascot 🐾</h4>
+              <p class="mascot-subtitle">Creado con ❤️ para todo el Perú</p>
+            </div>
           </div>
         </div>
       `;
-      document.body.appendChild(card);
+      document.body.appendChild(overlay);
 
-      // Configurar evento de cierre
-      const closeBtn = card.querySelector("#mascot-credits-close");
+      // Configurar eventos de cierre
+      const closeBtn = overlay.querySelector("#mascot-credits-close");
       if (closeBtn) {
-        closeBtn.addEventListener("click", () => {
-          card.classList.remove("active");
+        closeBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          closeMascotCredits();
         });
       }
+
+      // Cerrar al hacer clic en el fondo difuminado
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) {
+          closeMascotCredits();
+        }
+      });
     }
 
-    // Alternar la clase active para la animación de entrada/salida
-    // Usamos un pequeño timeout si se acaba de inyectar para que la animación CSS se active
+    // Activar la animación de entrada abriendo el modal
     setTimeout(() => {
-      card.classList.toggle("active");
+      overlay.classList.add("active");
+      document.body.classList.add("modal-open");
     }, 10);
+
+    // Cargar la imagen de la mascota verdaderamente on-demand (Lazy loading estricto)
+    const avatarImg = document.getElementById("mascot-avatar-img");
+    const avatarWrapper = document.getElementById("mascot-avatar-wrapper");
+    
+    if (avatarImg && !avatarImg.src) {
+      const srcToLoad = avatarImg.getAttribute("data-src");
+      avatarImg.src = srcToLoad;
+      
+      avatarImg.onload = () => {
+        avatarWrapper.classList.add("image-loaded");
+      };
+      
+      avatarImg.onerror = () => {
+        console.error("Error al cargar la imagen de la mascota");
+        // Quitar spinner si falla
+        const loader = avatarWrapper.querySelector(".mascot-loader-spinner");
+        if (loader) loader.style.display = "none";
+      };
+    }
   });
+
+  function closeMascotCredits() {
+    const overlay = document.getElementById("mascot-credits-overlay");
+    if (overlay) {
+      overlay.classList.remove("active");
+    }
+    document.body.classList.remove("modal-open");
+  }
 }

@@ -41,16 +41,22 @@ document.addEventListener("DOMContentLoaded", async () => {
       setupAliExpressBannerToggle();
     }
     
-    // C. Cargar esquemas de Datos Estructurados para SEO y Enrutador de forma diferida (libera main thread)
+    // C. Cargar esquemas de Datos Estructurados para SEO, Enrutador e Inicializar Reproductor de Música de forma diferida (libera main thread)
     if (typeof requestIdleCallback === "function") {
       requestIdleCallback(() => {
         injectGlobalWebsiteSchema();
         initRouterAndSeo();
+        if (typeof initMusicPlayer === "function") {
+          initMusicPlayer();
+        }
       });
     } else {
       setTimeout(() => {
         injectGlobalWebsiteSchema();
         initRouterAndSeo();
+        if (typeof initMusicPlayer === "function") {
+          initMusicPlayer();
+        }
       }, 100);
     }
   } else {

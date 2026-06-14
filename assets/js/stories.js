@@ -121,7 +121,7 @@ function renderActiveStorySlide() {
   const headerContainer = document.querySelector(".story-user-info");
   headerContainer.innerHTML = `
     <div class="story-profile">
-      <img class="story-profile-img" src="${sanitizeUrl(story.coverImage)}" alt="${escapeHTML(story.title)}">
+      <img class="story-profile-img" src="${sanitizeUrl(story.coverImage)}" alt="${escapeHTML(story.title)}" width="32" height="32">
       <span class="story-profile-name">${escapeHTML(story.title)}</span>
     </div>
     <button class="story-close-btn" onclick="closeStoryViewer()" aria-label="Cerrar reproductor de historias">✕ Cerrar</button>
@@ -183,7 +183,7 @@ function renderActiveStorySlide() {
 function startStoryTimer() {
   stopStoryTimer();
   
-  storyLastTickTime = Date.now();
+  storyLastTickTime = performance.now();
   storyElapsedTime = 0;
   storyPaused = false;
   
@@ -192,7 +192,7 @@ function startStoryTimer() {
 
   storyProgressInterval = setInterval(() => {
     if (!storyPaused) {
-      const now = Date.now();
+      const now = performance.now();
       const delta = now - storyLastTickTime;
       storyElapsedTime += delta;
       storyLastTickTime = now;
@@ -204,7 +204,7 @@ function startStoryTimer() {
         advanceStory();
       }
     } else {
-      storyLastTickTime = Date.now(); // Mantener el tick fresco mientras está pausado
+      storyLastTickTime = performance.now(); // Mantener el tick fresco mientras está pausado
     }
   }, 16); // ~60fps
 }
@@ -304,7 +304,7 @@ function pauseStory() {
  */
 function resumeStory() {
   storyPaused = false;
-  storyLastTickTime = Date.now();
+  storyLastTickTime = performance.now();
 }
 
 /**
@@ -341,20 +341,23 @@ function setupStoryControls() {
   container.addEventListener("touchend", (e) => {
     if (!isDraggingStory) return;
     isDraggingStory = false;
-    container.style.transition = "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)";
+    container.style.transition = "transform 0.3s ease, opacity 0.3s ease";
     
     const diffY = touchCurrentY - touchStartY;
     
     if (diffY > 150) {
       // Arrastre suficiente para cerrar
       container.style.transform = "translateY(100%)";
+      container.style.opacity = "0";
       setTimeout(() => {
         container.style.transform = "none";
+        container.style.opacity = "1";
         closeStoryViewer();
-      }, 250);
+      }, 300);
     } else {
       // Rebotar al centro
       container.style.transform = "translateY(0px)";
+      container.style.opacity = "1";
       document.getElementById("story-viewer-overlay").style.backgroundColor = "rgba(0, 0, 0, 0.95)";
       resumeStory();
     }
