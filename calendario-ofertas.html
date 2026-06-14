@@ -120,6 +120,13 @@
     ]
   }
   </script>
+  <!-- Evitar destello de elementos no estilizados en carga (FOUC) -->
+  <style>
+    .music-mobile-fab, .music-drawer, .music-drawer-overlay, .music-dropdown-card,
+    .story-viewer-overlay, .modal-overlay, .mascot-credits-overlay {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
