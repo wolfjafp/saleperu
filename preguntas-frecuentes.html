@@ -70,6 +70,13 @@
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
   
   <!-- Archivo de Estilos Consolidado -->
+  <!-- Evitar destello de elementos no estilizados en carga (FOUC) -->
+  <style>
+    .music-mobile-fab, .music-drawer, .music-drawer-overlay, .music-dropdown-card,
+    .story-viewer-overlay, .modal-overlay, .mascot-credits-overlay {
+      display: none;
+    }
+  </style>
   <!-- Preload de estilos criticos para mejorar el LCP y evitar recursos bloqueantes -->
   <link rel="preload" href="assets/css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="assets/css/styles.css"></noscript>
@@ -145,13 +152,6 @@
     ]
   }
   </script>
-  <!-- Evitar destello de elementos no estilizados en carga (FOUC) -->
-  <style>
-    .music-mobile-fab, .music-drawer, .music-drawer-overlay, .music-dropdown-card,
-    .story-viewer-overlay, .modal-overlay, .mascot-credits-overlay {
-      display: none;
-    }
-  </style>
 </head>
 <body>
 
